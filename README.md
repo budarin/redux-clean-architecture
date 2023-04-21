@@ -1,2 +1,2 @@
 # redux-clean-architecture
-Todo based on React Redux clean architecture
+Todo app based on React Redux clean architecture
