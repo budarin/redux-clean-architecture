@@ -30,7 +30,7 @@ CREATE TABLE public.todo_statuses (
 CREATE TABLE public.todos (
   todo_id BIGSERIAL,
   todo VARCHAR(150) NOT NULL,
-  comments TEXT,
+  description VARCHAR(1000),
   due_date TIMESTAMP(0) WITHOUT TIME ZONE,
   deleted BOOLEAN DEFAULT false NOT NULL,
   status_id SMALLINT,
