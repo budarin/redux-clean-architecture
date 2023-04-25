@@ -14,7 +14,10 @@ function rootReducer(state = {} as State, action: any) {
     };
 }
 
-const initialState = rootReducer(undefined, {});
+export const initialState = rootReducer(undefined, {});
 
 // @ts-ignore
-export const useStore = create<State>(logger(businessLogic(redux(rootReducer, initialState))));
+const coreStore = businessLogic(redux(rootReducer, initialState));
+const store = process.env['NODE_ENV'] === 'production' ? coreStore : logger(coreStore);
+
+export const useStore = create<State>(store);
