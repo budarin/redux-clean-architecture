@@ -8,7 +8,7 @@ function App() {
 
     useEffect(() => {
         dispatch({
-            type: 'UPDATE_ENTITIES',
+            type: 'UPDATE',
             payload: {
                 todos: [
                     {
