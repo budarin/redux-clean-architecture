@@ -1,14 +1,13 @@
-import { onAction } from '../../middlewares/businessLogic.ts';
 import { UPDATE_ENTITIES } from '../common/actions';
+import { onAction } from '../../middlewares/businessLogic.ts';
+
 import type { UpdateEntitiesAction } from '../common/actions';
 
 // @ts-ignore
 onAction('UPDATE', (get, set, api, action) => {
     if (action.payload.todos[0].todo.length > 3) {
-        const newAction = { ...action };
-        newAction.payload.todos[0] = { ...newAction.payload.todos[0], todo: 'abc' };
-
-        return api.dispatch(newAction);
+        action.payload.todos[0].todo = 'abc';
+        return api.dispatch({ ...action, type: UPDATE_ENTITIES });
     }
 
     api.dispatch(action);
