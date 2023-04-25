@@ -22,7 +22,7 @@ export const businessLogic = (config) => (set, get, api) => {
                 return originalDispath(action);
             }
 
-            return handler(set, get, api, { ...action, type: 'UPDATE_ENTITIES' });
+            return handler(set, get, api, action);
         } finally {
         }
     };
