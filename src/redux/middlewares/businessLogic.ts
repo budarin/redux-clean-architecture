@@ -1,7 +1,7 @@
 const actionHandlers = new Map();
 
 //@ts-ignore
-export function onAction(actionId: string, handler: (set, get, api) => void) {
+export function onAction(actionId: string, handler: (set, get, api, action) => void) {
     actionHandlers.set(actionId, handler);
 }
 
