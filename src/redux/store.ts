@@ -1,24 +1,32 @@
 import { create } from 'zustand';
-import { combineReducers } from 'redux';
 import { redux } from 'zustand/middleware';
 
 // reducers
 import todos from './domain/todos/index.ts';
 
-const rootReducer = combineReducers({
-    todos,
-});
+function rootReducer(state = {} as State, action: any) {
+    return {
+        todos: todos(state.todos, action),
+    };
+}
 
-//@ts-ignore
-const log = (config) => (set, get, api) =>
-    config(
-        (...args: any) => {
-            console.log('  applying', args);
-            set(...args);
+// @ts-ignore
+const log = (config) => (set, get, api) => {
+    const initialState = config(set, get, api);
+    const originalDispath = api.dispatch;
+    api.dispatch = (action: any) => {
+        try {
+            console.log('  applying', action);
+            return originalDispath(action);
+        } finally {
             console.log('  new state', get());
-        },
-        get,
-        api,
-    );
+        }
+    };
+    return initialState;
+};
 
-export const useStore = create<State>(log(redux(rootReducer, {} as State)));
+// @ts-ignore
+const initialState = rootReducer(undefined, {});
+
+// @ts-ignore
+export const useStore = create<State>(log(redux(rootReducer, initialState)));
