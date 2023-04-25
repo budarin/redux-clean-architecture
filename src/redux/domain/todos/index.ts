@@ -52,7 +52,7 @@ function getNewTodoState(state: TodoState) {
 export default function todos(state = initialState, action: Action = {} as Action) {
     switch (action.type) {
         case UPDATE_ENTITIES: {
-            if (!action.payload.todos || action.payload.todos.length === 0) {
+            if (!action.payload.todos || Object.keys(action.payload.todos).length === 0) {
                 return state;
             }
 
@@ -69,6 +69,10 @@ export default function todos(state = initialState, action: Action = {} as Actio
         }
 
         case DELETE_TODO: {
+            if (state.ids.length === 0) {
+                return state;
+            }
+
             const newSate = getNewEmptyTodoState();
 
             Object.keys(state.byId).forEach((key) => {
