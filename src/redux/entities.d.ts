@@ -1,40 +1,53 @@
+type Id = number;
+type StatusId = number;
+type CategoryId = number | undefined;
+type IconName = string;
+type Status = string;
+type Color = string;
+type CategoryName = string;
+type TodoTodo = string;
+type Description = string | undefined;
+type DueDate = TimeStamp;
+type Deleted = booleanr;
+type Completed = booleanr;
+
 type Icon = {
-    id: number;
-    name: string;
+    id: Id;
+    name: IconName;
 };
 
 type Status = {
-    id: number;
-    status: string;
-    color: string;
+    id: Id;
+    status: Status;
+    color: Color;
 };
 
 type Category = {
-    id: number;
-    category: string;
-    icon_id: number;
+    id: Id;
+    icon_id: Id;
+    category: CategoryName;
 };
 
 type Todo = {
-    id: number;
-    todo: string;
-    description?: string;
-    due_date?: string;
-    category_id?: number;
-    status_id?: number;
-    deleted: boolean;
-    completed: boolean;
+    id: Id;
+    status_id: StatusId;
+    category_id?: CategoryId;
+    todo: TodoTodo;
+    description?: Description;
+    due_date?: DueDate;
+    deleted: Deleted;
+    completed: Completed;
 };
 
 // States
 
 type TodoState = {
-    byId: Record<number, Todo>;
-    ids: number[];
+    byId: Record<Id, Todo>;
+    ids: Id[];
 };
 type CategoryState = {
-    byId: Record<number, Category>;
-    ids: number[];
+    byId: Record<Id, Category>;
+    ids: Id[];
 };
 type StatusState = Status[];
 type IconyState = Icon[];
