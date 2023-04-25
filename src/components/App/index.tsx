@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+
 import { useStore } from '../../redux/store.ts';
+import { UPDATE_ENTITIES } from '../../redux/domain/common/actions.ts';
 
 function App() {
     // @ts-ignore
@@ -8,7 +10,7 @@ function App() {
 
     useEffect(() => {
         dispatch({
-            type: 'UPDATE',
+            type: UPDATE_ENTITIES,
             payload: {
                 todos: [
                     {
