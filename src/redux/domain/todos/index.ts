@@ -2,6 +2,7 @@ import { onAction } from '../../middlewares/businessLogic.ts';
 import { UPDATE_ENTITIES } from '../common/actions';
 import type { UpdateEntitiesAction } from '../common/actions';
 
+// @ts-ignore
 onAction('UPDATE', (get, set, api, action) => {
     if (action.payload.todos[0].todo.length > 3) {
         const newAction = { ...action };
