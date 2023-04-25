@@ -1,4 +1,5 @@
-export const exists = <T>(x: T): boolean => Boolean(x);
+export const isExists = (x: unknown): boolean => Boolean(x);
+export const isNotExists = (x: unknown): boolean => !isExists(x);
 export const isUndefined = (x: any): boolean => x === undefined;
 
 export const isString = (x: unknown): x is string => typeof x === 'string';
