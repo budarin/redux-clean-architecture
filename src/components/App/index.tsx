@@ -4,7 +4,6 @@ import { useStore } from '../../redux/store.ts';
 import { UPDATE_ENTITIES } from '../../redux/domain/common/actions.ts';
 
 function App() {
-    // @ts-ignore
     const dispatch = useStore((state) => state.dispatch);
     const todos = useStore((state) => state.todos);
 

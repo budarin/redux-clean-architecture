@@ -57,4 +57,6 @@ type State = {
     categories: CategoryState;
     statuses: StatusState;
     icons: IconyState;
+
+    dispatch: (Action: any) => void;
 };
