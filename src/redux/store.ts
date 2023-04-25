@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import { redux } from 'zustand/middleware';
 import { combineReducers } from 'redux';
+import { redux } from 'zustand/middleware';
 
 // reducers
-import todos from './domain/todos/index';
+import todos from './domain/todos/index.ts';
 
 const rootReducer = combineReducers({
     todos,
