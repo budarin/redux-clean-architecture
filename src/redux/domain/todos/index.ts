@@ -2,16 +2,7 @@ import { UPDATE_ENTITIES } from '../common/actions';
 import { onAction } from '../../middlewares/businessLogic.ts';
 
 import type { UpdateEntitiesAction } from '../common/actions';
-
-// @ts-ignore
-onAction('UPDATE', (get, set, api, action) => {
-    if (action.payload.todos[0].todo.length > 3) {
-        action.payload.todos[0].todo = 'abc';
-        return api.dispatch({ ...action, type: UPDATE_ENTITIES });
-    }
-
-    api.dispatch(action);
-});
+import { getNewEmptyTodoState, getNewTodoState } from './utils.ts';
 
 // initial state
 export const initialState = {
@@ -42,23 +33,16 @@ export const updateTodo = (todo: Todo) => ({
 
 export type Action = ReturnType<typeof addTodo | typeof deleteTodo | typeof updateTodo | UpdateEntitiesAction>;
 
-function getNewEmptyTodoState() {
-    return {
-        byId: {},
-        ids: [],
-    } as TodoState;
-}
+// check datab constraints
+// @ts-ignore
+onAction(UPDATE_ENTITIES, (get, set, api, action: ReturnType<UpdateEntitiesAction>) => {
+    if (action.payload.todos[0].todo.length > 3) {
+        action.payload.todos[0].todo = 'abc';
+        return api.dispatch(action);
+    }
 
-function getNewTodoState(state: TodoState) {
-    const newSate = {
-        byId: {
-            ...state.byId,
-        },
-        ids: state.ids,
-    };
-
-    return newSate;
-}
+    return api.dispatch(action);
+});
 
 // reducer
 export default function todos(state = initialState, action: Action = {} as Action) {
