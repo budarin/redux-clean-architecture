@@ -12,4 +12,4 @@ export const updateEntities = (entities: entities) => ({
     payload: entities,
 });
 
-export type UpdateEntitiesAction = typeof updateEntities;
+export type UpdateEntitiesAction = ReturnType<typeof updateEntities>;

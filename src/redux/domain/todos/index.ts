@@ -32,11 +32,11 @@ export const updateTodo = (todo: Todo) => ({
     payload: todo,
 });
 
-export type Action = ReturnType<typeof addTodo | typeof deleteTodo | typeof updateTodo | UpdateEntitiesAction>;
+export type Action = ReturnType<typeof addTodo | typeof deleteTodo | typeof updateTodo> | UpdateEntitiesAction;
 
-// check datab constraints
+// check data constraints
 // @ts-ignore
-onAction(UPDATE_ENTITIES, (get, set, api, action: ReturnType<UpdateEntitiesAction>) => {
+onAction(UPDATE_ENTITIES, (get, set, api, action: UpdateEntitiesAction) => {
     if (action.payload.todos[0].todo.length > 3) {
         action.payload.todos[0].todo = 'abc';
         return api.dispatch(action);
