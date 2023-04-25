@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useStore } from '../../redux/store.ts';
-import { deleteTodo } from '../../redux/domain/todos/index.ts';
 
 function App() {
     // @ts-ignore
