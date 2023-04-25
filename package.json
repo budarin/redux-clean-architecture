@@ -25,7 +25,9 @@
         "webpack-cli": "^5.0.2",
         "zustand": "^4.3.7"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "html-webpack-plugin": "^5.5.1"
+    },
     "scripts": {
         "test": "jest"
     }
