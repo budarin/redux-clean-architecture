@@ -27,7 +27,8 @@
         "zustand": "^4.3.7"
     },
     "devDependencies": {
-        "html-webpack-plugin": "^5.5.1"
+        "html-webpack-plugin": "^5.5.1",
+        "webpack-dev-server": "^4.13.3"
     },
     "scripts": {
         "test": "jest"
