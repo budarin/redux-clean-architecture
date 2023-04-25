@@ -3,9 +3,10 @@ const path = require('path');
 
 module.exports = {
     mode: 'development',
+    devtool: 'inline-source-map',
     entry: './src/index.tsx',
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve('./dist'),
     },
     plugins: [new HtmlWebpackPlugin()],
     resolve: {
