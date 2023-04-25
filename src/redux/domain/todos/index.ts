@@ -1,8 +1,9 @@
 import { UPDATE_ENTITIES } from '../common/actions';
 import { onAction } from '../../middlewares/businessLogic.ts';
 
-import type { UpdateEntitiesAction } from '../common/actions';
 import { getNewEmptyTodoState, getNewTodoState } from './utils.ts';
+
+import type { UpdateEntitiesAction } from '../common/actions';
 
 // initial state
 export const initialState = {
