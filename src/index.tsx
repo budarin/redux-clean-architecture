@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import App from './components/App';
 
@@ -9,6 +9,6 @@ if (!rootElement) {
     const newRootElement = document.createElement('div');
     newRootElement.id = 'root';
     document.body.appendChild(newRootElement);
-}
 
-ReactDOM.render(<App />, rootElement);
+    createRoot(newRootElement).render(<App />);
+}
