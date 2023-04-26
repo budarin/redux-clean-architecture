@@ -1,4 +1,14 @@
-import { inRange, isBoolean, isInt, isString, isUndefined, toInt, toIntOrUndefined } from '../common/validation_utils';
+import {
+    inRange,
+    isBoolean,
+    isDate,
+    isInt,
+    isString,
+    isUndefined,
+    toDefaultBoolean,
+    toInt,
+    toTimeStamp,
+} from '../common/validation_utils';
 
 const MIN_TODO_LENGTH = 5;
 const MAX_TODO_LENGTH = 150;
@@ -13,11 +23,11 @@ export const validateId = ({ id }: Record<string, unknown>): boolean => isInt(id
 export const validateStatusId = ({ status_id }: Record<string, unknown>): boolean => isInt(status_id);
 
 // Category_id должен быть типа number
-export const validateCategoryId = ({ x: category_id }: Record<string, unknown>): boolean =>
+export const validateCategoryId = ({ category_id }: Record<string, unknown>): boolean =>
     isUndefined(category_id) || isInt(category_id);
 
 // длина todo должна быть более 5 символов и не превышать 150 символов
-function validateTodo({ x: todo }: Record<string, unknown>): boolean {
+function validateTodo({ todo }: Record<string, unknown>): boolean {
     if (isString(todo)) {
         return inRange(todo.length, MIN_TODO_LENGTH, MAX_TODO_LENGTH);
     }
@@ -25,7 +35,7 @@ function validateTodo({ x: todo }: Record<string, unknown>): boolean {
 }
 
 // длина description должна быть более 5 символов и не превышать 1000 символов
-export function validateDescription({ x: description }: Record<string, unknown>): boolean {
+export function validateDescription({ description }: Record<string, unknown>): boolean {
     if (isUndefined(description)) {
         return true;
     }
@@ -37,24 +47,44 @@ export function validateDescription({ x: description }: Record<string, unknown>)
     return false;
 }
 
+export const validateDueDate = ({ due_date }: Record<string, unknown>) => isDate(due_date);
+
 // completed должно быть boolean
-export const validateCompleted = (x: Record<string, unknown>): boolean => isBoolean(x);
+export const validateCompleted = ({ completed }: Record<string, unknown>): boolean => isBoolean(completed);
 
 // deleted должно быть boolean
-export const validateDeleted = (x: Record<string, unknown>): boolean => isUndefined(x) || isBoolean(x);
+export const validateDeleted = ({ x: deleted }: Record<string, unknown>): boolean =>
+    isUndefined(deleted) || isBoolean(deleted);
 
-export function getTodo(input: Record<string, unknown>): Todo {
+export function getTodo(input: Record<string, unknown>) {
     return {
-        id: toInt(input['id'] as NumberLike),
-        status_id: toInt(input['status_id'] as NumberLike),
-        category_id: toIntOrUndefined(input['category_id'] as NumberLike | undefined),
-        todo: input['todo'] as TodoTodo,
-        description: input['description'] as Description,
-        due_date: input['due_date'] as DueDate,
-        deleted: (input['deleted'] || false) as Deleted,
-        completed: input['completed'] as Completed,
+        id: input['id'],
+        status_id: input['status_id'],
+        category_id: input['category_id'],
+        todo: input['todo'],
+        description: input['description'],
+        due_date: input['due_date'],
+        deleted: input['deleted'],
+        completed: input['completed'],
     };
 }
+
+const validationRules = {
+    id: [validateId, 'Todo обязан иметь id целым числомr', toInt],
+    status_id: [validateStatusId, 'Todo обязан иметь status_id целым числом', toInt],
+    category_id: [validateCategoryId, 'Category_id должен быть целым числом', toInt],
+    todo: [
+        validateTodo,
+        `Длина названия todo должна быть более ${MIN_TODO_LENGTH} символов и не превышать ${MAX_TODO_LENGTH} символов`,
+    ],
+    description: [
+        validateDescription,
+        `Длина description должна быть более ${MIN_DESCRIPTION_LENGTH} символов и не превышать ${MAX_DESCRIPTION_LENGTH} символов`,
+    ],
+    due_date: [validateDueDate, 'Due_date - обязательное поле', toTimeStamp],
+    completed: [validateCompleted, 'Completed должно быть boolean', toDefaultBoolean(false)],
+    deleted: [validateDeleted, 'Deleted должно быть boolean'],
+};
 
 export function validateTodoObject(x: Record<string, unknown>): { valid: boolean; errors: Error[] } {
     const errors = [];
