@@ -25,7 +25,7 @@ type EntitiesState = {
 
 type Action = {
     type: string;
-    payload?: unknown;
+    payload?: any;
 };
 
 type State = EntitiesState & { dispatch: (Action: Action) => void };
