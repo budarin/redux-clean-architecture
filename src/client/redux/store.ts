@@ -35,7 +35,6 @@ function rootReducer(state: EntitiesState | undefined, action: any = {}) {
 }
 
 const coreStore = businessLogic(redux(rootReducer, entitiesInitialState));
-
 const store = process.env['NODE_ENV'] === 'production' ? coreStore : logger(coreStore);
 
 export const useStore = create<State>(store);
