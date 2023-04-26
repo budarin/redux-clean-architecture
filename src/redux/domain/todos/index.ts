@@ -1,33 +1,20 @@
 import { UPDATE_ENTITIES } from '../common/actions';
+import { entityInitialState } from '../common/state.ts';
 import { onAction } from '../../middlewares/businessLogic.ts';
-
 import { getNewEmptyTodoState, getNewTodoState } from './utils.ts';
 
 import type { UpdateEntitiesAction } from '../common/actions';
-import { entityInitialState } from '../common/state.ts';
 
 // Actions
-export const ADD_TODO = 'ADD_TODO' as const;
 export const DELETE_TODO = 'DELETE_TODO' as const;
-export const UPDATE_TODO = 'UPDATE_TODO' as const;
 
 // Action creators
-export const addTodo = (todo: Todo) => ({
-    type: ADD_TODO,
-    payload: todo,
-});
-
 export const deleteTodo = (id: number) => ({
     type: DELETE_TODO,
     payload: id,
 });
 
-export const updateTodo = (todo: Todo) => ({
-    type: UPDATE_TODO,
-    payload: todo,
-});
-
-export type Action = ReturnType<typeof addTodo | typeof deleteTodo | typeof updateTodo> | UpdateEntitiesAction;
+export type Action = ReturnType<typeof deleteTodo> | UpdateEntitiesAction;
 
 // check data constraints
 // @ts-ignore
