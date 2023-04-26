@@ -39,6 +39,8 @@ type Todo = {
     completed?: Completed | undefined;
 };
 
+type OneOfEntity = IconState | StatusState | CategoriyState | TodoState;
+
 type EntitiesPayload = {
     todos?: Todo[];
     categories?: Category[];
@@ -52,5 +54,3 @@ type NormalizedEntitiesPayload = {
     categories?: CategoriyState;
     todos?: TodoState;
 };
-
-type OneOfEntity = IconState | StatusState | CategoriyState | TodoState;
