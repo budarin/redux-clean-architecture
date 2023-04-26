@@ -1,4 +1,4 @@
-import { inRange, isBoolean, isNumber, isString, isUndefined } from '../common/validation_utils';
+import { inRange, isBoolean, isInt, isString, isUndefined } from '../common/validation_utils';
 
 const MIN_TODO_LENGTH = 5;
 const MAX_TODO_LENGTH = 150;
@@ -7,18 +7,18 @@ const MIN_DESCRIPTION_LENGTH = 10;
 const MAX_DESCRIPTION_LENGTH = 1000;
 
 // обязан присутствовать id типа number
-export const validateId = (x: unknown): boolean => isNumber(x);
+export const validateId = (x: unknown): boolean => isInt(x);
 
 // обязан присутствовать status_id типа number
-export const validateStatusId = (x: unknown): boolean => isNumber(x);
+export const validateStatusId = (x: unknown): boolean => isInt(x);
 
 // Category_id должен быть типа number
-export const validateCategoryId = (x: unknown): boolean => isUndefined(x) || isNumber(x);
+export const validateCategoryId = (x: unknown): boolean => isUndefined(x) || isInt(x);
 
 // длина todo должна быть более 5 символов и не превышать 150 символов
 function validateTodo(x: unknown): boolean {
-    if (isNumber(x)) {
-        return inRange(x, MIN_TODO_LENGTH, MAX_TODO_LENGTH);
+    if (isString(x)) {
+        return inRange(x.length, MIN_TODO_LENGTH, MAX_TODO_LENGTH);
     }
     return false;
 }
@@ -40,7 +40,7 @@ export function validateDescription(x: unknown): boolean {
 export const validateCompleted = (x: unknown): boolean => isBoolean(x);
 
 // deleted должно быть boolean
-export const validateDeleted = (x: unknown): boolean => isBoolean(x);
+export const validateDeleted = (x: unknown): boolean => isUndefined(x) || isBoolean(x);
 
 export function validateTodoObject(input: Record<string, any>): { error: Error[] } | { todo: Todo } {
     const error = [];
@@ -96,11 +96,11 @@ export function getTodo(input: Record<string, any>): Todo {
     return {
         id: input['id'],
         status_id: input['status_id'],
+        category_id: input['category_id'],
         todo: input['todo'],
         description: input['description'],
         due_date: input['due_date'],
-        category_id: input['category_id'],
-        deleted: input['deleted'],
+        deleted: input['deleted'] || false,
         completed: input['completed'],
     };
 }
