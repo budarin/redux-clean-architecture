@@ -21,6 +21,6 @@ type State = {
     statuses: StatusState;
     categories: CategoryState;
     todos: TodoState;
-
-    dispatch: (Action: any) => void;
 };
+
+type StateEithDispatch = State & { dispatch: (Action: any) => void };
