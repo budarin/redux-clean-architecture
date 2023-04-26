@@ -38,25 +38,3 @@ type Todo = {
     deleted: Deleted;
     completed: Completed;
 };
-
-// States
-
-type TodoState = {
-    byId: Record<Id, Todo>;
-    ids: Id[];
-};
-type CategoryState = {
-    byId: Record<Id, Category>;
-    ids: Id[];
-};
-type StatusState = Status[];
-type IconyState = Icon[];
-
-type State = {
-    todos: TodoState;
-    categories: CategoryState;
-    statuses: StatusState;
-    icons: IconyState;
-
-    dispatch: (Action: any) => void;
-};
