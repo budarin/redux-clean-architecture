@@ -2,8 +2,10 @@
  * @jest-environment jsdom
  */
 
+import todos, { DELETE_TODO } from '../todos';
 import { UPDATE_ENTITIES } from '../common/actions';
-import todos, { Action, DELETE_TODO } from '../todos';
+
+import type { TodoAction } from '../todos';
 
 const initialState = {
     byId: {
@@ -34,29 +36,31 @@ const initialState = {
 
 describe('todos редьюсер', () => {
     it('должен вернуть прежнее состояние если не указан actions', () => {
-        expect(todos(initialState, {} as Action)).toEqual(initialState);
+        expect(todos(initialState, {} as TodoAction)).toEqual(initialState);
     });
 
     it('UPDATE_ENTITIES должен обновить todos данными из action', () => {
         const action = {
             type: UPDATE_ENTITIES,
             payload: {
-                todos: [
-                    {
-                        id: 4,
-                        status_id: 1,
-                        todo: 'Clean room',
-                        completed: false,
-                        deleted: false,
-                    },
-                    {
-                        id: 1,
-                        status_id: 1,
-                        todo: 'Buy groceries for the week',
-                        completed: true,
-                        deleted: false,
-                    },
-                ],
+                entities: {
+                    todos: [
+                        {
+                            id: 4,
+                            status_id: 1,
+                            todo: 'Clean room',
+                            completed: false,
+                            deleted: false,
+                        },
+                        {
+                            id: 1,
+                            status_id: 1,
+                            todo: 'Buy groceries for the week',
+                            completed: true,
+                            deleted: false,
+                        },
+                    ],
+                },
             },
         };
 
@@ -94,7 +98,7 @@ describe('todos редьюсер', () => {
             ids: [1, 2, 3, 4],
         };
 
-        const result = todos(initialState, action as Action);
+        const result = todos(initialState, action as TodoAction);
         expect(result).toEqual(expectedState);
     });
 

@@ -13,7 +13,9 @@ export const deleteTodo = (id: number) => ({
     payload: id,
 });
 
-export type Action = ReturnType<typeof deleteTodo> | UpdateEntitiesAction;
+type DeleteTodoAction = ReturnType<typeof deleteTodo>;
+
+export type TodoAction = DeleteTodoAction | UpdateEntitiesAction;
 
 // check data constraints
 // @ts-ignore
@@ -31,7 +33,7 @@ onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
 });
 
 // reducer
-export default function todos(state = anyEntityInitialState as TodoState, action: Action = {} as Action) {
+export default function todos(state = anyEntityInitialState as TodoState, action = {} as TodoAction) {
     switch (action.type) {
         case UPDATE_ENTITIES: {
             if (!action.payload.entities?.todos || Object.keys(action.payload.entities.todos).length === 0) {
