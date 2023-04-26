@@ -4,12 +4,7 @@ import { onAction } from '../../middlewares/businessLogic.ts';
 import { getNewEmptyTodoState, getNewTodoState } from './utils.ts';
 
 import type { UpdateEntitiesAction } from '../common/actions';
-
-// initial state
-export const initialState = {
-    byId: {},
-    ids: [],
-} as TodoState;
+import { entityInitialState } from '../common/state.ts';
 
 // Actions
 export const ADD_TODO = 'ADD_TODO' as const;
@@ -46,7 +41,7 @@ onAction(UPDATE_ENTITIES, (get, set, api, action: UpdateEntitiesAction) => {
 });
 
 // reducer
-export default function todos(state = initialState, action: Action = {} as Action) {
+export default function todos(state = entityInitialState as TodoState, action: Action = {} as Action) {
     switch (action.type) {
         case UPDATE_ENTITIES: {
             if (!action.payload.todos || Object.keys(action.payload.todos).length === 0) {
