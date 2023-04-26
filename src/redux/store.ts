@@ -8,6 +8,8 @@ import { businessLogic } from './middlewares/businessLogic.ts';
 // reducers
 import todos from './domain/todos/index.ts';
 import categories from './domain/categories/index.ts';
+import statuses from './domain/statuses.ts';
+import icons from './domain/icons.ts';
 
 // порядок редьюсеров очень важен при обновлении всех сущностей
 // с action UPDATE_ENTITIES - делаем вставку в сущности по мереи их
@@ -15,8 +17,8 @@ import categories from './domain/categories/index.ts';
 // ссылочная целостность данных
 function rootReducer(state: State | undefined, action: any) {
     return {
-        // icons
-        // statuses
+        icons: icons(state?.icons, action),
+        statuses: statuses(state?.statuses, action),
         categories: categories(state?.categories, action),
         todos: todos(state?.todos, action),
     };
@@ -24,8 +26,7 @@ function rootReducer(state: State | undefined, action: any) {
 
 export const initialState = rootReducer(undefined, {});
 
-// @ts-ignore
 const coreStore = businessLogic(redux(rootReducer, initialState));
 const store = process.env['NODE_ENV'] === 'production' ? coreStore : logger(coreStore);
 
-export const useStore = create<State>(store);
+export const useStore = create<StateEithDispatch>(store);
