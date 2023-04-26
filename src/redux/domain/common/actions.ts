@@ -1,3 +1,4 @@
+export const RESET_STATE = 'RESET_STATE' as const;
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES' as const;
 
 type entities = {
