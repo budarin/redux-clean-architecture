@@ -2,7 +2,7 @@ type TodoState = {
     byId: Record<Id, Todo>;
     ids: Id[];
 };
-type CategoryState = {
+type CategoriyState = {
     byId: Record<Id, Category>;
     ids: Id[];
 };
@@ -16,11 +16,16 @@ type IconState = {
     ids: Id[];
 };
 
-type State = {
+type EntitiesState = {
     icons: IconState;
     statuses: StatusState;
-    categories: CategoryState;
+    categories: CategoriyState;
     todos: TodoState;
 };
 
-type StateEithDispatch = State & { dispatch: (Action: any) => void };
+type Action = {
+    type: string;
+    payload?: unknown;
+};
+
+type State = EntitiesState & { dispatch: (Action: Action) => void };

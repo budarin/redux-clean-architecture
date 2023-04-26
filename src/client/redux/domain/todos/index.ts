@@ -1,9 +1,8 @@
-import { UPDATE_ENTITIES } from '../common/actions';
-import { entityInitialState } from '../common/state.ts';
+import { UPDATE_ENTITIES } from '../common/actions.ts';
 import { onAction } from '../../middlewares/businessLogic.ts';
-import { getNewEmptyTodoState, getNewTodoState } from './utils.ts';
+import { anyEntityInitialState, createEmptyState, getNewState } from '../common/state.ts';
 
-import type { UpdateEntitiesAction } from '../common/actions';
+import type { UpdateEntitiesAction } from '../common/actions.ts';
 
 // Actions
 export const DELETE_TODO = 'DELETE_TODO' as const;
@@ -18,26 +17,30 @@ export type Action = ReturnType<typeof deleteTodo> | UpdateEntitiesAction;
 
 // check data constraints
 // @ts-ignore
-onAction(UPDATE_ENTITIES, (get, set, api, action: UpdateEntitiesAction) => {
-    if (action.payload.todos[0].todo.length > 3) {
-        action.payload.todos[0].todo = 'abc';
-        return api.dispatch(action);
+onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
+    if (action.payload.entities) {
+        const { todos } = action.payload.entities;
+
+        if (todos && todos[0].todo.length > 3) {
+            todos[0].todo = 'abc';
+            return api.dispatch({ ...action, type: UPDATE_ENTITIES });
+        }
     }
 
     return api.dispatch(action);
 });
 
 // reducer
-export default function todos(state = entityInitialState as TodoState, action: Action = {} as Action) {
+export default function todos(state = anyEntityInitialState as TodoState, action: Action = {} as Action) {
     switch (action.type) {
         case UPDATE_ENTITIES: {
-            if (!action.payload.todos || Object.keys(action.payload.todos).length === 0) {
+            if (!action.payload.entities?.todos || Object.keys(action.payload.entities.todos).length === 0) {
                 return state;
             }
 
-            const newSate = getNewTodoState(state);
+            const newSate = getNewState(state);
 
-            action.payload.todos.forEach((todo) => {
+            action.payload.entities.todos.forEach((todo) => {
                 newSate.byId[todo.id] = { ...todo };
             });
 
@@ -52,7 +55,7 @@ export default function todos(state = entityInitialState as TodoState, action: A
                 return state;
             }
 
-            const newSate = getNewEmptyTodoState();
+            const newSate = createEmptyState<TodoState>();
 
             Object.keys(state.byId).forEach((key) => {
                 const id = Number(key);

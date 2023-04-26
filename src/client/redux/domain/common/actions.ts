@@ -1,16 +1,9 @@
 export const RESET_STATE = 'RESET_STATE' as const;
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES' as const;
 
-type entities = {
-    todos: Todo[];
-    categories: Category[];
-    statuse: Status[];
-    icons: Icon[];
-};
-
-export const updateEntities = (entities: entities) => ({
+export const updateEntities = (entities?: EntitiesPayload) => ({
     type: UPDATE_ENTITIES,
-    payload: entities,
+    payload: { entities },
 });
 
 export type UpdateEntitiesAction = ReturnType<typeof updateEntities>;

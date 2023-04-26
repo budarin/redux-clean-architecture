@@ -31,6 +31,7 @@
     },
     "scripts": {
         "start": "webpack-dev-server",
-        "test": "jest"
+        "test": "jest",
+        "tsc": "tsc"
     }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { useStore } from '../../redux/store.ts';
-import { UPDATE_ENTITIES } from '../../redux/domain/common/actions.ts';
+import { initialState } from '../../../server/initialSate.ts';
 
 function App() {
     const dispatch = useStore((state) => state.dispatch);
@@ -9,16 +9,9 @@ function App() {
 
     useEffect(() => {
         dispatch({
-            type: UPDATE_ENTITIES,
+            type: 'UPDATE',
             payload: {
-                todos: [
-                    {
-                        id: 4,
-                        todo: 'Clean room',
-                        completed: false,
-                        deleted: false,
-                    },
-                ],
+                entities: initialState,
             },
         });
     }, []);
@@ -26,7 +19,7 @@ function App() {
     return (
         <>
             <div>App</div>
-            <div>{JSON.stringify(todos)}</div>
+            <pre>{JSON.stringify(todos, null, 2)}</pre>
         </>
     );
 }

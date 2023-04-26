@@ -2,7 +2,7 @@ type Id = number;
 type StatusId = number;
 type CategoryId = number | undefined;
 type IconName = string;
-type Status = string;
+type StatusName = string;
 type Color = string;
 type CategoryName = string;
 type TodoTodo = string;
@@ -18,7 +18,7 @@ type Icon = {
 
 type Status = {
     id: Id;
-    status: Status;
+    status: StatusName;
     color: Color;
 };
 
@@ -31,10 +31,26 @@ type Category = {
 type Todo = {
     id: Id;
     status_id: StatusId;
-    category_id?: CategoryId;
+    category_id?: CategoryId | undefined;
     todo: TodoTodo;
-    description?: Description;
-    due_date?: DueDate;
+    description?: Description | undefined;
+    due_date?: DueDate | undefined;
     deleted: Deleted;
-    completed: Completed;
+    completed?: Completed | undefined;
 };
+
+type EntitiesPayload = {
+    todos?: Todo[];
+    categories?: Category[];
+    statuses?: Status[];
+    icons?: Icon[];
+};
+
+type NormalizedEntitiesPayload = {
+    icons?: IconState;
+    statuses?: StatusState;
+    categories?: CategoriyState;
+    todos?: TodoState;
+};
+
+type OneOfEntity = IconState | StatusState | CategoriyState | TodoState;

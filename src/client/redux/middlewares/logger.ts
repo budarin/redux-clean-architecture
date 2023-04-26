@@ -9,7 +9,7 @@ export const logger = (config) => (set, get, api) => {
         try {
             return originalDispath(action);
         } finally {
-            console.log('  new state', get());
+            console.log('  new state', action.type, get());
         }
     };
 

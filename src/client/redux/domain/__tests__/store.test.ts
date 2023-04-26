@@ -1,9 +1,10 @@
-import { initialState, useStore } from '../../store.ts';
+import { useStore } from '../../store.ts';
+import { entitiesInitialState } from '../common/state.ts';
 
 describe('useStore', () => {
     it('should initialize with an empty todo list', () => {
         const state = useStore.getState();
-        expect(state.todos).toEqual(initialState.todos);
+        expect(state.todos).toEqual(entitiesInitialState.todos);
     });
 
     it('should add a new todo to the list', () => {
