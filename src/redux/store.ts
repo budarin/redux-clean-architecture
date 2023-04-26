@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { redux } from 'zustand/middleware';
+
+// store initial state
 import { storeInitialState } from './domain/common/state.ts';
 
 // actions
