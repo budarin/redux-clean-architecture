@@ -7,9 +7,9 @@ type Color = string;
 type CategoryName = string;
 type TodoTodo = string;
 type Description = string | undefined;
-type DueDate = TimeStamp;
-type Deleted = booleanr;
-type Completed = booleanr;
+type DueDate = TimeStamp | undefined;
+type Deleted = boolean;
+type Completed = boolean;
 
 type Icon = {
     id: Id;
