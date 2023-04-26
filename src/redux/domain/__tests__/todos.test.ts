@@ -9,18 +9,21 @@ const initialState = {
     byId: {
         1: {
             id: 1,
+            status_id: 1,
             todo: 'Buy groceries',
             completed: false,
             deleted: false,
         },
         2: {
             id: 2,
+            status_id: 1,
             todo: 'Do laundry',
             completed: true,
             deleted: false,
         },
         3: {
             id: 3,
+            status_id: 1,
             todo: 'Finish project',
             completed: false,
             deleted: false,
@@ -41,12 +44,14 @@ describe('todos редьюсер', () => {
                 todos: [
                     {
                         id: 4,
+                        status_id: 1,
                         todo: 'Clean room',
                         completed: false,
                         deleted: false,
                     },
                     {
                         id: 1,
+                        status_id: 1,
                         todo: 'Buy groceries for the week',
                         completed: true,
                         deleted: false,
@@ -59,24 +64,28 @@ describe('todos редьюсер', () => {
             byId: {
                 1: {
                     id: 1,
+                    status_id: 1,
                     todo: 'Buy groceries for the week',
                     completed: true,
                     deleted: false,
                 },
                 2: {
                     id: 2,
+                    status_id: 1,
                     todo: 'Do laundry',
                     completed: true,
                     deleted: false,
                 },
                 3: {
                     id: 3,
+                    status_id: 1,
                     todo: 'Finish project',
                     completed: false,
                     deleted: false,
                 },
                 4: {
                     id: 4,
+                    status_id: 1,
                     todo: 'Clean room',
                     completed: false,
                     deleted: false,
@@ -99,12 +108,14 @@ describe('todos редьюсер', () => {
             byId: {
                 1: {
                     id: 1,
+                    status_id: 1,
                     todo: 'Buy groceries',
                     completed: false,
                     deleted: false,
                 },
                 3: {
                     id: 3,
+                    status_id: 1,
                     todo: 'Finish project',
                     completed: false,
                     deleted: false,
