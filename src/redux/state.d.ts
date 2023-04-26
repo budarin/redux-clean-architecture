@@ -17,10 +17,10 @@ type IconState = {
 };
 
 type State = {
-    todos: TodoState;
-    categories: CategoryState;
-    statuses: StatusState;
     icons: IconState;
+    statuses: StatusState;
+    categories: CategoryState;
+    todos: TodoState;
 
     dispatch: (Action: any) => void;
 };
