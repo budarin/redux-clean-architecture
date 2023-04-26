@@ -15,10 +15,6 @@ import todos from './domain/todos/index.ts';
 import statuses from './domain/statuses.ts';
 import categories from './domain/categories/index.ts';
 
-// порядок редьюсеров очень важен при обновлении всех сущностей
-// с action UPDATE_ENTITIES - делаем вставку в сущности по мереи их
-// зависимостей друг от друга чтобы при проверках не нарушалась
-// ссылочная целостность данных
 function rootReducer(state: State | undefined, action: any) {
     if (action.type === RESET_STATE) {
         return storeInitialState;
