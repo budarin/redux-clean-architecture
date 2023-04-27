@@ -1,7 +1,18 @@
-import { anyEntityInitialState, getNewState } from '../common/state.ts';
+import { anyEntityInitialState, createEmptyState, getNewState } from '../common/state.ts';
 import { UPDATE_ENTITIES, type UpdateEntitiesAction } from '../common/actions.ts';
 
-export type CategoryAction = UpdateEntitiesAction;
+// Actions
+export const DELETE_CATEGORY = 'DELETE_CATEGORY' as const;
+
+// Action creators
+export const deleteCategory = (id: number) => ({
+    type: DELETE_CATEGORY,
+    payload: id,
+});
+
+type DeleteCategoryAction = ReturnType<typeof deleteCategory>;
+
+export type CategoryAction = DeleteCategoryAction | UpdateEntitiesAction;
 
 export default function categories(state = anyEntityInitialState as CategoriyState, action = {} as CategoryAction) {
     switch (action.type) {
@@ -21,5 +32,29 @@ export default function categories(state = anyEntityInitialState as CategoriySta
 
             return newSate;
         }
+
+        case DELETE_CATEGORY: {
+            if (state.ids.length === 0) {
+                return state;
+            }
+
+            const newSate = createEmptyState<CategoriyState>();
+
+            Object.keys(state.byId).forEach((key) => {
+                const id = Number(key);
+
+                if (id !== action.payload) {
+                    newSate.byId[id] = { ...state.byId[id] };
+                }
+            });
+
+            // храним порядок элементов по id
+            newSate.ids = Object.keys(newSate.byId).map(Number);
+
+            return newSate;
+        }
+
+        default:
+            return state;
     }
 }
