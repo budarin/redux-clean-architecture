@@ -2,10 +2,10 @@
  * @jest-environment jsdom
  */
 
-import todos, { DELETE_TODO } from '../todos';
-import { UPDATE_ENTITIES } from '../common/actions';
+import todos, { DELETE_TODO } from '.';
+import { UPDATE_ENTITIES } from '../../common/actions';
 
-import type { TodoAction } from '../todos';
+import type { TodoAction } from '.';
 
 const initialState = {
     byId: {

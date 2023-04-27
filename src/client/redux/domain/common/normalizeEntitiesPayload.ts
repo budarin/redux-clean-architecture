@@ -8,7 +8,7 @@ export function normalizeEntitiesPayload(entities: EntitiesPayload): NormalizedE
     Object.keys(entities).forEach((entity) => {
         if (entity) {
             newEntities[entity as keyof NormalizedEntitiesPayload] = anyEntityInitialState;
-            const newEntity = newEntities[entity as keyof NormalizedEntitiesPayload] as OneOfEntity;
+            const newEntity = newEntities[entity as keyof NormalizedEntitiesPayload] as OneOfEntitiyState;
 
             entities[entity as EntitiesIndex]?.forEach((item) => {
                 newEntity.byId[item.id] = { ...item };

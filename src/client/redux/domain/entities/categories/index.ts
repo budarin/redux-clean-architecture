@@ -1,5 +1,8 @@
-import { anyEntityInitialState, createEmptyState, getNewState } from '../common/state.ts';
-import { UPDATE_ENTITIES, type UpdateEntitiesAction } from '../common/actions.ts';
+import { UPDATE_ENTITIES } from '../../common/actions.ts';
+import { onAction } from '../../../middlewares/businessLogic.ts';
+import { anyEntityInitialState, createEmptyState, getNewState } from '../../common/state.ts';
+
+import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 // Actions
 export const DELETE_CATEGORY = 'DELETE_CATEGORY' as const;
@@ -13,6 +16,22 @@ export const deleteCategory = (id: number) => ({
 type DeleteCategoryAction = ReturnType<typeof deleteCategory>;
 
 export type CategoryAction = DeleteCategoryAction | UpdateEntitiesAction;
+
+// @ts-ignore
+// нельзя удалять Category если есть todo, у которого установлен category_id равный id, удаляемой категории
+onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
+    const state = api.getState();
+    const todoWithTheCategory = Object.values<Todo>(state.todos.byId).find(
+        (todo) => todo.category_id === action.payload,
+    );
+
+    if (todoWithTheCategory) {
+        console.error('Нельзя удалять категорию когда есть Todo с ней');
+        return;
+    }
+
+    return api.dispatch(action);
+});
 
 export default function categories(state = anyEntityInitialState as CategoriyState, action = {} as CategoryAction) {
     switch (action.type) {

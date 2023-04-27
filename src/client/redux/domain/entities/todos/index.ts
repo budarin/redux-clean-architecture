@@ -1,8 +1,8 @@
-import { UPDATE_ENTITIES } from '../common/actions.ts';
-import { onAction } from '../../middlewares/businessLogic.ts';
-import { anyEntityInitialState, createEmptyState, getNewState } from '../common/state.ts';
+import { UPDATE_ENTITIES } from '../../common/actions.ts';
 
-import type { UpdateEntitiesAction } from '../common/actions.ts';
+import { anyEntityInitialState, createEmptyState, getNewState } from '../../common/state.ts';
+
+import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 // Actions
 export const DELETE_TODO = 'DELETE_TODO' as const;
@@ -16,21 +16,6 @@ export const deleteTodo = (id: number) => ({
 type DeleteTodoAction = ReturnType<typeof deleteTodo>;
 
 export type TodoAction = DeleteTodoAction | UpdateEntitiesAction;
-
-// check data constraints
-// @ts-ignore
-onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
-    if (action.payload.entities) {
-        const { todos } = action.payload.entities;
-
-        if (todos && todos[0].todo.length > 3) {
-            todos[0].todo = 'abc';
-            return api.dispatch({ ...action, type: UPDATE_ENTITIES });
-        }
-    }
-
-    return api.dispatch(action);
-});
 
 // reducer
 export default function todos(state = anyEntityInitialState as TodoState, action = {} as TodoAction) {

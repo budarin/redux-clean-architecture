@@ -23,7 +23,7 @@ export const businessLogic = (config) => (set, get, api) => {
             }
 
             // return handler(set, get, { ...api, dispatch: originalDispath }, action);
-            return handler(set, get, api, action);
+            return handler(set, get, { ...api, dispatch: originalDispath }, action);
         } finally {
         }
     };

@@ -59,7 +59,7 @@ export const initialState: EntitiesPayload = {
     todos: [
         {
             id: 1,
-            status_id: 2,
+            status_id: 1,
             category_id: 1,
             todo: 'TodoTodo',
             description: undefined,

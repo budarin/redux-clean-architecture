@@ -39,7 +39,9 @@ type Todo = {
     completed?: Completed | undefined;
 };
 
-type OneOfEntity = IconState | StatusState | CategoriyState | TodoState;
+type OneOfEntities = Icon | Status | Category | Todo;
+type keyOfOneOfEntities = keyof OneOfEntities;
+type OneOfEntitiyState = IconState | StatusState | CategoriyState | TodoState;
 
 type EntitiesPayload = {
     todos?: Todo[];

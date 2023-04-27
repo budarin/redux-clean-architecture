@@ -1,5 +1,5 @@
-import { anyEntityInitialState, getNewState } from './common/state.ts';
-import { UPDATE_ENTITIES, type UpdateEntitiesAction } from './common/actions.ts';
+import { anyEntityInitialState, getNewState } from '../../common/state.ts';
+import { UPDATE_ENTITIES, type UpdateEntitiesAction } from '../../common/actions.ts';
 
 export type StatusAction = UpdateEntitiesAction;
 

@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { redux } from 'zustand/middleware';
 
+import './domain/check_constraints/index.ts';
+
 // store initial state
 import { entitiesInitialState } from './domain/common/state.ts';
 
@@ -12,10 +14,10 @@ import { logger } from './middlewares/logger.ts';
 import { businessLogic } from './middlewares/businessLogic.ts';
 
 // reducers
-import icons from './domain/icons.ts';
-import todos from './domain/todos/index.ts';
-import statuses from './domain/statuses.ts';
-import categories from './domain/categories/index.ts';
+import icons from './domain/entities/icons/icons.ts';
+import todos from './domain/entities/todos/index.ts';
+import statuses from './domain/entities/statuses/statuses.ts';
+import categories from './domain/entities/categories/index.ts';
 
 function rootReducer(state: EntitiesState | undefined, action: any = {}) {
     if (typeof action !== 'object') {

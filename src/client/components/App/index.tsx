@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useStore } from '../../redux/store.ts';
 import { initialState } from '../../../server/initialSate.ts';
+import { deleteCategory } from '../../redux/domain/entities/categories/index.ts';
 
 function App() {
     const dispatch = useStore((state) => state.dispatch);
@@ -14,6 +15,8 @@ function App() {
                 entities: initialState,
             },
         });
+
+        dispatch(deleteCategory(1));
     }, []);
 
     return (

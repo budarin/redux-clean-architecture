@@ -19,7 +19,7 @@ export function createEmptyState<T>(): T {
     } as T;
 }
 
-export function getNewState<T extends OneOfEntity>(state: T): T {
+export function getNewState<T extends OneOfEntitiyState>(state: T): T {
     const newSate = {
         byId: {
             ...state.byId,
