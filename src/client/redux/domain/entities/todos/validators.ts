@@ -1,13 +1,13 @@
 import {
+    isInt,
+    isDate,
+    inRange,
+    isString,
+    isBoolean,
+    isNotExists,
+    isUndefined,
     TypeConverters,
     ValidationRules,
-    inRange,
-    isBoolean,
-    isDate,
-    isInt,
-    isNotExists,
-    isString,
-    isUndefined,
     toDefaultBoolean,
 } from '../../common/validation_utils';
 
@@ -47,6 +47,7 @@ export const validateDueDate = ({ due_date }: Record<string, unknown>) => isNotE
 export const validateCompleted = ({ completed }: Record<string, unknown>): boolean => isBoolean(completed);
 export const validateDeleted = ({ x: deleted }: Record<string, unknown>): boolean =>
     isUndefined(deleted) || isBoolean(deleted);
+
 export const todosConverters: TypeConverters = {
     completed: toDefaultBoolean(false),
 };
