@@ -16,7 +16,7 @@ export const businessLogic = (config) => (set, get, api) => {
 
     api.dispatch = (action: any) => {
         const handler = actionHandlers.get(action.type);
-        return handler ? handler(set, get, api, action) : originalDispath(action);
+        return handler ? handler(set, get, { ...api, originalDispath }, action) : originalDispath(action);
     };
 
     return initialState;

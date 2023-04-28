@@ -42,6 +42,6 @@ onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
         checkCategoryConstraints(action, store, categories, iconIds, categoryIds);
         checkTodoConstraints(action, store, todos, categoryIds, statusIds);
 
-        return api.dispatch({ ...action, type: UPDATE_ENTITIES });
+        return api.originalDispath({ ...action, type: UPDATE_ENTITIES });
     }
 });
