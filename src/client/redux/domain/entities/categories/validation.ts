@@ -24,6 +24,7 @@ export function validateCategory({ category }: Record<string, unknown>): boolean
 export const validateIconIdIntegration = (icon_id: number, iconIdsSores: Record<number, any>[]): boolean =>
     !!iconIdsSores.find((idsStore) => Boolean(idsStore[icon_id]));
 
+// validation rules
 export const categoryValidationRules: ValidationRules<Todo> = {
     id: [validateId, 'Category обязан иметь id целым числомr'],
     category: [
@@ -33,6 +34,7 @@ export const categoryValidationRules: ValidationRules<Todo> = {
     icon_id: [validateIconId, 'Category обязан иметь icon_id целым числом'],
 };
 
+// Category getter
 export function getCategory(input: Record<string, unknown>): Category {
     return {
         id: input['id'],

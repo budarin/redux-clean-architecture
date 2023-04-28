@@ -61,10 +61,12 @@ export const validateStatusIdIntegration = (status_id: number, statusIdsSores: R
 export const validateCategoryIdIntegration = (category_id: number, categoryIdsSores: Record<number, any>[]): boolean =>
     !!categoryIdsSores.find((idsStore) => Boolean(idsStore[category_id]));
 
+// coverters
 export const todoConverters: TypeConverters = {
     completed: toDefaultBoolean(false),
 };
 
+// validation rules
 export const todoValidationRules: ValidationRules<Todo> = {
     id: [validateId, 'Todo обязан иметь id целым числомr'],
     status_id: [validateStatusId, 'Todo обязан иметь status_id целым числом'],
@@ -82,6 +84,7 @@ export const todoValidationRules: ValidationRules<Todo> = {
     deleted: [validateDeleted, 'Deleted должно быть boolean'],
 };
 
+// Todo getter
 export function getTodo(input: Record<string, unknown>): Todo {
     return {
         id: input['id'],
