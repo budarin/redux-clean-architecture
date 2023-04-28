@@ -1,5 +1,5 @@
-import { isInt } from '../isInt';
-import { isString } from '../isString';
+import { isInt } from '../isInt.ts';
+import { toInt } from '../toInt.ts';
 import { validateEntity } from '../validateEntity';
 
 describe('функция validateEntity', () => {
@@ -16,12 +16,11 @@ describe('функция validateEntity', () => {
         email: 'john@com',
     };
     const mockRules = {
-        name: isString,
-        age: isInt,
+        age: [(x: any) => isInt(x), 'Error'],
     };
 
     test('должна вернуть объект с флагом valid в true и пустым объектом errors, если все правила валидации пройдены', () => {
-        const result = validateEntity(mockValidEntity, mockRules);
+        const result = validateEntity<typeof mockValidEntity>(mockValidEntity, mockRules);
         expect(result.valid).toBe(true);
         expect(result.errors).toEqual({});
     });

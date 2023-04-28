@@ -1,7 +1,7 @@
 export type ValidationRules<T> = Record<string, [(x: any) => boolean, string]>;
 
 export function validateEntity<T>(
-    entity: OneOfEntities,
+    entity: object,
     rules: ValidationRules<T>,
 ): { valid: boolean; errors: Record<string, string> } {
     const errors = {} as Record<string, string>;
