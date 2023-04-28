@@ -28,7 +28,13 @@
         byId: Record<number, Category>,
         ids: number[]
     },
-    icons:  Icon[],
-    statuses: Status[]
+    icons:  {
+        byId: Record<number, Icon>,
+        ids: number[]
+    },,
+    statuses: {
+        byId: Record<number, Status>,
+        ids: number[]
+    },
 }
 ```
