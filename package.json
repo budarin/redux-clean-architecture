@@ -30,7 +30,7 @@
         "webpack-dev-server": "^4.13.3"
     },
     "scripts": {
-        "start": "webpack-dev-server",
+        "start-client": "webpack-dev-server",
         "test": "jest",
         "tsc": "tsc"
     }
