@@ -1,4 +1,3 @@
-import { getEntity, validateEntity } from '../common/validation_utils.ts';
 import {
     getTodo,
     todoConverters,
@@ -6,6 +5,7 @@ import {
     validateCategoryIdIntegration,
     validateStatusIdIntegration,
 } from '../entities/todos/validators.ts';
+import { getEntity, validateEntity } from '../common/validation_utils.ts';
 
 import type { UpdateEntitiesAction } from '../common/actions.ts';
 
