@@ -1,3 +1,3 @@
 export function isExists(x: unknown): boolean {
-    return Boolean(x);
+    return (x !== undefined && x !== null) || (typeof x === 'number' && !isNaN(x));
 }

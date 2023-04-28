@@ -1,3 +1,5 @@
+import { isExists } from './isExists';
+
 export function isNotExists(x: unknown): boolean {
-    return !Boolean(x);
+    return !isExists(x);
 }

@@ -3,10 +3,18 @@ import { isString } from './isString';
 
 export function toBoolean(x: unknown): boolean | undefined {
     if (isBoolean(x)) {
-        return x;
+        return true;
     }
-    if ((isString(x) && x === 'true') || x === 'false') {
-        return Boolean(x);
+    if (isString(x)) {
+        switch (x.toLowerCase()) {
+            case 'true':
+                return true;
+            case 'false':
+                return false;
+
+            default:
+                return;
+        }
     }
 }
 
