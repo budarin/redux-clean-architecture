@@ -10,7 +10,7 @@ export const DELETE_CATEGORY = 'DELETE_CATEGORY' as const;
 // Action creators
 export const deleteCategory = (id: number) => ({
     type: DELETE_CATEGORY,
-    payload: id,
+    payload: { id },
 });
 
 type DeleteCategoryAction = ReturnType<typeof deleteCategory>;
@@ -20,7 +20,7 @@ export type CategoryAction = DeleteCategoryAction | UpdateEntitiesAction;
 // @ts-ignore
 onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
     const state = api.getState();
-    const isFound = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === action.payload);
+    const isFound = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === action.payload.id);
 
     if (isFound) {
         console.error('Нельзя удалить category если на нее ссылается хотя бы один Todo');
@@ -59,7 +59,7 @@ export default function categories(state = anyEntityInitialState as CategoriySta
             Object.keys(state.byId).forEach((key) => {
                 const id = Number(key);
 
-                if (id !== action.payload) {
+                if (id !== action.payload.id) {
                     newSate.byId[id] = { ...state.byId[id] };
                 }
             });

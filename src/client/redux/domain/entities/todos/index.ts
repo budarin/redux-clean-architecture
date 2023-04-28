@@ -10,7 +10,7 @@ export const DELETE_TODO = 'DELETE_TODO' as const;
 // Action creators
 export const deleteTodo = (id: number) => ({
     type: DELETE_TODO,
-    payload: id,
+    payload: { id },
 });
 
 type DeleteTodoAction = ReturnType<typeof deleteTodo>;
@@ -47,7 +47,7 @@ export default function todos(state = anyEntityInitialState as TodoState, action
             Object.keys(state.byId).forEach((key) => {
                 const id = Number(key);
 
-                if (id !== action.payload) {
+                if (id !== action.payload.id) {
                     newSate.byId[id] = { ...state.byId[id] };
                 }
             });
