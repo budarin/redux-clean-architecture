@@ -1,6 +1,6 @@
 {
     "name": "redux-clean-architecture",
-    "description": "Todo application on React + Redax using clean architecture",
+    "description": "Todo application on React + Redux using clean architecture",
     "version": "1.0.0",
     "main": "src/index.ts",
     "repository": "https://github.com/budarin/redux-clean-architecture.git",
