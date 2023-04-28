@@ -105,7 +105,7 @@ describe('todos редьюсер', () => {
     it('DELETE_TODO должен удалить элемент из todos', () => {
         const action = {
             type: DELETE_TODO,
-            payload: 2,
+            payload: { id: 2 },
         };
 
         const expectedState = {
