@@ -1,6 +1,6 @@
 import { UPDATE_ENTITIES } from '../common/actions.ts';
 import { onAction } from '../../middlewares/businessLogic.ts';
-import { everyIsEmptyArrayOrUndefined } from '../common/validation_utils.ts';
+import { everyIsEmptyArrayOrUndefined } from '../common/validation_utils/everyIsEmptyArrayOrUndefined.ts';
 
 import { checkTodoConstraints } from './checkTodoConstraints.ts';
 import { checkCategoryConstraints } from './checkCategoryConstraints.ts';

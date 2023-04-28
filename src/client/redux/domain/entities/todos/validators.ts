@@ -10,18 +10,17 @@
  *  -   Поле completed должно быть логическим типом и по умолчанию должно быть установлено в false, либо оно может быть неопределенным.
  */
 
-import {
-    isInt,
-    isDate,
-    inRange,
-    isString,
-    isBoolean,
-    isNotExists,
-    isUndefined,
-    TypeConverters,
-    ValidationRules,
-    toDefaultBoolean,
-} from '../../common/validation_utils';
+import { isInt } from '../../common/validation_utils/isInt';
+import { inRange } from '../../common/validation_utils/inRange';
+import { isString } from '../../common/validation_utils/isString';
+import { isBoolean } from '../../common/validation_utils/isBoolean';
+import { isUndefined } from '../../common/validation_utils/isUndefined';
+import { isTimeStamp } from '../../common/validation_utils/isTimeStamp';
+import { isNotExists } from '../../common/validation_utils/isNotExists';
+import { toDefaultBoolean } from '../../common/validation_utils/toDefaultBoolean';
+
+import type { TypeConverters } from '../../common/validation_utils/getEntity.ts';
+import type { ValidationRules } from '../../common/validation_utils/validateEntity.ts';
 
 const MIN_TODO_LENGTH = 5;
 const MAX_TODO_LENGTH = 150;
@@ -33,7 +32,8 @@ export const validateId = ({ id }: Record<string, unknown>): boolean => isInt(id
 export const validateStatusId = ({ status_id }: Record<string, unknown>): boolean => isInt(status_id);
 export const validateCategoryId = ({ category_id }: Record<string, unknown>): boolean =>
     isUndefined(category_id) || isInt(category_id);
-export const validateDueDate = ({ due_date }: Record<string, unknown>) => isNotExists(due_date) || isDate(due_date);
+export const validateDueDate = ({ due_date }: Record<string, unknown>) =>
+    isNotExists(due_date) || isTimeStamp(due_date);
 export const validateCompleted = ({ completed }: Record<string, unknown>): boolean => isBoolean(completed);
 export const validateDeleted = ({ x: deleted }: Record<string, unknown>): boolean =>
     isUndefined(deleted) || isBoolean(deleted);

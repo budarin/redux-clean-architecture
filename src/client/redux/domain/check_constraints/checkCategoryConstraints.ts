@@ -1,4 +1,4 @@
-import { validateEntity } from '../common/validation_utils.ts';
+import { validateEntity } from '../common/validation_utils/validateEntity.ts';
 import { categoryValidationRules, getCategory, validateIconIdIntegration } from '../entities/categories/validation.ts';
 
 import type { UpdateEntitiesAction } from '../common/actions.ts';

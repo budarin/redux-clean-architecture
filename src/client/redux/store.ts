@@ -4,7 +4,7 @@ import { redux } from 'zustand/middleware';
 import './domain/check_constraints/index.ts';
 
 // store initial state
-import { entitiesInitialState } from './domain/common/state.ts';
+import { entitiesInitialState } from './domain/common/consts.ts';
 
 // actions
 import { RESET_STATE } from './domain/common/actions.ts';
