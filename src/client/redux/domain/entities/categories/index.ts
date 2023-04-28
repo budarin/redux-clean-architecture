@@ -18,15 +18,12 @@ type DeleteCategoryAction = ReturnType<typeof deleteCategory>;
 export type CategoryAction = DeleteCategoryAction | UpdateEntitiesAction;
 
 // @ts-ignore
-// нельзя удалять Category если есть todo, у которого установлен category_id равный id, удаляемой категории
 onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
     const state = api.getState();
-    const todoWithTheCategory = Object.values<Todo>(state.todos.byId).find(
-        (todo) => todo.category_id === action.payload,
-    );
+    const isFound = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === action.payload);
 
-    if (todoWithTheCategory) {
-        console.error('Нельзя удалять категорию когда есть Todo с ней');
+    if (isFound) {
+        console.error('Нельзя удалить category если на нее ссылается хотя бы один Todo');
         return;
     }
 

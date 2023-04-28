@@ -52,7 +52,7 @@ type TypeConverter = typeof toTimeStamp | typeof toInt | typeof toBoolean | type
 export type TypeConverters = Record<string, TypeConverter>;
 export type ValidationRules<T> = Record<string, [(x: any) => boolean, string]>;
 
-export function getConvertedEntity<T>(entity: T, convertes: TypeConverters): T {
+export function getEntity<T>(entity: T, convertes: TypeConverters): T {
     Object.keys(convertes).forEach((propName) => {
         const key = propName as keyof T;
         const value = entity[key];

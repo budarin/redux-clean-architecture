@@ -1,13 +1,22 @@
 import { UPDATE_ENTITIES } from '../common/actions.ts';
 import { onAction } from '../../middlewares/businessLogic.ts';
-import { everyIsEmptyArrayOrUndefined, getConvertedEntity, validateEntity } from '../common/validation_utils.ts';
+import { everyIsEmptyArrayOrUndefined, getEntity, validateEntity } from '../common/validation_utils.ts';
+import { categoryValidationRules, getCategory, validateIconIdIntegration } from '../entities/categories/validation.ts';
+import {
+    getTodo,
+    todoConverters,
+    todoValidationRules,
+    validateCategoryIdIntegration,
+    validateStatusIdIntegration,
+} from '../entities/todos/validators.ts';
 
 import type { UpdateEntitiesAction } from '../common/actions.ts';
-import { getTodo, todosConverters, todosValidationRules } from '../entities/todos/validators.ts';
-
-const NOT_FOUND = -1;
 
 type IdsHash = Record<number, boolean>;
+
+const ICON_ID_ERROR_MESSAGE = 'Значение icon_id отсутствует в Icons';
+const STATUS_ID_ERROR_MESSAGE = 'Значение status_id отсутствует в Statuses';
+const CATEGORY_ID_ERROR_MESSAGE = 'Значение category_id отсутствует в Categories';
 
 // @ts-ignore
 onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
@@ -33,7 +42,7 @@ onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
 
         if (statuses && statuses.length > 0) {
             // -   обязан присутствовать id типа integer
-            // -   обязан присутствовать ststus
+            // -   обязан присутствовать ststus_id
             // -   обязан присутствовать color
 
             statuses.forEach((status, i) => {
@@ -42,14 +51,28 @@ onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
         }
 
         if (categories && categories.length > 0) {
-            // Category
-            // -   обязан присутствовать id типа integer
-            // -   icon_id должен быть типа number и должен присутствовать Icons
-            // -   category обязательное поле и его длина названия не должна превышать 20 символов
-            // -   нельзя удалять Category если есть todo, у которого установлен category_id равный id, удаляемой категории
+            const newCategories = [] as Category[];
 
             categories.forEach((category, i) => {
-                categoryIds[category.id] = true;
+                let linksAreCorrect = true;
+                const newCategory = category;
+                const { valid, errors } = validateEntity<Category>(newCategory, categoryValidationRules);
+                const { icon_id } = newCategory;
+
+                // проверить существуют ли icon_id в Icons
+                if (icon_id && validateIconIdIntegration(icon_id, [store.icons.byId, iconIds]) === false) {
+                    linksAreCorrect = false;
+                    errors['icon_id'] = ICON_ID_ERROR_MESSAGE;
+                    console.log(ICON_ID_ERROR_MESSAGE);
+                }
+
+                if (valid && linksAreCorrect) {
+                    newCategories.push(getCategory(newCategory));
+                    categoryIds[category.id] = true;
+                } else {
+                    console.error('Category', { newCategory, errors });
+                    // generate Error
+                }
             });
         }
 
@@ -58,38 +81,29 @@ onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
 
             todos.forEach((todo, i) => {
                 let linksAreCorrect = true;
-                const newTodo = getConvertedEntity<Todo>(todo, todosConverters);
-                const { valid, errors } = validateEntity<Todo>(newTodo, todosValidationRules);
+                const newTodo = getEntity<Todo>(todo, todoConverters);
+                const { valid, errors } = validateEntity<Todo>(newTodo, todoValidationRules);
                 const { status_id, category_id } = newTodo;
 
                 // проверить существуют ли status_id в Statuse
-                if (
-                    status_id &&
-                    store.statuses.ids.indexOf(status_id) === NOT_FOUND &&
-                    statusIds[status_id] === undefined
-                ) {
+                if (status_id && validateStatusIdIntegration(status_id, [store.statuses.byId, statusIds]) === false) {
                     linksAreCorrect = false;
-                    const errorMsg = 'Значение status_id отсутствует в Statuses';
-
-                    errors['status_id'] = errorMsg;
-                    console.log(errorMsg);
+                    errors['status_id'] = STATUS_ID_ERROR_MESSAGE;
+                    console.log(STATUS_ID_ERROR_MESSAGE);
                 }
 
                 // проверить существуют ли category_id в Categories
                 if (
                     category_id &&
-                    store.categories.ids.indexOf(category_id) === NOT_FOUND &&
-                    categoryIds[category_id] === undefined
+                    validateCategoryIdIntegration(category_id, [store.categories.byId, categoryIds]) === false
                 ) {
                     linksAreCorrect = false;
-                    const errorMsg = 'Значение category_id отсутствует в Categories';
-
-                    errors['category_id'] = errorMsg;
-                    console.log(errorMsg);
+                    errors['category_id'] = CATEGORY_ID_ERROR_MESSAGE;
+                    console.log(CATEGORY_ID_ERROR_MESSAGE);
                 }
 
                 if (valid && linksAreCorrect) {
-                    newTodos[i] = getTodo(newTodo);
+                    newTodos.push(getTodo(newTodo));
                 } else {
                     console.error('Todo', { newTodo, errors });
                     // generate Error
