@@ -1,6 +1,8 @@
-import { anyEntityInitialState } from '../../common/consts.ts';
 import { getNewState } from '../../common/getNewState.ts';
-import { UPDATE_ENTITIES, type UpdateEntitiesAction } from '../../common/actions.ts';
+import { UPDATE_ENTITIES } from '../../common/actions.ts';
+import { anyEntityInitialState } from '../../common/consts.ts';
+
+import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 export type IconAction = UpdateEntitiesAction;
 

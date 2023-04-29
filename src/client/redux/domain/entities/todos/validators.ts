@@ -68,20 +68,20 @@ export const todoConverters: TypeConverters = {
 
 // validation rules
 export const todoValidationRules: ValidationRules<Todo> = {
-    id: [validateId, 'Todo обязан иметь id целым числомr'],
-    status_id: [validateStatusId, 'Todo обязан иметь status_id целым числом'],
-    category_id: [validateCategoryId, 'Category_id должен быть целым числом'],
+    id: [validateId, 'обязательное поле id должно быть целым числом'],
+    status_id: [validateStatusId, 'обязательное поле status_id должно быть целым числом'],
+    category_id: [validateCategoryId, 'необязательное поле category_id должно быть целым числом'],
     todo: [
         validateTodo,
-        `Длина названия todo должна быть более ${MIN_TODO_LENGTH} символов и не превышать ${MAX_TODO_LENGTH} символов`,
+        `длина названия todo должна быть более ${MIN_TODO_LENGTH} символов и не превышать ${MAX_TODO_LENGTH} символов`,
     ],
     description: [
         validateDescription,
-        `Длина description должна быть более ${MIN_DESCRIPTION_LENGTH} символов и не превышать ${MAX_DESCRIPTION_LENGTH} символов`,
+        `длина description должна быть более ${MIN_DESCRIPTION_LENGTH} символов и не превышать ${MAX_DESCRIPTION_LENGTH} символов`,
     ],
-    due_date: [validateDueDate, 'Due_date должно содержать целое число, содержащее значение даты:времени'],
-    completed: [validateCompleted, 'Completed должно быть boolean'],
-    deleted: [validateDeleted, 'Deleted должно быть boolean'],
+    due_date: [validateDueDate, 'необязательное поле due_date должно быть значением timestamp'],
+    completed: [validateCompleted, 'поле completed должно быть boolean'],
+    deleted: [validateDeleted, 'поле deleted должно быть boolean'],
 };
 
 // Todo getter

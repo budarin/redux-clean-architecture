@@ -10,8 +10,8 @@ import { getEntity } from '../common/validation_utils/getEntity.ts';
 
 import type { UpdateEntitiesAction } from '../common/actions.ts';
 
-const STATUS_ID_ERROR_MESSAGE = 'Значение status_id отсутствует в Statuses';
-const CATEGORY_ID_ERROR_MESSAGE = 'Значение category_id отсутствует в Categories';
+const STATUS_ID_ERROR_MESSAGE = 'Todos: Значение status_id отсутствует в Statuses';
+const CATEGORY_ID_ERROR_MESSAGE = 'Todos: Значение category_id отсутствует в Categories';
 
 export function checkTodoConstraints(
     action: UpdateEntitiesAction,
@@ -26,7 +26,7 @@ export function checkTodoConstraints(
         todos.forEach((todo, i) => {
             let linksAreCorrect = true;
             const newTodo = getEntity<Todo>(todo, todoConverters);
-            const { valid, errors } = validateEntity<Todo>(newTodo, todoValidationRules);
+            const { valid, errors } = validateEntity<Todo>(newTodo, todoValidationRules, 'Categories');
             const { status_id, category_id } = newTodo;
 
             // проверить существуют ли status_id в Statuse

@@ -3,6 +3,7 @@ export type ValidationRules<T> = Record<string, [(x: any) => boolean, string]>;
 export function validateEntity<T>(
     entity: object,
     rules: ValidationRules<T>,
+    errorPrefix: string,
 ): { valid: boolean; errors: Record<string, string> } {
     const errors = {} as Record<string, string>;
     let hasNoErrors = true;
@@ -12,7 +13,7 @@ export function validateEntity<T>(
         const [validator, errorMessage] = rule;
 
         if (validator(entity) === false) {
-            errors[propName] = errorMessage;
+            errors[propName] = `${errorPrefix}: ${errorMessage}`;
             hasNoErrors && (hasNoErrors = false);
         }
     });

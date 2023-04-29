@@ -21,22 +21,22 @@ export const initialState: EntitiesPayload = {
         {
             id: 1,
             status: 'низкий',
-            color: 'grey',
+            color: '#808080',
         },
         {
             id: 2,
             status: 'нормальный',
-            color: 'black',
+            color: '#000000',
         },
         {
             id: 3,
             status: 'повышенный',
-            color: 'blue',
+            color: '#008000',
         },
         {
             id: 4,
             status: 'высокий',
-            color: 'red',
+            color: '#ff0000',
         },
     ],
     categories: [

@@ -3,6 +3,8 @@ import { onAction } from '../../middlewares/businessLogic.ts';
 import { everyIsEmptyArrayOrUndefined } from '../common/validation_utils/everyIsEmptyArrayOrUndefined.ts';
 
 import { checkTodoConstraints } from './checkTodoConstraints.ts';
+import { checkIconConstraints } from './checkIconConstraints.ts';
+import { checkStatusConstraints } from './checkStatusConstraints.ts';
 import { checkCategoryConstraints } from './checkCategoryConstraints.ts';
 
 import type { UpdateEntitiesAction } from '../common/actions.ts';
@@ -17,28 +19,8 @@ onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
         const store = api.getState() as State;
         const { todos, categories, statuses, icons } = action.payload.entities;
 
-        if (icons && icons.length > 0) {
-            // -   обязан присутствовать id типа integer
-            // -   обязан присутствовать name
-
-            icons.forEach((icon, i) => {
-                const newIcon = icon;
-                icons[i] = newIcon;
-
-                iconIds[icon.id] = true;
-            });
-        }
-
-        if (statuses && statuses.length > 0) {
-            // -   обязан присутствовать id типа integer
-            // -   обязан присутствовать ststus_id
-            // -   обязан присутствовать color
-
-            statuses.forEach((status, i) => {
-                statusIds[status.id] = true;
-            });
-        }
-
+        checkIconConstraints(action, store, icons, iconIds);
+        checkStatusConstraints(action, store, statuses, statusIds);
         checkCategoryConstraints(action, store, categories, iconIds, categoryIds);
         checkTodoConstraints(action, store, todos, categoryIds, statusIds);
 

@@ -17,9 +17,8 @@ export function checkCategoryConstraints(
 
         categories.forEach((category, i) => {
             let linksAreCorrect = true;
-            const newCategory = category;
-            const { valid, errors } = validateEntity<Category>(newCategory, categoryValidationRules);
-            const { icon_id } = newCategory;
+            const { valid, errors } = validateEntity<Category>(category, categoryValidationRules, 'Categories');
+            const { icon_id } = category;
 
             // проверить существуют ли icon_id в Icons
             if (icon_id && validateIconIdIntegration(icon_id, [store.icons.byId, iconIds]) === false) {
@@ -29,10 +28,10 @@ export function checkCategoryConstraints(
             }
 
             if (valid && linksAreCorrect) {
-                newCategories.push(getCategory(newCategory));
+                newCategories.push(getCategory(category));
                 categoryIds[category.id] = true;
             } else {
-                console.error('Category', { newCategory, errors });
+                console.error('Category', { category, errors });
                 // generate Error
             }
         });

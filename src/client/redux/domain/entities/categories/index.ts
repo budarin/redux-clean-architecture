@@ -1,7 +1,7 @@
-import { UPDATE_ENTITIES } from '../../common/actions.ts';
-import { onAction } from '../../../middlewares/businessLogic.ts';
-import { anyEntityInitialState } from '../../common/consts.ts';
 import { getNewState } from '../../common/getNewState.ts';
+import { UPDATE_ENTITIES } from '../../common/actions.ts';
+import { anyEntityInitialState } from '../../common/consts.ts';
+import { onAction } from '../../../middlewares/businessLogic.ts';
 import { createEmptyState } from '../../common/createEmptyState.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
@@ -22,10 +22,13 @@ export type CategoryAction = DeleteCategoryAction | UpdateEntitiesAction;
 // @ts-ignore
 onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
     const state = api.getState();
-    const isFound = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === action.payload.id);
+    const linkeddTodo = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === action.payload.id);
 
-    if (isFound) {
-        console.error('Нельзя удалить category если на нее ссылается хотя бы один Todo');
+    if (linkeddTodo) {
+        console.error(
+            'Categories: нельзя удалить category если на нее ссылается хотя бы один Todo',
+            state.categories.byId[action.payload.id],
+        );
         return;
     }
 
