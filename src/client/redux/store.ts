@@ -4,7 +4,7 @@ import { redux } from 'zustand/middleware';
 import './domain/check_constraints/index.ts';
 
 // store initial state
-import { entitiesInitialState } from './domain/common/consts.ts';
+import { getEntitiesInitialState } from './domain/common/getEntitiesInitialState.ts';
 
 // actions
 import { RESET_STATE } from './domain/common/actions.ts';
@@ -19,13 +19,16 @@ import todos from './domain/entities/todos/index.ts';
 import statuses from './domain/entities/statuses/statuses.ts';
 import categories from './domain/entities/categories/index.ts';
 
+import { initialState } from '../../server/initialSate.ts';
+import { normalizeEntitiesPayload } from './domain/common/normalizeEntitiesPayload.ts';
+
 function rootReducer(state: EntitiesState | undefined, action: any = {}) {
     if (typeof action !== 'object') {
         return state;
     }
 
     if (action.type === RESET_STATE) {
-        return entitiesInitialState;
+        return getEntitiesInitialState();
     }
 
     return {
@@ -35,8 +38,7 @@ function rootReducer(state: EntitiesState | undefined, action: any = {}) {
         todos: todos(state?.todos, action),
     };
 }
-
-const coreStore = businessLogic(redux(rootReducer, entitiesInitialState));
+const coreStore = businessLogic(redux(rootReducer, normalizeEntitiesPayload(initialState) as State));
 const store = process.env['NODE_ENV'] === 'production' ? coreStore : logger(coreStore);
 
 export const useStore = create<State>(store);

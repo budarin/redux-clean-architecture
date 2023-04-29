@@ -1,20 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useStore } from '../../redux/store.ts';
-import { initialState } from '../../../server/initialSate.ts';
 
 function App() {
-    const dispatch = useStore((state) => state.dispatch);
-    const todos = useStore((state) => state.todos);
-
-    useEffect(() => {
-        dispatch({
-            type: 'UPDATE',
-            payload: {
-                entities: initialState,
-            },
-        });
-    }, []);
+    const todos = useStore((state) => state);
 
     return (
         <>

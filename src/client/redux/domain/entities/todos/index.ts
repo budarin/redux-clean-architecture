@@ -1,5 +1,5 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
-import { anyEntityInitialState } from '../../common/consts.ts';
+import { getAnyEntityInitialState } from '../../common/getAnyEntityInitialState.ts';
 import { getNewState } from '../../common/getNewState.ts';
 import { createEmptyState } from '../../common/createEmptyState.ts';
 
@@ -19,7 +19,7 @@ type DeleteTodoAction = ReturnType<typeof deleteTodo>;
 export type TodoAction = DeleteTodoAction | UpdateEntitiesAction;
 
 // reducer
-export default function todos(state = anyEntityInitialState as TodoState, action = {} as TodoAction) {
+export default function todos(state = getAnyEntityInitialState as TodoState, action = {} as TodoAction) {
     switch (action.type) {
         case UPDATE_ENTITIES: {
             if (!action.payload.entities?.todos || Object.keys(action.payload.entities.todos).length === 0) {

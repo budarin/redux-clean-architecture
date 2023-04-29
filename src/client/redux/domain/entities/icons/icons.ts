@@ -1,12 +1,15 @@
 import { getNewState } from '../../common/getNewState.ts';
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
-import { anyEntityInitialState } from '../../common/consts.ts';
+import { getAnyEntityInitialState } from '../../common/getAnyEntityInitialState.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 export type IconAction = UpdateEntitiesAction;
 
-export default function categories(state = anyEntityInitialState as IconState, action: IconAction = {} as IconAction) {
+export default function categories(
+    state = getAnyEntityInitialState as IconState,
+    action: IconAction = {} as IconAction,
+) {
     switch (action.type) {
         case UPDATE_ENTITIES: {
             if (!action.payload.entities?.icons || Object.keys(action.payload.entities.icons).length === 0) {
