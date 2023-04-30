@@ -32,8 +32,7 @@ export default function todos(state = initialState, action = {} as TodoAction) {
     switch (action.type) {
         case UPDATE_TODO: {
             const newSate = getNewState(state);
-
-            newSate.byId[action.payload.id].todo = action.payload.todo;
+            newSate.byId[action.payload.id] = { ...newSate.byId[action.payload.id], todo: action.payload.todo };
 
             return newSate;
         }
