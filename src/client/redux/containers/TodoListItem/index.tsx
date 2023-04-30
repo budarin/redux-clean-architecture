@@ -27,4 +27,6 @@ const TodoListItemContainer = React.memo(({ id }: { id: number }) => {
     return <TodoListItem todo={todo} status={status} category={category} icon={icon} handleChange={handleChange} />;
 });
 
+TodoListItemContainer.displayName = 'TodoListItemContainer';
+
 export default TodoListItemContainer;
