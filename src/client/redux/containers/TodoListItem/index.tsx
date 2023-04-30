@@ -1,11 +1,15 @@
 import React from 'react';
 import { useStore } from '../../store.ts';
-import TodoListItem from '../../../components/TodoListItem/index.tsx';
+
 import { updateTodo } from '../../domain/entities/todos/index.ts';
+
+import TodoListItem from '../../../components/TodoListItem/index.tsx';
 
 const TodoListItemContainer = React.memo(({ id }: { id: number }) => {
     const dispatch = useStore((state) => state.dispatch);
-    const todo = useStore((state) => state.todos.byId[id as keyof typeof state.todos.byId].todo);
+    const todo = useStore((state) => state.todos.byId[id as keyof typeof state.todos.byId]);
+    const category = useStore((state) => state.categories.byId[todo.category_id as keyof typeof state.categories.byId]);
+    const status = useStore((state) => state.statuses.byId[todo.status_id as keyof typeof state.statuses.byId]);
 
     const handleUpdate = React.useCallback(
         (updatedTodo: string) => {
@@ -19,7 +23,7 @@ const TodoListItemContainer = React.memo(({ id }: { id: number }) => {
         handleUpdate(updatedTodo);
     };
 
-    return <TodoListItem todo={todo} handleChange={handleChange} />;
+    return <TodoListItem todo={todo} status={status.status} category={category.category} handleChange={handleChange} />;
 });
 
 export default TodoListItemContainer;

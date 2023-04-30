@@ -26,5 +26,8 @@ export default function categories(state = initialState, action: IconAction = {}
 
             return newSate;
         }
+
+        default:
+            return state;
     }
 }

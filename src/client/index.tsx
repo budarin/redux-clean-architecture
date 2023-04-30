@@ -1,8 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import App from './components/App';
-import TodoListContainer from './redux/containers/TodoList/index.tsx';
+import AppContainer from './redux/containers/App/index.tsx';
 
 const rootElement = document.getElementById('root');
 
@@ -11,5 +10,5 @@ if (!rootElement) {
     newRootElement.id = 'root';
     document.body.appendChild(newRootElement);
 
-    createRoot(newRootElement).render(<App todos={<TodoListContainer></TodoListContainer>} />);
+    createRoot(newRootElement).render(<AppContainer />);
 }
