@@ -5,7 +5,6 @@ import TodoList from '../../../components/TodoList/index.tsx';
 import TodoListItemContainer from '../TodoListItem/index.tsx';
 
 const TodoListContainer = () => {
-    const dispatch = useStore((state) => state.dispatch);
     const ids = useStore((state) => state.todos.ids);
 
     return (
