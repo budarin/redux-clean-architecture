@@ -2,10 +2,12 @@ type TodoState = {
     byId: Record<Id, Todo>;
     ids: Id[];
 };
+
 type CategoriyState = {
     byId: Record<Id, Category>;
     ids: Id[];
 };
+
 type StatusState = {
     byId: Record<Id, Status>;
     ids: Id[];
@@ -22,6 +24,10 @@ type EntitiesState = {
     categories: CategoriyState;
     todos: TodoState;
 };
+type TodosIndex = keyof EntitiesState['todos']['byId'];
+type CategoriesIndex = keyof EntitiesState['todos']['byId'];
+type StatusesIndex = keyof EntitiesState['todos']['byId'];
+type IconsIndex = keyof EntitiesState['todos']['byId'];
 
 type Action = {
     type: string;
