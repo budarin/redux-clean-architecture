@@ -1,7 +1,6 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
 import { onAction } from '../../../middlewares/businessLogic.ts';
 import { createEmptyState } from '../../utils/createEmptyState.ts';
-import { getAnyEntityInitialState } from '../../utils/getAnyEntityInitialState.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
@@ -34,7 +33,7 @@ onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
     return api.dispatch(action);
 });
 
-const initialState = getAnyEntityInitialState() as CategoriyState;
+const initialState = createEmptyState<CategoriyState>();
 
 export default function categories(state = initialState, action = {} as CategoryAction) {
     switch (action.type) {

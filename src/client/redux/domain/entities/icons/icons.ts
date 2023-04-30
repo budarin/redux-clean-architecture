@@ -1,11 +1,11 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
-import { getAnyEntityInitialState } from '../../utils/getAnyEntityInitialState.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
+import { createEmptyState } from '../../utils/createEmptyState.ts';
 
 export type IconAction = UpdateEntitiesAction;
 
-const initialState = getAnyEntityInitialState() as IconState;
+const initialState = createEmptyState<IconState>();
 
 export default function categories(state = initialState, action: IconAction = {} as IconAction) {
     switch (action.type) {

@@ -1,4 +1,4 @@
-import { getAnyEntityInitialState } from './getAnyEntityInitialState';
+import { createEmptyState } from './createEmptyState.ts';
 
 // store initial state
 
@@ -9,9 +9,9 @@ export function getEntitiesInitialState(): {
     todos: TodoState;
 } {
     return {
-        icons: getAnyEntityInitialState() as IconState,
-        statuses: getAnyEntityInitialState() as StatusState,
-        categories: getAnyEntityInitialState() as CategoriyState,
-        todos: getAnyEntityInitialState() as TodoState,
+        icons: createEmptyState<IconState>(),
+        statuses: createEmptyState<StatusState>(),
+        categories: createEmptyState<CategoriyState>(),
+        todos: createEmptyState<TodoState>(),
     };
 }

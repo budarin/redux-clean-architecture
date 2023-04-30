@@ -1,6 +1,5 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
 import { createEmptyState } from '../../utils/createEmptyState.ts';
-import { getAnyEntityInitialState } from '../../utils/getAnyEntityInitialState.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
@@ -24,7 +23,7 @@ type UpdateTodoAction = ReturnType<typeof updateTodo>;
 
 export type TodoAction = DeleteTodoAction | UpdateTodoAction | UpdateEntitiesAction;
 
-const initialState = getAnyEntityInitialState() as TodoState;
+const initialState = createEmptyState<TodoState>();
 
 // reducer
 export default function todos(state = initialState, action = {} as TodoAction) {
