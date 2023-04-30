@@ -6,10 +6,9 @@ import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 export type StatusAction = UpdateEntitiesAction;
 
-export default function categories(
-    state = getAnyEntityInitialState as StatusState,
-    action: StatusAction = {} as StatusAction,
-) {
+const initialState = getAnyEntityInitialState() as StatusState;
+
+export default function categories(state = initialState, action: StatusAction = {} as StatusAction) {
     switch (action.type) {
         case UPDATE_ENTITIES: {
             if (!action.payload.entities?.statuses || Object.keys(action.payload.entities.statuses).length === 0) {

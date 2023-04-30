@@ -7,6 +7,7 @@ import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 // Actions
 export const DELETE_TODO = 'DELETE_TODO' as const;
+export const UPDATE_TODO = 'UPDATE_TODO' as const;
 
 // Action creators
 export const deleteTodo = (id: number) => ({
@@ -14,13 +15,29 @@ export const deleteTodo = (id: number) => ({
     payload: { id },
 });
 
-type DeleteTodoAction = ReturnType<typeof deleteTodo>;
+export const updateTodo = (id: number, todo: string) => ({
+    type: UPDATE_TODO,
+    payload: { id, todo },
+});
 
-export type TodoAction = DeleteTodoAction | UpdateEntitiesAction;
+type DeleteTodoAction = ReturnType<typeof deleteTodo>;
+type UpdateTodoAction = ReturnType<typeof updateTodo>;
+
+export type TodoAction = DeleteTodoAction | UpdateTodoAction | UpdateEntitiesAction;
+
+const initialState = getAnyEntityInitialState() as TodoState;
 
 // reducer
-export default function todos(state = getAnyEntityInitialState as TodoState, action = {} as TodoAction) {
+export default function todos(state = initialState, action = {} as TodoAction) {
     switch (action.type) {
+        case UPDATE_TODO: {
+            const newSate = getNewState(state);
+
+            newSate.byId[action.payload.id].todo = action.payload.todo;
+
+            return newSate;
+        }
+
         case UPDATE_ENTITIES: {
             if (!action.payload.entities?.todos || Object.keys(action.payload.entities.todos).length === 0) {
                 return state;

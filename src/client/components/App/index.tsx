@@ -3,9 +3,10 @@ import React, { useEffect } from 'react';
 import { useStore } from '../../redux/store.ts';
 import { initialState } from '../../../server/initialSate.ts';
 
-function App() {
+import TodoListContainer from '../../redux/containers/TodoList/index.tsx';
+
+function App({ todos }: { todos: typeof TodoListContainer }) {
     const dispatch = useStore((state) => state.dispatch);
-    const todos = useStore((state) => state);
 
     useEffect(() => {
         dispatch({
@@ -19,7 +20,7 @@ function App() {
     return (
         <>
             <div>App</div>
-            <pre>{JSON.stringify(todos, null, 2)}</pre>
+            {todos}
         </>
     );
 }
