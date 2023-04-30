@@ -13,11 +13,13 @@ const TodoListItem = ({
     category: Category;
     handleChange: (e: any) => void;
 }) => {
+    const autoFocused = todo.id === 1 ? true : false;
+
     return (
         <li>
             <form name={`todo${todo.id}`}>
                 <input name="completed" type="checkbox" checked={todo.completed} onChange={handleChange}></input>
-                <input name="todo" type="text" value={todo.todo} onChange={handleChange} />{' '}
+                <input name="todo" type="text" value={todo.todo} onChange={handleChange} autoFocus={autoFocused} />{' '}
                 <span style={{ color: status.color }}>{status.status}</span> <span>{category.category}</span>{' '}
                 <span>{icon.name}</span>
             </form>
