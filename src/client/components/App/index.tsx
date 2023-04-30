@@ -2,10 +2,10 @@ import React from 'react';
 
 function App({ todos }: { todos: JSX.Element }) {
     return (
-        <>
-            <div>App</div>
+        <main>
+            <h3>Todo App</h3>
             {todos}
-        </>
+        </main>
     );
 }
 
