@@ -7,11 +7,11 @@
  *  -   Удаление категории невозможно, если на неё ссылается хотя бы одна задача (Todo).
  */
 
-import { isInt } from '../../common/validation_utils/isInt.ts';
-import { inRange } from '../../common/validation_utils/inRange.ts';
-import { isString } from '../../common/validation_utils/isString.ts';
+import { isInt } from '../../utils/validation_utils/isInt.ts';
+import { inRange } from '../../utils/validation_utils/inRange.ts';
+import { isString } from '../../utils/validation_utils/isString.ts';
 
-import type { ValidationRules } from '../../common/validation_utils/validateEntity.ts';
+import type { ValidationRules } from '../../utils/validation_utils/validateEntity.ts';
 
 const MIN_CATEGOTY_LENGTH = 3;
 const MAX_CATEGOTY_LENGTH = 20;

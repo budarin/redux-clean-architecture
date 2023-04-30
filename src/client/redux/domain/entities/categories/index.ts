@@ -1,8 +1,7 @@
-import { getNewState } from '../../common/getNewState.ts';
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
-import { getAnyEntityInitialState } from '../../common/getAnyEntityInitialState.ts';
 import { onAction } from '../../../middlewares/businessLogic.ts';
-import { createEmptyState } from '../../common/createEmptyState.ts';
+import { createEmptyState } from '../../utils/createEmptyState.ts';
+import { getAnyEntityInitialState } from '../../utils/getAnyEntityInitialState.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 

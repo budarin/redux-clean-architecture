@@ -1,5 +1,5 @@
 import { isBoolean } from './isBoolean.ts';
-import { isString } from './isString';
+import { isString } from './isString.ts';
 
 export function toBoolean(x: unknown): boolean | undefined {
     if (isBoolean(x)) {

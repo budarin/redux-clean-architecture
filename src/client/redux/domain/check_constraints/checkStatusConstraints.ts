@@ -1,4 +1,4 @@
-import { validateEntity } from '../common/validation_utils/validateEntity.ts';
+import { validateEntity } from '../utils/validation_utils/validateEntity.ts';
 import { getStatus, statusValidationRules } from '../entities/statuses/validation.ts';
 
 import type { UpdateEntitiesAction } from '../common/actions.ts';

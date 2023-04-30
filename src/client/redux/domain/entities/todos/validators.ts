@@ -10,17 +10,17 @@
  *  -   Поле completed должно быть логическим типом и по умолчанию должно быть установлено в false, либо оно может быть неопределенным.
  */
 
-import { isInt } from '../../common/validation_utils/isInt';
-import { inRange } from '../../common/validation_utils/inRange';
-import { isString } from '../../common/validation_utils/isString';
-import { isBoolean } from '../../common/validation_utils/isBoolean';
-import { isUndefined } from '../../common/validation_utils/isUndefined';
-import { isTimeStamp } from '../../common/validation_utils/isTimeStamp';
-import { isNotExists } from '../../common/validation_utils/isNotExists';
-import { toDefaultBoolean } from '../../common/validation_utils/toDefaultBoolean';
+import { isInt } from '../../utils/validation_utils/isInt.ts';
+import { inRange } from '../../utils/validation_utils/inRange.ts';
+import { isString } from '../../utils/validation_utils/isString.ts';
+import { isBoolean } from '../../utils/validation_utils/isBoolean.ts';
+import { isUndefined } from '../../utils/validation_utils/isUndefined.ts';
+import { isTimeStamp } from '../../utils/validation_utils/isTimeStamp.ts';
+import { isNotExists } from '../../utils/validation_utils/isNotExists.ts';
+import { toDefaultBoolean } from '../../utils/validation_utils/toDefaultBoolean.ts';
 
-import type { TypeConverters } from '../../common/validation_utils/getEntity.ts';
-import type { ValidationRules } from '../../common/validation_utils/validateEntity.ts';
+import type { TypeConverters } from '../../utils/validation_utils/getEntity.ts';
+import type { ValidationRules } from '../../utils/validation_utils/validateEntity.ts';
 
 const MIN_TODO_LENGTH = 5;
 const MAX_TODO_LENGTH = 150;

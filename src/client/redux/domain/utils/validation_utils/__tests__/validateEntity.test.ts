@@ -1,6 +1,6 @@
 import { isInt } from '../isInt.ts';
 import { toInt } from '../toInt.ts';
-import { validateEntity } from '../validateEntity';
+import { validateEntity } from '../validateEntity.ts';
 
 describe('функция validateEntity', () => {
     const mockValidEntity = {

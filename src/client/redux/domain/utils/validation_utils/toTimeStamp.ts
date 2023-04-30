@@ -1,5 +1,5 @@
 import { isInt } from './isInt.ts';
-import { isString } from './isString';
+import { isString } from './isString.ts';
 
 // конверторы
 

@@ -1,7 +1,6 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
-import { getNewState } from '../../common/getNewState.ts';
-import { createEmptyState } from '../../common/createEmptyState.ts';
-import { getAnyEntityInitialState } from '../../common/getAnyEntityInitialState.ts';
+import { createEmptyState } from '../../utils/createEmptyState.ts';
+import { getAnyEntityInitialState } from '../../utils/getAnyEntityInitialState.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 

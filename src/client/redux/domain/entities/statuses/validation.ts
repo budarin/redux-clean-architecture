@@ -1,8 +1,8 @@
-import { inRange } from '../../common/validation_utils/inRange.ts';
-import { isInt } from '../../common/validation_utils/isInt.ts';
-import { isString } from '../../common/validation_utils/isString.ts';
+import { inRange } from '../../utils/validation_utils/inRange.ts';
+import { isInt } from '../../utils/validation_utils/isInt.ts';
+import { isString } from '../../utils/validation_utils/isString.ts';
 
-import type { ValidationRules } from '../../common/validation_utils/validateEntity.ts';
+import type { ValidationRules } from '../../utils/validation_utils/validateEntity.ts';
 
 const MIN_STATUS_LENGTH = 3;
 const MAX_STATUS_LENGTH = 20;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, getByDisplayValue } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import TodoListItem from './';
 
 const todo = {
