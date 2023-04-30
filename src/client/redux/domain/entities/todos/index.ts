@@ -1,7 +1,7 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
-import { getAnyEntityInitialState } from '../../common/getAnyEntityInitialState.ts';
 import { getNewState } from '../../common/getNewState.ts';
 import { createEmptyState } from '../../common/createEmptyState.ts';
+import { getAnyEntityInitialState } from '../../common/getAnyEntityInitialState.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
@@ -31,10 +31,8 @@ const initialState = getAnyEntityInitialState() as TodoState;
 export default function todos(state = initialState, action = {} as TodoAction) {
     switch (action.type) {
         case UPDATE_TODO: {
-            const newSate = getNewState(state);
-            newSate.byId[action.payload.id] = { ...newSate.byId[action.payload.id], todo: action.payload.todo };
-
-            return newSate;
+            state.byId[action.payload.id] = { ...state.byId[action.payload.id], todo: action.payload.todo };
+            return state;
         }
 
         case UPDATE_ENTITIES: {
@@ -42,16 +40,14 @@ export default function todos(state = initialState, action = {} as TodoAction) {
                 return state;
             }
 
-            const newSate = getNewState(state);
-
             action.payload.entities.todos.forEach((todo) => {
-                newSate.byId[todo.id] = { ...todo };
+                state.byId[todo.id] = { ...todo };
             });
 
             // храним порядок элементов по id
-            newSate.ids = Object.keys(newSate.byId).map(Number);
+            state.ids = Object.keys(state.byId).map(Number);
 
-            return newSate;
+            return state;
         }
 
         case DELETE_TODO: {

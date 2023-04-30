@@ -44,16 +44,14 @@ export default function categories(state = initialState, action = {} as Category
                 return state;
             }
 
-            const newSate = getNewState(state);
-
             action.payload.entities.categories.forEach((category) => {
-                newSate.byId[category.id] = { ...category };
+                state.byId[category.id] = { ...category };
             });
 
             // храним порядок элементов по id
-            newSate.ids = Object.keys(newSate.byId).map(Number);
+            state.ids = Object.keys(state.byId).map(Number);
 
-            return newSate;
+            return state;
         }
 
         case DELETE_CATEGORY: {

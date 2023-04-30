@@ -15,16 +15,14 @@ export default function categories(state = initialState, action: IconAction = {}
                 return state;
             }
 
-            const newSate = getNewState(state);
-
             action.payload.entities.icons.forEach((icon) => {
-                newSate.byId[icon.id] = { ...icon };
+                state.byId[icon.id] = { ...icon };
             });
 
             // храним порядок элементов по id
-            newSate.ids = Object.keys(newSate.byId).map(Number);
+            state.ids = Object.keys(state.byId).map(Number);
 
-            return newSate;
+            return state;
         }
 
         default:

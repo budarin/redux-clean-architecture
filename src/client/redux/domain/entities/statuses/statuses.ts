@@ -15,16 +15,14 @@ export default function categories(state = initialState, action: StatusAction = 
                 return state;
             }
 
-            const newSate = getNewState(state);
-
             action.payload.entities.statuses.forEach((status) => {
-                newSate.byId[status.id] = { ...status };
+                state.byId[status.id] = { ...status };
             });
 
             // храним порядок элементов по id
-            newSate.ids = Object.keys(newSate.byId).map(Number);
+            state.ids = Object.keys(state.byId).map(Number);
 
-            return newSate;
+            return state;
         }
 
         default:
