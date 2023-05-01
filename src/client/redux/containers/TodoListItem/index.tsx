@@ -9,7 +9,9 @@ import TodoListItem from '../../../components/TodoListItem/index.tsx';
 
 const getTodoById = (id: number) => (state: State) => state.todos.byId[id as TodosStatesKey];
 
-const TodoListItemContainer = ({ id }: { id: number }) => {
+type TodoListItemContainerProps = { id: number };
+
+const TodoListItemContainer = ({ id }: TodoListItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);
     const todo = useStore(getTodoById(id));
     const status = useStore((state) => state.statuses.byId[todo.status_id as StatusesStatesKey]);

@@ -9,7 +9,9 @@ import NavigationIPanelIem from '../../../components/NavigationIPanelIem';
 
 const getNavigationFilter = (state: State) => state.navigationFilter;
 
-const NavigationPanelItemContainer = ({ title }: { title: string }) => {
+type NavigationPanelItemContainerProps = { title: string };
+
+const NavigationPanelItemContainer = ({ title }: NavigationPanelItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);
     const filter = useStore(getNavigationFilter);
     const isChecked = title === filter;

@@ -11,7 +11,7 @@ const topFilters = [filters.inbox, filters.today, filters.next];
 
 const getCategories = (state: State) => state.categories;
 
-function NavigationPanelContainer() {
+function NavigationPanelContainer(): JSX.Element {
     const categories = useStore(getCategories);
     const categoryNames = Object.values(categories.byId).map((category) => category.category);
 

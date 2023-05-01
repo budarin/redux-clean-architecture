@@ -12,7 +12,7 @@ const getTodoById = (state: State) => state.todos.byId;
 const getCategoriesById = (state: State) => state.categories.byId;
 const getNavigationFilter = (state: State) => state.navigationFilter;
 
-function TodoListContainer() {
+function TodoListContainer(): JSX.Element {
     const ids = useStore(getTodoIds);
     const byId = useStore(getTodoById);
     const categories = useStore(getCategoriesById);
