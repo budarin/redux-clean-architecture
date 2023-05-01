@@ -32,9 +32,8 @@ onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
         }
 
         if (todos && todos.length > 0) {
-            // обновлять информацию по категориям
-            // inboxIds = number[]
-
+            // пересчитать счетчики todo по категориям
+            // TODO:
             checkTodoConstraints(action, store, todos, categoryIds, statusIds);
         }
 
