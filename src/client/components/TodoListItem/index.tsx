@@ -1,14 +1,12 @@
 import React from 'react';
 
-const TodoListItem = ({
-    todo,
-    status: statuses,
-    handleChange,
-}: {
+type TodoListItemProps = {
     todo: Todo;
     status: Status;
     handleChange: (e: any) => void;
-}) => {
+};
+
+const TodoListItem = ({ todo, status: statuses, handleChange }: TodoListItemProps) => {
     return (
         <li>
             <form name={`todo${todo.id}`}>

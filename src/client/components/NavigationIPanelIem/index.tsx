@@ -1,14 +1,12 @@
 import React from 'react';
 
-const NavigationIPanelIem = ({
-    title,
-    checked,
-    handleChange,
-}: {
+type NavigationIPanelIemProps = {
     title: string;
     checked: boolean;
     handleChange: (e: any) => void;
-}) => {
+};
+
+const NavigationIPanelIem = ({ title, checked, handleChange }: NavigationIPanelIemProps) => {
     return (
         <div>
             <label>
