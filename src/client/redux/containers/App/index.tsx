@@ -22,7 +22,7 @@ function AppContainer() {
                     completed: Math.random() < 0.5,
                 }),
             );
-        }, 3000);
+        }, 10000);
         () => clearInterval(timer);
     }, []);
 

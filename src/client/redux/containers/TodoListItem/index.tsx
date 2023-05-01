@@ -31,6 +31,8 @@ const TodoListItemContainer = ({ id }: TodoListItemContainerProps): JSX.Element 
         [dispatch, id],
     );
 
+    console.log('render TodoListItemContainer');
+
     return <TodoListItem todo={todo} status={status} handleChange={handleChange} />;
 };
 

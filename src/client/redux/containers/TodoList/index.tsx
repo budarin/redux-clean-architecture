@@ -83,6 +83,8 @@ function TodoListContainer(): JSX.Element {
         }
     }, [byId, filter]);
 
+    console.log('render TodoListContainer');
+
     return (
         <List category={filter}>
             {filteredIds.map((id) => (

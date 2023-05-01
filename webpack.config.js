@@ -8,7 +8,12 @@ module.exports = {
     output: {
         path: path.resolve('./dist'),
     },
-    plugins: [new HtmlWebpackPlugin()],
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './assets/index.html',
+            inject: 'body',
+        }),
+    ],
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         modules: ['node_modules', 'src'],
