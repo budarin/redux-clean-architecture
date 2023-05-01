@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import AppContainer from './redux/containers/App/index.tsx';
@@ -10,5 +10,9 @@ if (!rootElement) {
     newRootElement.id = 'root';
     document.body.appendChild(newRootElement);
 
-    createRoot(newRootElement).render(<AppContainer />);
+    createRoot(newRootElement).render(
+        <StrictMode>
+            <AppContainer />
+        </StrictMode>,
+    );
 }

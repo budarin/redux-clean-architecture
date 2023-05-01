@@ -18,16 +18,15 @@ type IconState = {
     ids: Id[];
 };
 
+type NavigationFilterState = string;
+
 type EntitiesState = {
     icons: IconState;
     statuses: StatusState;
     categories: CategoriyState;
     todos: TodoState;
+    navigationFilter: NavigationFilterState;
 };
-type TodosIndex = keyof EntitiesState['todos']['byId'];
-type CategoriesIndex = keyof EntitiesState['todos']['byId'];
-type StatusesIndex = keyof EntitiesState['todos']['byId'];
-type IconsIndex = keyof EntitiesState['todos']['byId'];
 
 type Action = {
     type: string;
@@ -35,3 +34,9 @@ type Action = {
 };
 
 type State = EntitiesState & { dispatch: (Action: Action) => void };
+
+// keys types
+type TodosStatesKey = keyof EntitiesState['todos']['byId'];
+type CategoriesStatesKey = keyof EntitiesState['todos']['byId'];
+type StatusesStatesKey = keyof EntitiesState['todos']['byId'];
+type IconsStatesKey = keyof EntitiesState['todos']['byId'];

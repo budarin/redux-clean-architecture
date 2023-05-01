@@ -4,8 +4,8 @@ export const logger = (config) => (set, get, api) => {
     const originalDispath = api.dispatch;
 
     api.dispatch = (action: any) => {
-        console.log('  prev state', get());
-        console.log('  applying', JSON.parse(JSON.stringify(action)));
+        console.log('  prev state', JSON.parse(JSON.stringify(get())));
+        console.log('  applying', action);
         try {
             return originalDispath(action);
         } finally {

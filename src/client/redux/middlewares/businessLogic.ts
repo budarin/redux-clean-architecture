@@ -12,11 +12,13 @@ export function offAction(actionId: string) {
 // @ts-ignore
 export const businessLogic = (config) => (set, get, api) => {
     const initialState = config(set, get, api);
-    const originalDispath = api.dispatch;
+    const originalDispatch = api.dispatch;
 
     api.dispatch = (action: any) => {
         const handler = actionHandlers.get(action.type);
-        return handler ? handler(set, get, { ...api, originalDispath }, action) : originalDispath(action);
+        return handler
+            ? handler(set, get, { ...api, originalDispatch: originalDispatch }, action)
+            : originalDispatch(action);
     };
 
     return initialState;

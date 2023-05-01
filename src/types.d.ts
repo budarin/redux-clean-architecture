@@ -7,3 +7,6 @@ type Image = LocalFile;
 
 type TimeStamp = number;
 type DateString = string;
+
+type Keys<T> = keyof T;
+type Values<T, Keys> = T[Keys];

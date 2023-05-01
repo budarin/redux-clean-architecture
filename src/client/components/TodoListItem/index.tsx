@@ -2,7 +2,7 @@ import React from 'react';
 
 const TodoListItem = ({
     todo,
-    status,
+    status: statuses,
     handleChange,
 }: {
     todo: Todo;
@@ -13,7 +13,7 @@ const TodoListItem = ({
         <li>
             <form name={`todo${todo.id}`}>
                 <input name="completed" type="checkbox" checked={todo.completed} onChange={handleChange}></input>
-                <span style={{ color: status.color }}>{todo.todo}</span>
+                <span style={{ color: statuses.color }}>{todo.todo}</span>
             </form>
         </li>
     );

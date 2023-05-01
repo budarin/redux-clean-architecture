@@ -1,29 +1,26 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useStore } from '../../store.ts';
 
 import { updateTodo } from '../../domain/entities/todos/index.ts';
 
+// components
 import TodoListItem from '../../../components/TodoListItem/index.tsx';
 
-const TodoListItemContainer = React.memo(({ id }: { id: number }) => {
+const TodoListItemContainer = ({ id }: { id: number }) => {
     const dispatch = useStore((state) => state.dispatch);
-    const todo = useStore((state) => state.todos.byId[id as TodosIndex]);
-    const status = useStore((state) => state.statuses.byId[todo.status_id as StatusesIndex]);
+    const todo = useStore((state) => state.todos.byId[id as TodosStatesKey]);
+    const status = useStore((state) => state.statuses.byId[todo.status_id as StatusesStatesKey]);
 
-    const handleUpdate = React.useCallback(
-        (updatedTodo: string) => {
+    const handleChange = React.useCallback(
+        (e: { target: { value: string } }): void => {
+            const updatedTodo = e.target.value;
             dispatch(updateTodo(id, updatedTodo));
         },
         [dispatch, id],
     );
 
-    const handleChange = (e: { target: { value: string } }): void => {
-        const updatedTodo = e.target.value;
-        handleUpdate(updatedTodo);
-    };
-
     return <TodoListItem todo={todo} status={status} handleChange={handleChange} />;
-});
+};
 
 TodoListItemContainer.displayName = 'TodoListItemContainer';
 
