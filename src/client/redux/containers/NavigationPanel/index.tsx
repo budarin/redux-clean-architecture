@@ -9,8 +9,10 @@ import NavigationPanelItemContainer from '../NavigationPanelItem';
 
 const topFilters = [filters.inbox, filters.today, filters.next];
 
+const getCategories = (state: State) => state.categories;
+
 function NavigationPanelContainer() {
-    const categories = useStore((state) => state.categories);
+    const categories = useStore(getCategories);
     const categoryNames = Object.values(categories.byId).map((category) => category.category);
 
     return (

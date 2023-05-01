@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { useStore } from '../../store.ts';
+import { getDispatch } from '../../domain/common/selectors.ts';
 // import { updateTodo } from '../../domain/entities/todos/index.ts';
 
 // components
@@ -9,7 +10,7 @@ import TodoListContainer from '../TodoList/index.tsx';
 import NavigationPanelContainer from '../NavigationPanel/index.tsx';
 
 function AppContainer() {
-    const dispatch = useStore((state) => state.dispatch);
+    const dispatch = useStore(getDispatch);
 
     // useEffect(() => {
     //     const timer = setInterval(() => {

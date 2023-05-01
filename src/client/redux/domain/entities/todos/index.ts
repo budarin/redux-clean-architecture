@@ -13,9 +13,9 @@ export const deleteTodo = (id: number) => ({
     payload: { id },
 });
 
-export const updateTodo = (id: number, todo: string) => ({
+export const updateTodo = (id: number, completed: boolean) => ({
     type: UPDATE_TODO,
-    payload: { id, todo },
+    payload: { id, completed },
 });
 
 type DeleteTodoAction = ReturnType<typeof deleteTodo>;
@@ -29,7 +29,7 @@ const initialState = createEmptyState<TodoState>();
 export default function todos(state = initialState, action = {} as TodoAction) {
     switch (action.type) {
         case UPDATE_TODO: {
-            state.byId[action.payload.id] = { ...state.byId[action.payload.id], todo: action.payload.todo };
+            state.byId[action.payload.id] = { ...state.byId[action.payload.id], completed: action.payload.completed };
             return state;
         }
 

@@ -7,11 +7,16 @@ import { filters } from '../../domain/entities/navigationFilter/index.ts';
 import List from '../../../components/List/index.tsx';
 import TodoListItemContainer from '../TodoListItem/index.tsx';
 
+const getTodoIds = (state: State) => state.todos.ids;
+const getTodoById = (state: State) => state.todos.byId;
+const getCategoriesById = (state: State) => state.categories.byId;
+const getNavigationFilter = (state: State) => state.navigationFilter;
+
 function TodoListContainer() {
-    const ids = useStore((state) => state.todos.ids);
-    const byId = useStore((state) => state.todos.byId);
-    const categories = useStore((state) => state.categories.byId);
-    const filter = useStore((state) => state.navigationFilter);
+    const ids = useStore(getTodoIds);
+    const byId = useStore(getTodoById);
+    const categories = useStore(getCategoriesById);
+    const filter = useStore(getNavigationFilter);
 
     const filteredIds = React.useMemo(() => {
         switch (filter) {
