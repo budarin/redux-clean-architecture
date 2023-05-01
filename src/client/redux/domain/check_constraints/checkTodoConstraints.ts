@@ -24,6 +24,7 @@ export function checkTodoConstraints(
 
     todos!.forEach((todo, i) => {
         let linksAreCorrect = true;
+
         const newTodo = getEntity<Todo>(todo, todoConverters);
         const { valid, errors } = validateEntity<Todo>(newTodo, todoValidationRules, 'Categories');
         const { status_id, category_id } = newTodo;

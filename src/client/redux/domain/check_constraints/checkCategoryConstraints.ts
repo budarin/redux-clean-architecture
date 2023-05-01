@@ -16,6 +16,7 @@ export function checkCategoryConstraints(
 
     categories!.forEach((category, i) => {
         let linksAreCorrect = true;
+
         const { valid, errors } = validateEntity<Category>(category, categoryValidationRules, 'Categories');
         const { icon_id } = category;
 
