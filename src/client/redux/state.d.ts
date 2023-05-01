@@ -1,6 +1,16 @@
+type TodoIdsByCategoryId = Record<number, Id[]>;
+type TodoIdsByCategoryIdKey = keyof TodoIdsByCategoryId;
+
+type TodoIdsByFilterId = Record<string, Id[]>;
+type TodoIdsByFilterIdKey = keyof TodoIdsByFilterId;
+
+type TodoById = Record<Id, Todo>;
+
 type TodoState = {
-    byId: Record<Id, Todo>;
+    byId: TodoById;
     ids: Id[];
+    idsByCategoryId: TodoIdsByCategoryId;
+    idsByFilterId: TodoIdsByFilterId;
 };
 
 type CategoriyState = {

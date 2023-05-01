@@ -56,3 +56,5 @@ type NormalizedEntitiesPayload = {
     categories?: CategoriyState;
     todos?: TodoState;
 };
+
+type NormalizedEntitiesPayloadKey = keyof NormalizedEntitiesPayload;
