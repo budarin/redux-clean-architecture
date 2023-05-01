@@ -54,7 +54,7 @@ const store = process.env['NODE_ENV'] === 'production' ? coreStore : logger(core
 
 export const useStore = create<State>(store);
 
-// setup store with data
+// setup store with data from server
 useStore.getState().dispatch({
     type: 'UPDATE',
     payload: {
