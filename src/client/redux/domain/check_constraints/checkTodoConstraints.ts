@@ -20,40 +20,35 @@ export function checkTodoConstraints(
     categoryIds: IdsHash,
     statusIds: IdsHash,
 ): void {
-    if (todos && todos.length > 0) {
-        const newTodos = [] as Todo[];
+    const newTodos = [] as Todo[];
 
-        todos.forEach((todo, i) => {
-            let linksAreCorrect = true;
-            const newTodo = getEntity<Todo>(todo, todoConverters);
-            const { valid, errors } = validateEntity<Todo>(newTodo, todoValidationRules, 'Categories');
-            const { status_id, category_id } = newTodo;
+    todos!.forEach((todo, i) => {
+        let linksAreCorrect = true;
+        const newTodo = getEntity<Todo>(todo, todoConverters);
+        const { valid, errors } = validateEntity<Todo>(newTodo, todoValidationRules, 'Categories');
+        const { status_id, category_id } = newTodo;
 
-            // проверить существуют ли status_id в Statuse
-            if (status_id && validateStatusIdIntegration(status_id, [store.statuses.byId, statusIds]) === false) {
-                linksAreCorrect = false;
-                errors['status_id'] = STATUS_ID_ERROR_MESSAGE;
-                console.log(STATUS_ID_ERROR_MESSAGE);
-            }
+        // проверить существуют ли status_id в Statuse
+        if (status_id && validateStatusIdIntegration(status_id, [store.statuses.byId, statusIds]) === false) {
+            linksAreCorrect = false;
+            errors['status_id'] = STATUS_ID_ERROR_MESSAGE;
+            console.log(STATUS_ID_ERROR_MESSAGE);
+        }
 
-            // проверить существуют ли category_id в Categories
-            if (
-                category_id &&
-                validateCategoryIdIntegration(category_id, [store.categories.byId, categoryIds]) === false
-            ) {
-                linksAreCorrect = false;
-                errors['category_id'] = CATEGORY_ID_ERROR_MESSAGE;
-                console.log(CATEGORY_ID_ERROR_MESSAGE);
-            }
+        // проверить существуют ли category_id в Categories
+        if (category_id && validateCategoryIdIntegration(category_id, [store.categories.byId, categoryIds]) === false) {
+            linksAreCorrect = false;
+            errors['category_id'] = CATEGORY_ID_ERROR_MESSAGE;
+            console.log(CATEGORY_ID_ERROR_MESSAGE);
+        }
 
-            if (valid && linksAreCorrect) {
-                newTodos.push(getTodo(newTodo));
-            } else {
-                console.error('Todo', { newTodo, errors });
-                // generate Error
-            }
-        });
+        if (valid && linksAreCorrect) {
+            newTodos.push(getTodo(newTodo));
+        } else {
+            console.error('Todo', { newTodo, errors });
+            // generate Error
+        }
+    });
 
-        action.payload.entities!.todos = newTodos;
-    }
+    action.payload.entities!.todos = newTodos;
 }

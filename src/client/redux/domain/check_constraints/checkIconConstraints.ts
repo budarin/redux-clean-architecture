@@ -11,21 +11,19 @@ export function checkIconConstraints(
     icons: Icon[] | undefined,
     iconIds: IdsHash,
 ): void {
-    if (icons && icons.length > 0) {
-        const newIcons = [] as Icon[];
+    const newIcons = [] as Icon[];
 
-        icons.forEach((icon, i) => {
-            const { valid, errors } = validateEntity<Icon>(icon, iconValidationRules, 'Icons');
+    icons!.forEach((icon, i) => {
+        const { valid, errors } = validateEntity<Icon>(icon, iconValidationRules, 'Icons');
 
-            if (valid) {
-                newIcons.push(getIcon(icon));
-                iconIds[icon.id] = true;
-            } else {
-                console.error('Icon', { icon, errors });
-                // generate Error
-            }
-        });
+        if (valid) {
+            newIcons.push(getIcon(icon));
+            iconIds[icon.id] = true;
+        } else {
+            console.error('Icon', { icon, errors });
+            // generate Error
+        }
+    });
 
-        action.payload.entities!.icons = newIcons;
-    }
+    action.payload.entities!.icons = newIcons;
 }

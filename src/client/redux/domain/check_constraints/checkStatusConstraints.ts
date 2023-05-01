@@ -11,21 +11,19 @@ export function checkStatusConstraints(
     statuses: Status[] | undefined,
     statusIds: IdsHash,
 ): void {
-    if (statuses && statuses.length > 0) {
-        const newStatuses = [] as Status[];
+    const newStatuses = [] as Status[];
 
-        statuses.forEach((status, i) => {
-            const { valid, errors } = validateEntity<Status>(status, statusValidationRules, 'Statuses');
+    statuses!.forEach((status, i) => {
+        const { valid, errors } = validateEntity<Status>(status, statusValidationRules, 'Statuses');
 
-            if (valid) {
-                newStatuses.push(getStatus(status));
-                statusIds[status.id] = true;
-            } else {
-                console.error('Status', { status, errors });
-                // generate Error
-            }
-        });
+        if (valid) {
+            newStatuses.push(getStatus(status));
+            statusIds[status.id] = true;
+        } else {
+            console.error('Status', { status, errors });
+            // generate Error
+        }
+    });
 
-        action.payload.entities!.statuses = newStatuses;
-    }
+    action.payload.entities!.statuses = newStatuses;
 }
