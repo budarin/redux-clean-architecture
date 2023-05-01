@@ -117,5 +117,15 @@ export const initialState: EntitiesPayload = {
             completed: true,
             deleted: false,
         },
+        {
+            id: 6,
+            status_id: 2,
+            category_id: undefined,
+            todo: 'Todo7',
+            description: undefined,
+            due_date: undefined,
+            completed: true,
+            deleted: true,
+        },
     ],
 };
