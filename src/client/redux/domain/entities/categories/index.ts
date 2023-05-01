@@ -1,6 +1,7 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
 import { onAction } from '../../../middlewares/businessLogic.ts';
 import { createEmptyState } from '../../utils/createEmptyState.ts';
+import { capitalizeFirstLetter } from '../../../../../common/utils/capitalizeFirstLetter.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
@@ -43,7 +44,11 @@ export default function categories(state = initialState, action = {} as Category
             }
 
             action.payload.entities.categories.forEach((category) => {
-                state.byId[category.id] = { ...category };
+                state.byId[category.id] = {
+                    id: category.id,
+                    icon_id: category.icon_id,
+                    category: capitalizeFirstLetter(category.category),
+                };
             });
 
             // храним порядок элементов по id
