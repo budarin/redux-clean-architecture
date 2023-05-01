@@ -7,13 +7,13 @@ import { updateTodo } from '../../domain/entities/todos/index.ts';
 // components
 import TodoListItem from '../../../components/TodoListItem/index.tsx';
 
-const getTodoById = (id: number) => (state: State) => state.todos.byId[id as TodosStatesKey];
+const getTodoById = (id: number) => useCallback((state: State) => state.todos.byId[id as TodosStatesKey], [id]);
 
 type TodoListItemContainerProps = { id: number };
 
 const TodoListItemContainer = ({ id }: TodoListItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);
-    const todo = useStore(useCallback((state: State) => state.todos.byId[id as TodosStatesKey], [id]));
+    const todo = useStore(getTodoById(id));
     const status = useStore((state) => state.statuses.byId[todo.status_id as StatusesStatesKey]);
 
     const handleChange = React.useCallback(
