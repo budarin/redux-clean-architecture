@@ -15,14 +15,15 @@ function NavigationPanelContainer() {
 
     return (
         <NavigationPanel>
+            <h4>Фильтры</h4>
             {topFilters.map((navItem) => (
                 <NavigationPanelItemContainer key={navItem} title={navItem} />
             ))}
-            <hr />
+            <h4>Категории дел</h4>
             {categoryNames.map((navItem) => (
                 <NavigationPanelItemContainer key={navItem} title={navItem} />
             ))}
-            <hr />
+            <h4>Утилиты</h4>
             <NavigationPanelItemContainer key={filters.recycleBin} title={filters.recycleBin} />
             <hr />
         </NavigationPanel>
