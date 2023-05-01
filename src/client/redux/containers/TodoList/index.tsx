@@ -76,10 +76,10 @@ function TodoListContainer() {
                 return ids;
             }
         }
-    }, [ids, byId, filter]);
+    }, [byId, filter]);
 
     return (
-        <List>
+        <List category={filter}>
             {filteredIds.map((id) => (
                 <TodoListItemContainer key={id} id={id} />
             ))}
