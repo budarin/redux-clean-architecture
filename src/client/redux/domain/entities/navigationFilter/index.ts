@@ -1,10 +1,15 @@
 export const SET_NAVIGATION_FILTER = 'SET_NAVIGATION_FILTER' as const;
 
+export const inboxKey = 'inbox';
+export const todayKey = 'today';
+export const nextKey = 'next';
+export const recycleBinKey = 'recycleBin';
+
 export const filters = {
-    inbox: 'Не назначенные',
-    today: 'Сегодня',
-    next: 'Следующие',
-    recycleBin: 'Корзина',
+    [inboxKey]: 'Не назначенные',
+    [todayKey]: 'Сегодня',
+    [nextKey]: 'Следующие',
+    [recycleBinKey]: 'Корзина',
 } as const;
 
 export function setNavigationFilter(filter: string) {

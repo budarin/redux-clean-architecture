@@ -13,13 +13,20 @@ type TodoListItemContainerProps = { id: number };
 
 const TodoListItemContainer = ({ id }: TodoListItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);
-    const todo = useStore(getTodoById(id));
+    const todo = useStore(useCallback((state: State) => state.todos.byId[id as TodosStatesKey], [id]));
     const status = useStore((state) => state.statuses.byId[todo.status_id as StatusesStatesKey]);
 
     const handleChange = React.useCallback(
         (e: { target: { checked: boolean } }): void => {
             const updatedTodo = e.target.checked;
-            dispatch(updateTodo(id, updatedTodo));
+            dispatch(
+                updateTodo({
+                    id: 1,
+                    todo: String(Math.random()),
+                    completed: updatedTodo,
+                    deleted: Math.random() > 0.5,
+                }),
+            );
         },
         [dispatch, id],
     );

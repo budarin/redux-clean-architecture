@@ -118,7 +118,7 @@ export const initialState: EntitiesPayload = {
             deleted: false,
         },
         {
-            id: 6,
+            id: 7,
             status_id: 2,
             category_id: undefined,
             todo: 'Todo7',

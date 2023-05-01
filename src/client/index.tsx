@@ -11,8 +11,8 @@ if (!rootElement) {
     document.body.appendChild(newRootElement);
 
     createRoot(newRootElement).render(
-        <StrictMode>
-            <AppContainer />
-        </StrictMode>,
+        // <StrictMode>
+        <AppContainer />,
+        // </StrictMode>,
     );
 }

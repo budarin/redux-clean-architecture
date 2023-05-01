@@ -1,9 +1,11 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
 import { createEmptyState } from '../../utils/createEmptyState.ts';
 
-import type { UpdateEntitiesAction } from '../../common/actions.ts';
-import { createEmptyTodoState } from '../../utils/createEmptyTodoState.ts';
+import { updateFilterCounters } from './updateFilterCounters.ts';
 import { updateICategoryCounters } from './updateICategoryCounters.ts';
+import { createEmptyTodoState } from '../../utils/createEmptyTodoState.ts';
+
+import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 // Actions
 export const DELETE_TODO = 'DELETETODO' as const;
@@ -15,9 +17,19 @@ export const deleteTodo = (id: number) => ({
     payload: { id },
 });
 
-export const updateTodo = (id: number, completed: boolean) => ({
+export const updateTodo = ({
+    id,
+    todo,
+    deleted,
+    completed,
+}: {
+    id: Id;
+    todo: TodoTodo;
+    deleted: Completed;
+    completed: Completed;
+}) => ({
     type: UPDATE_TODO,
-    payload: { id, completed },
+    payload: { entities: { todos: [{ id, todo, deleted, completed, status_id: 1, category_id: 1 }] } },
 });
 
 type DeleteTodoAction = ReturnType<typeof deleteTodo>;
@@ -38,6 +50,7 @@ export default function todos(state = initialState, action = {} as TodoAction) {
             action.payload.entities.todos.forEach((todo) => {
                 state.byId[todo.id] = { ...todo };
                 updateICategoryCounters(todo, state);
+                updateFilterCounters(todo, state);
             });
 
             // храним порядок элементов по id

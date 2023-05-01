@@ -3,12 +3,14 @@ export function updateICategoryCounters(todo: Todo, state: TodoState) {
     if (todo.category_id) {
         const byId = state.idsByCategoryId;
 
-        // если есть такая категория в тодо
+        // если есть такая категория
         if (byId[todo.category_id]) {
+            // вставляем todo.id
             if (byId[todo.category_id].indexOf(todo.id) === -1) {
                 state.idsByCategoryId[todo.category_id] = [...byId[todo.category_id], todo.id];
             }
         } else {
+            // создаем и вставляем todo.id
             state.idsByCategoryId[todo.category_id] = [todo.id];
         }
 
