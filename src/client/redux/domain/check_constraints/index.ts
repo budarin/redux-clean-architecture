@@ -19,10 +19,24 @@ onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
         const store = api.getState() as State;
         const { todos, categories, statuses, icons } = action.payload.entities;
 
-        checkIconConstraints(action, store, icons, iconIds);
-        checkStatusConstraints(action, store, statuses, statusIds);
-        checkCategoryConstraints(action, store, categories, iconIds, categoryIds);
-        checkTodoConstraints(action, store, todos, categoryIds, statusIds);
+        if (icons && icons.length > 0) {
+            checkIconConstraints(action, store, icons, iconIds);
+        }
+
+        if (statuses && statuses.length > 0) {
+            checkStatusConstraints(action, store, statuses, statusIds);
+        }
+
+        if (categories && categories.length > 0) {
+            checkCategoryConstraints(action, store, categories, iconIds, categoryIds);
+        }
+
+        if (todos && todos.length > 0) {
+            // обновлять информацию по категориям
+            // inboxIds = number[]
+
+            checkTodoConstraints(action, store, todos, categoryIds, statusIds);
+        }
 
         return api.originalDispatch({ ...action, type: UPDATE_ENTITIES });
     }
