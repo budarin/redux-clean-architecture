@@ -4,12 +4,12 @@ import {
     todoValidationRules,
     validateCategoryIdIntegration,
     validateStatusIdIntegration,
-} from '../../entities/todos/validators.ts';
+} from '../validators.ts';
 
-import { getEntity } from '../../utils/validation_utils/getEntity.ts';
-import { validateEntity } from '../../utils/validation_utils/validateEntity.ts';
+import { getEntity } from '../../../utils/validation_utils/getEntity.ts';
+import { validateEntity } from '../../../utils/validation_utils/validateEntity.ts';
 
-import type { UpdateEntitiesAction } from '../../common/actions.ts';
+import type { UpdateEntitiesAction } from '../../../common/actions.ts';
 
 const STATUS_ID_ERROR_MESSAGE = 'Todos: Значение status_id отсутствует в Statuses';
 const CATEGORY_ID_ERROR_MESSAGE = 'Todos: Значение category_id отсутствует в Categories';

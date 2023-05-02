@@ -1,1 +1,5 @@
-export const getDispatch = (state: State) => state.dispatch;
+type Dispatch = (Action: Action) => void;
+
+export function getDispatch(state: State): Dispatch {
+    return state.dispatch;
+}

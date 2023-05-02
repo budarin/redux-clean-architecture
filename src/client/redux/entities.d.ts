@@ -10,6 +10,8 @@ type Description = string | undefined;
 type DueDate = TimeStamp | undefined;
 type Deleted = boolean;
 type Completed = boolean;
+type Filter = string;
+type FilterKey = Filter | Id;
 
 type Icon = {
     id: Id;
@@ -37,6 +39,11 @@ type Todo = {
     due_date?: DueDate | undefined;
     deleted: Deleted;
     completed?: Completed | undefined;
+};
+
+type NavigationFilter = {
+    key: FilterKey;
+    filter: Filter;
 };
 
 type OneOfEntities = Icon | Status | Category | Todo;

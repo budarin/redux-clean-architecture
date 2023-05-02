@@ -1,7 +1,7 @@
-import { validateEntity } from '../../utils/validation_utils/validateEntity.ts';
-import { getIcon, iconValidationRules } from '../../entities/icons/validation.ts';
+import { validateEntity } from '../../../utils/validation_utils/validateEntity.ts';
+import { getIcon, iconValidationRules } from '../../icons/validation.ts';
 
-import type { UpdateEntitiesAction } from '../../common/actions.ts';
+import type { UpdateEntitiesAction } from '../../../common/actions.ts';
 
 export function checkIconConstraints(action: UpdateEntitiesAction, icons: Icon[] | undefined, iconIds: IdsHash): void {
     const newIcons = [] as Icon[];

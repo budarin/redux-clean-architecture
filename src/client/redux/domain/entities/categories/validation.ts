@@ -1,12 +1,3 @@
-/**
- * Category check constraints:
- *
- *  -   Идентификатор (id) должен быть целочисленного типа.
- *  -   Поле icon_id должно быть целочисленного типа и должно ссылаться на существующую иконку в списке Icons.
- *  -   Обязательно должно присутствовать поле category, и его длина должна быть более 3-х символов и не должна превышать 20 символов.
- *  -   Удаление категории невозможно, если на неё ссылается хотя бы одна задача (Todo).
- */
-
 import { isInt } from '../../utils/validation_utils/isInt.ts';
 import { inRange } from '../../utils/validation_utils/inRange.ts';
 import { isString } from '../../utils/validation_utils/isString.ts';
@@ -16,8 +7,13 @@ import type { ValidationRules } from '../../utils/validation_utils/validateEntit
 const MIN_CATEGOTY_LENGTH = 3;
 const MAX_CATEGOTY_LENGTH = 20;
 
+//  Идентификатор (id) должен быть целочисленного типа.
 export const validateId = ({ id }: Record<string, unknown>): boolean => isInt(id);
+
+// Поле icon_id должно быть целочисленного типа и должно ссылаться на существующую иконку в списке Icons.
 export const validateIconId = ({ icon_id }: Record<string, unknown>): boolean => isInt(icon_id);
+
+// Обязательно должно присутствовать поле category, и его длина должна быть более 3-х символов и не должна превышать 20 символов.
 export function validateCategory({ category }: Record<string, unknown>): boolean {
     if (isString(category)) {
         return inRange(category.length, MIN_CATEGOTY_LENGTH, MAX_CATEGOTY_LENGTH);
@@ -25,6 +21,8 @@ export function validateCategory({ category }: Record<string, unknown>): boolean
 
     return false;
 }
+
+// значение поля icon_id должно быть в спике icons
 export const validateIconIdIntegration = (icon_id: number, iconIdsSores: Record<number, any>[]): boolean =>
     !!iconIdsSores.find((idsStore) => Boolean(idsStore[icon_id]));
 

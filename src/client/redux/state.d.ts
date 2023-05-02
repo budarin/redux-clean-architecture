@@ -28,17 +28,12 @@ type IconState = {
     ids: Id[];
 };
 
-type NavigationFilterState = {
-    key: sting | Id;
-    filter: string;
-};
-
 type EntitiesState = {
     icons: IconState;
     statuses: StatusState;
     categories: CategoriyState;
     todos: TodoState;
-    navigationFilter: NavigationFilterState;
+    navigationFilter: NavigationFilter;
 };
 
 type Action = {

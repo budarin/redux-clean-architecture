@@ -1,7 +1,7 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
 import { onAction } from '../../../middlewares/businessLogic.ts';
 import { createEmptyState } from '../../utils/createEmptyState.ts';
-import { capitalizeFirstLetter } from '../../../../../common/utils/capitalizeFirstLetter.ts';
+import { capitalizeFirstLetter } from '../../../../../common/capitalizeFirstLetter.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
@@ -13,12 +13,12 @@ export const deleteCategory = (id: number) => ({
     type: DELETE_CATEGORY,
     payload: { id },
 });
-
-type DeleteCategoryAction = ReturnType<typeof deleteCategory>;
+export type DeleteCategoryAction = ReturnType<typeof deleteCategory>;
 
 export type CategoryAction = DeleteCategoryAction | UpdateEntitiesAction;
 
 // @ts-ignore
+// регистрируем middleware для проверки check constraints попытке удаления категории
 onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
     const state = api.getState();
     const linkeddTodo = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === action.payload.id);

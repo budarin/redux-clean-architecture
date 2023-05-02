@@ -12,8 +12,9 @@ const getNavigationFilter = (state: State) => state.navigationFilter;
 function TodoListContainer(): JSX.Element {
     const { key, filter } = useStore(getNavigationFilter);
     const filterKey = flippedFilters[filter];
+
     const filteredIds = useStore((state) => {
-        return !!filterKey ? state.todos.idsByFilterId[key] : state.todos.idsByCategoryId[key];
+        return !!filterKey ? state.todos.idsByFilterId[key] : state.todos.idsByCategoryId[key as Id];
     });
 
     return (

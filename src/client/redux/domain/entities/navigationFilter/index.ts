@@ -1,4 +1,4 @@
-import { flipObject } from '../../../../../common/utils/flipObject.ts';
+import { flipObject } from '../../../../../common/flipObject.ts';
 
 export const SET_NAVIGATION_FILTER = 'SET_NAVIGATION_FILTER' as const;
 
@@ -31,7 +31,7 @@ const initialState = {
 };
 
 export default function navigationFilterReducer(
-    state: NavigationFilterState = initialState,
+    state: NavigationFilter = initialState,
     action: NavigationFilterAction,
 ) {
     switch (action.type) {

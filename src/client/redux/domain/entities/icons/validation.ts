@@ -7,7 +7,10 @@ import type { ValidationRules } from '../../utils/validation_utils/validateEntit
 const MIN_ICON_NAME_LENGTH = 5;
 const MAX_ICON_NAME_LENGTH = 50;
 
+// Идентификатор (id) должен быть целочисленного типа.
 export const validateId = ({ id }: Record<string, unknown>): boolean => isInt(id);
+
+// Длина поля name должна быть не менее 5 символов и не более 50 символов.
 export function validateName({ name }: Record<string, unknown>): boolean {
     if (isString(name)) {
         return inRange(name.length, MIN_ICON_NAME_LENGTH, MAX_ICON_NAME_LENGTH);

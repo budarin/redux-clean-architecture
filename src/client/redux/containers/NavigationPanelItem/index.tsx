@@ -24,15 +24,17 @@ const NavigationPanelItemContainer = memo(({ id, navigationType }: NavigationPan
 
     // FIXME: упростить логику
     const dispatch = useStore(getDispatch);
+
     const { key, filter } = useStore(getNavigationFilter);
     const categoriy = useStore(useCallback((state) => state.categories.byId[id as number], [id]));
     const count = useStore((state) =>
         isCategoryNavigation
-            ? state.todos.idsByCategoryId[id as number].length || 0
+            ? state.todos.idsByCategoryId[id as number]?.length || 0
             : state.todos.idsByFilterId[id].length,
     );
-    const title = isCategoryNavigation ? categoriy.category : filters[id as FiltersKey];
-    const isChecked = title === filter;
+
+    const categoryOrFilterTitle = isCategoryNavigation ? categoriy.category : filters[id as FiltersKey];
+    const isChecked = filter === categoryOrFilterTitle;
 
     const handleChange = React.useCallback(
         (e: { target: { value: string; dataset: { id: string | Id } } }): void => {
@@ -44,7 +46,15 @@ const NavigationPanelItemContainer = memo(({ id, navigationType }: NavigationPan
         [dispatch],
     );
 
-    return <NavigationIPanelIem id={id} title={title} count={count} checked={isChecked} handleChange={handleChange} />;
+    return (
+        <NavigationIPanelIem
+            id={id}
+            title={categoryOrFilterTitle}
+            count={count}
+            checked={isChecked}
+            handleChange={handleChange}
+        />
+    );
 });
 
 export default NavigationPanelItemContainer;

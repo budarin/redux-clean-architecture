@@ -1,15 +1,3 @@
-/**
- *  Todo check constraints:
- *
- *  -   Идентификатор (id) должен быть целочисленного типа.
- *  -   Поле status_id должно быть целочисленного типа и должно ссылаться на существующий статус в списке Statuses.
- *  -   Поле category_id должно быть целочисленного типа и должно ссылаться на существующую категорию в списке Categories, либо оно может быть неопределенным.
- *  -   Длина поля todo должна быть не менее 5 символов и не более 150 символов.
- *  -   Поле description должно иметь длину не менее 10 символов и не более 1000 символов, либо оно может быть неопределенным.
- *  -   Поле deleted должно быть логическим типом и по умолчанию должно быть установлено в false.
- *  -   Поле completed должно быть логическим типом и по умолчанию должно быть установлено в false, либо оно может быть неопределенным.
- */
-
 import { isInt } from '../../utils/validation_utils/isInt.ts';
 import { inRange } from '../../utils/validation_utils/inRange.ts';
 import { isString } from '../../utils/validation_utils/isString.ts';
@@ -28,15 +16,30 @@ const MAX_TODO_LENGTH = 150;
 const MIN_DESCRIPTION_LENGTH = 10;
 const MAX_DESCRIPTION_LENGTH = 1000;
 
+// Идентификатор (id) должен быть целочисленного типа.
 export const validateId = ({ id }: Record<string, unknown>): boolean => isInt(id);
+
+// Поле status_id должно быть целочисленного типа и должно ссылаться на существующий статус в списке Statuses.
 export const validateStatusId = ({ status_id }: Record<string, unknown>): boolean => isInt(status_id);
+
+// Поле category_id должно быть целочисленного типа и должно ссылаться на существующую категорию в списке Categories,
+// либо оно может быть неопределенным.
 export const validateCategoryId = ({ category_id }: Record<string, unknown>): boolean =>
     isUndefined(category_id) || isInt(category_id);
+
+// поле due_date должно присутствовать и имет целочисленное значение
 export const validateDueDate = ({ due_date }: Record<string, unknown>) =>
     isNotExists(due_date) || isTimeStamp(due_date);
+
+// Поле completed должно быть логическим типом и по умолчанию должно быть установлено в false,
+// либо оно может быть неопределенным.
 export const validateCompleted = ({ completed }: Record<string, unknown>): boolean => isBoolean(completed);
+
+//  Поле deleted должно быть логическим типом и по умолчанию должно быть установлено в false.
 export const validateDeleted = ({ x: deleted }: Record<string, unknown>): boolean =>
     isUndefined(deleted) || isBoolean(deleted);
+
+// Длина поля todo должна быть не менее 5 символов и не более 150 символов.
 export function validateTodo({ todo }: Record<string, unknown>): boolean {
     if (isString(todo)) {
         return inRange(todo.length, MIN_TODO_LENGTH, MAX_TODO_LENGTH);
@@ -44,6 +47,8 @@ export function validateTodo({ todo }: Record<string, unknown>): boolean {
 
     return false;
 }
+
+// Поле description должно иметь длину не менее 10 символов и не более 1000 символов, либо оно может быть неопределенным.
 export function validateDescription({ description }: Record<string, unknown>): boolean {
     if (isUndefined(description)) {
         return true;
@@ -55,9 +60,12 @@ export function validateDescription({ description }: Record<string, unknown>): b
 
     return false;
 }
+
+// значение поля status_id должно присутствовать в списке statuses
 export const validateStatusIdIntegration = (status_id: number, statusIdsSores: Record<number, any>[]): boolean =>
     !!statusIdsSores.find((idsStore) => Boolean(idsStore[status_id]));
 
+// значение поля category_id должно присутствовать в списке categories либо быть равным undefined
 export const validateCategoryIdIntegration = (category_id: number, categoryIdsSores: Record<number, any>[]): boolean =>
     !!categoryIdsSores.find((idsStore) => Boolean(idsStore[category_id]));
 

@@ -3,10 +3,6 @@ import { redux } from 'zustand/middleware';
 
 import { initialState } from '../../server/initialSate.ts';
 
-// регистрируем middleware который обрабатывает UPDATE_TO action
-// с целью проверки целостности обновляемых в store данных
-import './domain/middlewares/checkConstraintsOnUpdate/index.ts';
-
 // actions
 import { RESET_STATE } from './domain/common/actions.ts';
 
@@ -30,7 +26,7 @@ function rootReducer(
           statuses: StatusState;
           categories: CategoriyState;
           todos: TodoState;
-          navigationFilter: NavigationFilterState;
+          navigationFilter: NavigationFilter;
       }
     | undefined {
     if (typeof action !== 'object') {

@@ -7,8 +7,14 @@ import type { ValidationRules } from '../../utils/validation_utils/validateEntit
 const MIN_STATUS_LENGTH = 3;
 const MAX_STATUS_LENGTH = 20;
 
+// Идентификатор (id) должен быть целочисленного типа.
 export const validateId = ({ id }: Record<string, unknown>): boolean => isInt(id);
-export const validateColor = ({ color }: Record<string, unknown>): boolean => isString(color) && color.length === 7;
+
+// Длина поля color должна быть 7 символов и первый символ должен быть #.
+export const validateColor = ({ color }: Record<string, unknown>): boolean =>
+    isString(color) && color.length === 7 && color[0] === '#';
+
+// Длина поля status должна быть не менее 3 символов и не более 20 символов.
 export function validateStatus({ status }: Record<string, unknown>): boolean {
     if (isString(status)) {
         return inRange(status.length, MIN_STATUS_LENGTH, MAX_STATUS_LENGTH);

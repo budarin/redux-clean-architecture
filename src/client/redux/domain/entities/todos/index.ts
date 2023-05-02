@@ -1,8 +1,16 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
+import { onAction } from '../../../middlewares/businessLogic.ts';
 import { updateFilterCounters } from './updateFilterCounters.ts';
 import { createEmptyState } from '../../utils/createEmptyState.ts';
 import { updateICategoryCounters } from './updateICategoryCounters.ts';
 import { createEmptyTodoState } from '../../utils/createEmptyTodoState.ts';
+import { everyIsEmptyArrayOrUndefined } from '../../utils/validation_utils/everyIsEmptyArrayOrUndefined.ts';
+
+// check constraints utilities
+import { checkTodoConstraints } from './checkConstraints/checkTodoConstraints.ts';
+import { checkIconConstraints } from './checkConstraints/checkIconConstraints.ts';
+import { checkStatusConstraints } from './checkConstraints/checkStatusConstraints.ts';
+import { checkCategoryConstraints } from './checkConstraints/checkCategoryConstraints.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
@@ -35,6 +43,37 @@ type DeleteTodoAction = ReturnType<typeof deleteTodo>;
 type UpdateTodoAction = ReturnType<typeof updateTodo>;
 
 export type TodoAction = DeleteTodoAction | UpdateTodoAction | UpdateEntitiesAction;
+
+// @ts-ignore
+// регистрируем middleware который обрабатывает UPDATE_TO action
+// с целью проверки целостности обновляемых в store данных
+onAction(UPDATE_TODO, (get, set, api, action: UpdateEntitiesAction) => {
+    if (action.payload.entities && everyIsEmptyArrayOrUndefined(action.payload.entities) === false) {
+        const iconIds = {} as IdsHash;
+        const statusIds = {} as IdsHash;
+        const categoryIds = {} as IdsHash;
+        const store = api.getState() as State;
+        const { todos, categories, statuses, icons } = action.payload.entities;
+
+        if (icons && icons.length > 0) {
+            checkIconConstraints(action, icons, iconIds);
+        }
+
+        if (statuses && statuses.length > 0) {
+            checkStatusConstraints(action, statuses, statusIds);
+        }
+
+        if (categories && categories.length > 0) {
+            checkCategoryConstraints(action, store, categories, iconIds, categoryIds);
+        }
+
+        if (todos && todos.length > 0) {
+            checkTodoConstraints(action, store, todos, categoryIds, statusIds);
+        }
+
+        return api.originalDispatch({ ...action, type: UPDATE_ENTITIES });
+    }
+});
 
 const initialState = createEmptyTodoState();
 
