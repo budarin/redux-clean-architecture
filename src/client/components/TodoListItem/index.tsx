@@ -6,11 +6,13 @@ type TodoListItemProps = {
     handleChange: (e: any) => void;
 };
 
-const TodoListItem = ({ todo, status: statuses, handleChange }: TodoListItemProps) => {
+const TodoListItem = ({ todo, status, handleChange }: TodoListItemProps) => {
     return (
         <li>
-            <input name="completed" type="checkbox" checked={todo.completed} onChange={handleChange}></input>
-            <span style={{ color: statuses.color }}>{todo.todo}</span>
+            <label style={{ color: status.color }}>
+                <input name="completed" type="checkbox" checked={todo.completed} onChange={handleChange}></input>{' '}
+                {todo.todo}
+            </label>
         </li>
     );
 };

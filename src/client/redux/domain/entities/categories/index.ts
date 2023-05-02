@@ -9,7 +9,7 @@ import type { UpdateEntitiesAction } from '../../common/actions.ts';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY' as const;
 
 // Action creators
-export const deleteCategory = (id: number) => ({
+export const deleteCategory = (id: Id) => ({
     type: DELETE_CATEGORY,
     payload: { id },
 });

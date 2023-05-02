@@ -1,5 +1,6 @@
 export function updateICategoryCounters(todo: Todo, state: TodoState) {
-    // обновляем idsByCategoryId
+    // обновляем todos.idsByCategoryId
+
     if (todo.category_id && !todo.deleted) {
         const byId = state.idsByCategoryId;
 
@@ -29,7 +30,7 @@ export function updateICategoryCounters(todo: Todo, state: TodoState) {
             }
         });
     } else {
-        // проходимся по dctvкатегориям и удаляем его
+        // проходимся по всем категориям и удаляем его
         Object.keys(state.idsByCategoryId).forEach((categoryId) => {
             const id = Number(categoryId);
             const ids = state.idsByCategoryId;

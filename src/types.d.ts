@@ -10,3 +10,5 @@ type DateString = string;
 
 type Keys<T> = keyof T;
 type Values<T, Keys> = T[Keys];
+
+type UnknownObject = Record<string, unknown>;

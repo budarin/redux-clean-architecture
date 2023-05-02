@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useStore } from '../../store.ts';
-import { flippedFilters } from '../../domain/entities/navigationFilter/index.ts';
+import { navigationFilterTypes } from '../../domain/entities/navigationFilter/index.ts';
 
 // components
 import TodoList from '../../../components/TodoList /index.tsx';
@@ -10,16 +10,16 @@ import TodoListItemContainer from '../TodoListItem/index.tsx';
 const getNavigationFilter = (state: State) => state.navigationFilter;
 
 function TodoListContainer(): JSX.Element {
-    const { key, filter } = useStore(getNavigationFilter);
-    const filterKey = flippedFilters[filter];
+    const { key, title, type } = useStore(getNavigationFilter);
+    const isCategoryNavigation = navigationFilterTypes.category === type;
 
-    const filteredIds = useStore((state) => {
-        return !!filterKey ? state.todos.idsByFilterId[key] : state.todos.idsByCategoryId[key as Id];
+    const todoIds = useStore((state) => {
+        return isCategoryNavigation ? state.todos.idsByCategoryId[key as Id] : state.todos.idsByFilterId[key];
     });
 
     return (
-        <TodoList category={filter}>
-            {filteredIds.map((id) => (
+        <TodoList category={title}>
+            {todoIds.map((id) => (
                 <TodoListItemContainer key={id} id={id} />
             ))}
         </TodoList>

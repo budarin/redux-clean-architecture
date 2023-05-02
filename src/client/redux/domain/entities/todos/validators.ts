@@ -17,30 +17,28 @@ const MIN_DESCRIPTION_LENGTH = 10;
 const MAX_DESCRIPTION_LENGTH = 1000;
 
 // Идентификатор (id) должен быть целочисленного типа.
-export const validateId = ({ id }: Record<string, unknown>): boolean => isInt(id);
+export const validateId = ({ id }: UnknownObject): boolean => isInt(id);
 
 // Поле status_id должно быть целочисленного типа и должно ссылаться на существующий статус в списке Statuses.
-export const validateStatusId = ({ status_id }: Record<string, unknown>): boolean => isInt(status_id);
+export const validateStatusId = ({ status_id }: UnknownObject): boolean => isInt(status_id);
 
 // Поле category_id должно быть целочисленного типа и должно ссылаться на существующую категорию в списке Categories,
 // либо оно может быть неопределенным.
-export const validateCategoryId = ({ category_id }: Record<string, unknown>): boolean =>
+export const validateCategoryId = ({ category_id }: UnknownObject): boolean =>
     isUndefined(category_id) || isInt(category_id);
 
 // поле due_date должно присутствовать и имет целочисленное значение
-export const validateDueDate = ({ due_date }: Record<string, unknown>) =>
-    isNotExists(due_date) || isTimeStamp(due_date);
+export const validateDueDate = ({ due_date }: UnknownObject) => isNotExists(due_date) || isTimeStamp(due_date);
 
 // Поле completed должно быть логическим типом и по умолчанию должно быть установлено в false,
 // либо оно может быть неопределенным.
-export const validateCompleted = ({ completed }: Record<string, unknown>): boolean => isBoolean(completed);
+export const validateCompleted = ({ completed }: UnknownObject): boolean => isBoolean(completed);
 
 //  Поле deleted должно быть логическим типом и по умолчанию должно быть установлено в false.
-export const validateDeleted = ({ x: deleted }: Record<string, unknown>): boolean =>
-    isUndefined(deleted) || isBoolean(deleted);
+export const validateDeleted = ({ x: deleted }: UnknownObject): boolean => isUndefined(deleted) || isBoolean(deleted);
 
 // Длина поля todo должна быть не менее 5 символов и не более 150 символов.
-export function validateTodo({ todo }: Record<string, unknown>): boolean {
+export function validateTodo({ todo }: UnknownObject): boolean {
     if (isString(todo)) {
         return inRange(todo.length, MIN_TODO_LENGTH, MAX_TODO_LENGTH);
     }
@@ -49,7 +47,7 @@ export function validateTodo({ todo }: Record<string, unknown>): boolean {
 }
 
 // Поле description должно иметь длину не менее 10 символов и не более 1000 символов, либо оно может быть неопределенным.
-export function validateDescription({ description }: Record<string, unknown>): boolean {
+export function validateDescription({ description }: UnknownObject): boolean {
     if (isUndefined(description)) {
         return true;
     }
@@ -93,7 +91,7 @@ export const todoValidationRules: ValidationRules<Todo> = {
 };
 
 // Todo getter
-export function getTodo(input: Record<string, unknown>): Todo {
+export function getTodo(input: UnknownObject): Todo {
     return {
         id: input['id'],
         status_id: input['status_id'],

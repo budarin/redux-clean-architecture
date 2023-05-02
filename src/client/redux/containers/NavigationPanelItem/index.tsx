@@ -1,60 +1,65 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
+
+import {
+    navigationFilterTypes,
+    navigationFilters,
+    setNavigationFilter,
+    type NavigationFiltersKey,
+} from '../../domain/entities/navigationFilter';
 
 import { useStore } from '../../store';
 import { getDispatch } from '../../domain/common/selectors';
-import { FiltersKey, filters, setNavigationFilter } from '../../domain/entities/navigationFilter';
 
 // components
 import NavigationIPanelIem from '../../../components/NavigationIPanelIem';
 
+//selectors
 const getNavigationFilter = (state: State) => state.navigationFilter;
+const getCategory = (id: Id) => useCallback((state: State) => state.categories.byId[id as Id], [id]);
 
 type NavigationPanelItemContainerProps = {
-    id: string | number;
-    navigationType: string;
+    id: NavigationFilterKey;
+    navigationType: NavigationFilterType;
 };
 
-export const navigationTypes = {
-    category: 'category',
-    filter: 'filter',
-};
-
-const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
-    const isCategoryNavigation = navigationType === navigationTypes.category;
-
-    // FIXME: упростить логику
+const NavigationPanelItemContainer = memo(({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);
 
-    const { key, filter } = useStore(getNavigationFilter);
-    const categoriy = useStore(useCallback((state) => state.categories.byId[id as number], [id]));
-    const count = useStore((state) =>
-        isCategoryNavigation
-            ? state.todos.idsByCategoryId[id as number]?.length || 0
-            : state.todos.idsByFilterId[id].length,
+    // FIXME: упростить логику
+
+    const navigationFilter = useStore(getNavigationFilter);
+    const categoriy = useStore(getCategory(id as Id));
+    const isCategoryNavigation = navigationFilterTypes.category === navigationType;
+
+    const todoCount = useStore(
+        useCallback(
+            (state) =>
+                isCategoryNavigation
+                    ? state.todos.idsByCategoryId[id as Id]?.length || 0
+                    : state.todos.idsByFilterId[id].length,
+            [id],
+        ),
     );
 
-    const categoryOrFilterTitle = isCategoryNavigation ? categoriy.category : filters[id as FiltersKey];
-    const isChecked = filter === categoryOrFilterTitle;
+    const title = isCategoryNavigation ? categoriy.category : navigationFilters[id as NavigationFiltersKey];
+    const isChecked = navigationFilter.title === title;
 
     const handleChange = React.useCallback(
-        (e: { target: { value: string; dataset: { id: string | Id } } }): void => {
-            const updatedTodo = e.target.value;
-            const id = e.target.dataset.id;
+        (e: { target: { value: string } }): void => {
+            const title = e.target.value;
 
-            dispatch(setNavigationFilter(isCategoryNavigation ? Number(id) : id, updatedTodo));
+            dispatch(
+                setNavigationFilter(
+                    isCategoryNavigation ? Number(id) : id,
+                    title,
+                    navigationType as NavigationFilterType,
+                ),
+            );
         },
         [dispatch],
     );
 
-    return (
-        <NavigationIPanelIem
-            id={id}
-            title={categoryOrFilterTitle}
-            count={count}
-            checked={isChecked}
-            handleChange={handleChange}
-        />
-    );
-};
+    return <NavigationIPanelIem title={title} todoCount={todoCount} checked={isChecked} handleChange={handleChange} />;
+});
 
 export default NavigationPanelItemContainer;

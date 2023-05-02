@@ -1,17 +1,24 @@
 type Id = number;
-type StatusId = number;
-type CategoryId = number | undefined;
+
 type IconName = string;
+
 type StatusName = string;
-type Color = string;
-type CategoryName = string;
+type StatusColor = string;
+
+type TodoStatusId = number;
+type TodoCategoryId = Id | undefined;
 type TodoTodo = string;
-type Description = string | undefined;
-type DueDate = TimeStamp | undefined;
-type Deleted = boolean;
-type Completed = boolean;
-type Filter = string;
-type FilterKey = Filter | Id;
+type TodoDescription = string | undefined;
+type TodoDueDate = TimeStamp | undefined;
+type TodoDeleted = boolean;
+type TodoCompleted = boolean | undefined;
+
+type CategoryIconId = Id;
+type CategoryName = string;
+
+type NavigationFilterTitle = string;
+type NavigationFilterKey = NavigationFilterTitle | Id;
+type NavigationFilterType = 'filter' | 'category';
 
 type Icon = {
     id: Id;
@@ -21,29 +28,30 @@ type Icon = {
 type Status = {
     id: Id;
     status: StatusName;
-    color: Color;
+    color: StatusColor;
 };
 
 type Category = {
     id: Id;
-    icon_id: Id;
+    icon_id: CategoryIconId;
     category: CategoryName;
 };
 
 type Todo = {
     id: Id;
-    status_id: StatusId;
-    category_id?: CategoryId | undefined;
+    status_id: TodoStatusId;
+    category_id?: TodoCategoryId;
     todo: TodoTodo;
-    description?: Description | undefined;
-    due_date?: DueDate | undefined;
-    deleted: Deleted;
-    completed?: Completed | undefined;
+    description?: TodoDescription;
+    due_date?: TodoDueDate;
+    deleted: TodoDeleted;
+    completed?: TodoCompleted;
 };
 
 type NavigationFilter = {
-    key: FilterKey;
-    filter: Filter;
+    key: NavigationFilterKey;
+    title: NavigationFilterTitle;
+    type: NavigationFilterType;
 };
 
 type OneOfEntities = Icon | Status | Category | Todo;

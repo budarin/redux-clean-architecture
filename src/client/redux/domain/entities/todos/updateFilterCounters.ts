@@ -4,17 +4,17 @@ import { isTodayItem } from './isTodayItem.ts';
 import { isRecycleBinItem } from './isRecycleBinItem.ts';
 import { inboxKey, nextKey, recycleBinKey, todayKey } from '../navigationFilter/index.ts';
 
-export function updateFilterCounters(todo: Todo, state: TodoState) {
+export function updateFilterCounters(todo: Todo, state: TodoState): void {
     const byId = state.idsByFilterId;
-    const inbox = byId[inboxKey];
-    const today = byId[todayKey];
-    const next = byId[nextKey];
-    const recycleBin = byId[recycleBinKey];
 
+    // проверяем принадлежит ли todo фильтру inbox
+    const inbox = byId[inboxKey];
     if (isInboxItem(todo)) {
         if (inbox.indexOf(todo.id) === -1) {
             byId[inboxKey] = [...inbox, todo.id];
         }
+
+        return;
     } else {
         const idx = inbox.indexOf(todo.id);
 
@@ -24,14 +24,18 @@ export function updateFilterCounters(todo: Todo, state: TodoState) {
         }
     }
 
+    // проверяем принадлежит ли todo фильтру today
     const date = new Date();
     date.setDate(date.getDate() + 1);
     const timestamp = date.valueOf();
 
+    const today = byId[todayKey];
     if (isTodayItem(todo, timestamp)) {
         if (today.indexOf(todo.id) === -1) {
             byId[todayKey] = [...today, todo.id];
         }
+
+        return;
     } else {
         const idx = today.indexOf(todo.id);
 
@@ -41,10 +45,14 @@ export function updateFilterCounters(todo: Todo, state: TodoState) {
         }
     }
 
+    // проверяем принадлежит ли todo фильтру next
+    const next = byId[nextKey];
     if (isNextItem(todo, timestamp)) {
         if (next.indexOf(todo.id) === -1) {
             byId[nextKey] = [...next, todo.id];
         }
+
+        return;
     } else {
         const idx = next.indexOf(todo.id);
 
@@ -54,6 +62,8 @@ export function updateFilterCounters(todo: Todo, state: TodoState) {
         }
     }
 
+    // проверяем принадлежит ли todo фильтру recycleBin
+    const recycleBin = byId[recycleBinKey];
     if (isRecycleBinItem(todo)) {
         if (recycleBin.indexOf(todo.id) === -1) {
             byId[recycleBinKey] = [...recycleBin, todo.id];

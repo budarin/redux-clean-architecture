@@ -1,5 +1,5 @@
 import { isEmptyObjectOrUndefined } from './isEmptyObjectOrUndefined';
 
-export function everyIsEmptyObjectOrUndefined(x: Record<string, unknown>): boolean {
+export function everyIsEmptyObjectOrUndefined(x: UnknownObject): boolean {
     return Object.values(x).every(isEmptyObjectOrUndefined);
 }

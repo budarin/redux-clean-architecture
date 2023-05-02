@@ -32,8 +32,8 @@ export const updateTodo = ({
 }: {
     id: Id;
     todo: TodoTodo;
-    deleted: Completed;
-    completed: Completed;
+    deleted: TodoCompleted;
+    completed: TodoCompleted;
 }) => ({
     type: UPDATE_TODO,
     payload: { entities: { todos: [{ id, todo, deleted, completed, status_id: 1, category_id: 1 }] } },

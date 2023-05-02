@@ -1,4 +1,4 @@
-import { filters } from '../entities/navigationFilter/index.ts';
+import { navigationFilters } from '../entities/navigationFilter/index.ts';
 
 export function createEmptyTodoState(): TodoState {
     const todoState = {
@@ -8,7 +8,7 @@ export function createEmptyTodoState(): TodoState {
         idsByFilterId: {} as TodoIdsByFilterId,
     };
 
-    Object.keys(filters).forEach((filter) => {
+    Object.keys(navigationFilters).forEach((filter) => {
         todoState.idsByFilterId[filter] = [] as number[];
     });
 

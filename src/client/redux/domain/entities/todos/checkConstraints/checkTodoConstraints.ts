@@ -2,8 +2,8 @@ import {
     getTodo,
     todoConverters,
     todoValidationRules,
-    validateCategoryIdIntegration,
     validateStatusIdIntegration,
+    validateCategoryIdIntegration,
 } from '../validators.ts';
 
 import { getEntity } from '../../../utils/validation_utils/getEntity.ts';
