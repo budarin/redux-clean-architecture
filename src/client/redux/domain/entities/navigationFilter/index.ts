@@ -12,6 +12,8 @@ export const filters = {
     [recycleBinKey]: 'Корзина',
 } as const;
 
+export type FiltersKey = keyof typeof filters;
+
 export function setNavigationFilter(filter: string) {
     return {
         type: SET_NAVIGATION_FILTER,

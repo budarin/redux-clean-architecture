@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useStore } from '../../store';
 import { getDispatch } from '../../domain/common/selectors';
-import { setNavigationFilter } from '../../domain/entities/navigationFilter';
+import { FiltersKey, filters, setNavigationFilter } from '../../domain/entities/navigationFilter';
 
 // components
 import NavigationIPanelIem from '../../../components/NavigationIPanelIem';
 
 const getNavigationFilter = (state: State) => state.navigationFilter;
 
-type NavigationPanelItemContainerProps = { title: string };
+type NavigationPanelItemContainerProps = {
+    id: string | number;
+    navigationType: string;
+};
 
-const NavigationPanelItemContainer = ({ title }: NavigationPanelItemContainerProps): JSX.Element => {
+export const navigationTypes = {
+    category: 'category',
+    filter: 'filter',
+};
+
+const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);
     const filter = useStore(getNavigationFilter);
+    const categoriy = useStore(useCallback((state) => state.categories.byId[id as number], [id]));
+    const title = navigationType === navigationTypes.category ? categoriy.category : filters[id as FiltersKey];
     const isChecked = title === filter;
 
     const handleChange = React.useCallback(

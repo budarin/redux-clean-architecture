@@ -1,32 +1,36 @@
 import React from 'react';
+import { shallow } from 'zustand/shallow';
 
 import { useStore } from '../../store';
-import { filters } from '../../domain/entities/navigationFilter';
+import { filters, inboxKey, nextKey, recycleBinKey, todayKey } from '../../domain/entities/navigationFilter';
 
 // components
 import NavigationPanel from '../../../components/NavigationPanel';
-import NavigationPanelItemContainer from '../NavigationPanelItem';
+import NavigationPanelItemContainer, { navigationTypes } from '../NavigationPanelItem';
 
-const topFilters = [filters.inbox, filters.today, filters.next];
+const topFilters = [inboxKey, todayKey, nextKey];
 
-const getCategories = (state: State) => state.categories;
+const getCategories = (state: State) => Object.values(state.categories.byId).map((category) => category.id, shallow);
 
 function NavigationPanelContainer(): JSX.Element {
-    const categories = useStore(getCategories);
-    const categoryNames = Object.values(categories.byId).map((category) => category.category);
+    const categoryIds = useStore(getCategories);
 
     return (
         <NavigationPanel>
             <h4>Фильтры</h4>
             {topFilters.map((navItem) => (
-                <NavigationPanelItemContainer key={navItem} title={navItem} />
+                <NavigationPanelItemContainer key={navItem} id={navItem} navigationType={navigationTypes.filter} />
             ))}
             <h4>Категории дел</h4>
-            {categoryNames.map((navItem) => (
-                <NavigationPanelItemContainer key={navItem} title={navItem} />
+            {categoryIds.map((navItem) => (
+                <NavigationPanelItemContainer key={navItem} id={navItem} navigationType={navigationTypes.category} />
             ))}
             <h4>Утилиты</h4>
-            <NavigationPanelItemContainer key={filters.recycleBin} title={filters.recycleBin} />
+            <NavigationPanelItemContainer
+                key={recycleBinKey}
+                id={recycleBinKey}
+                navigationType={navigationTypes.filter}
+            />
             <hr />
         </NavigationPanel>
     );
