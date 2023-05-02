@@ -47,14 +47,23 @@ export default function todosReducer(state = initialState, action = {} as TodoAc
                 return state;
             }
 
+            let isAddedNewTodos = false;
+
             action.payload.entities.todos.forEach((todo) => {
                 state.byId[todo.id] = { ...todo };
+
+                if (state.ids.indexOf(todo.id) === -1) {
+                    isAddedNewTodos = true;
+                }
+
                 updateICategoryCounters(todo, state);
                 updateFilterCounters(todo, state);
             });
 
-            // храним порядок элементов по id
-            state.ids = Object.keys(state.byId).map(Number);
+            if (isAddedNewTodos) {
+                // храним порядок элементов по id
+                state.ids = Object.keys(state.byId).map(Number);
+            }
 
             return state;
         }
