@@ -1,10 +1,11 @@
+import { toast } from 'react-toastify';
+
 import { INTERNAL_UPDATE_ENTITIES } from '../../common/actions.ts';
 import { onAction } from '../../../middlewares/businessLogic.ts';
 import { createEmptyState } from '../../utils/createEmptyState.ts';
 import { capitalizeFirstLetter } from '../../../../../common/capitalizeFirstLetter.ts';
 
 import type { InternalUpdateEntitiesAction } from '../../common/actions.ts';
-import { toast } from 'react-toastify';
 
 // Actions
 export const DELETE_CATEGORY = 'DELETE_CATEGORY' as const;
