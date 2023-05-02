@@ -14,12 +14,20 @@ export default function statusesReducer(state = initialState, action: StatusActi
                 return state;
             }
 
+            let isAddedEntities = false;
+
             action.payload.entities.statuses.forEach((status) => {
                 state.byId[status.id] = { ...status };
+
+                if (!isAddedEntities && state.ids.indexOf(status.id) === -1) {
+                    isAddedEntities = true;
+                }
             });
 
-            // храним порядок элементов по id
-            state.ids = Object.keys(state.byId).map(Number);
+            if (isAddedEntities) {
+                // храним порядок элементов по id
+                state.ids = Object.keys(state.byId).map(Number);
+            }
 
             return state;
         }

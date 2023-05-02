@@ -14,12 +14,20 @@ export default function iconsReducer(state = initialState, action: IconAction = 
                 return state;
             }
 
+            let isAddedEntities = false;
+
             action.payload.entities.icons.forEach((icon) => {
                 state.byId[icon.id] = { ...icon };
+
+                if (!isAddedEntities && state.ids.indexOf(icon.id) === -1) {
+                    isAddedEntities = true;
+                }
             });
 
-            // храним порядок элементов по id
-            state.ids = Object.keys(state.byId).map(Number);
+            if (isAddedEntities) {
+                // храним порядок элементов по id
+                state.ids = Object.keys(state.byId).map(Number);
+            }
 
             return state;
         }

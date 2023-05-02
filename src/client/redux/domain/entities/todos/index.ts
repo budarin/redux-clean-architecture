@@ -39,9 +39,8 @@ export const updateTodo = ({
     payload: { entities: { todos: [{ id, todo, deleted, completed, status_id: 1, category_id: 1 }] } },
 });
 
-type DeleteTodoAction = ReturnType<typeof deleteTodo>;
-type UpdateTodoAction = ReturnType<typeof updateTodo>;
-
+export type DeleteTodoAction = ReturnType<typeof deleteTodo>;
+export type UpdateTodoAction = ReturnType<typeof updateTodo>;
 export type TodoAction = DeleteTodoAction | UpdateTodoAction | UpdateEntitiesAction;
 
 // @ts-ignore
@@ -85,20 +84,20 @@ export default function todosReducer(state = initialState, action = {} as TodoAc
                 return state;
             }
 
-            let isAddedNewTodos = false;
+            let isAddedEntities = false;
 
             action.payload.entities.todos.forEach((todo) => {
                 state.byId[todo.id] = { ...todo };
 
-                if (state.ids.indexOf(todo.id) === -1) {
-                    isAddedNewTodos = true;
+                if (!isAddedEntities && state.ids.indexOf(todo.id) === -1) {
+                    isAddedEntities = true;
                 }
 
                 updateICategoryCounters(todo, state);
                 updateFilterCounters(todo, state);
             });
 
-            if (isAddedNewTodos) {
+            if (isAddedEntities) {
                 // храним порядок элементов по id
                 state.ids = Object.keys(state.byId).map(Number);
             }

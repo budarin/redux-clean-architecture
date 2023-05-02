@@ -43,16 +43,24 @@ export default function categoriesReducer(state = initialState, action = {} as C
                 return state;
             }
 
+            let isAddedEntities = false;
+
             action.payload.entities.categories.forEach((category) => {
                 state.byId[category.id] = {
                     id: category.id,
                     icon_id: category.icon_id,
                     category: capitalizeFirstLetter(category.category),
                 };
+
+                if (!isAddedEntities && state.ids.indexOf(category.id) === -1) {
+                    isAddedEntities = true;
+                }
             });
 
-            // храним порядок элементов по id
-            state.ids = Object.keys(state.byId).map(Number);
+            if (isAddedEntities) {
+                // храним порядок элементов по id
+                state.ids = Object.keys(state.byId).map(Number);
+            }
 
             return state;
         }
