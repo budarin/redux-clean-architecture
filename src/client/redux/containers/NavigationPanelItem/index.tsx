@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 
 import { useStore } from '../../store';
 import { getDispatch } from '../../domain/common/selectors';
@@ -19,7 +19,7 @@ export const navigationTypes = {
     filter: 'filter',
 };
 
-const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
+const NavigationPanelItemContainer = memo(({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
     const isCategoryNavigation = navigationType === navigationTypes.category;
 
     // FIXME: упростить логику
@@ -45,6 +45,6 @@ const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelIte
     );
 
     return <NavigationIPanelIem id={id} title={title} count={count} checked={isChecked} handleChange={handleChange} />;
-};
+});
 
 export default NavigationPanelItemContainer;

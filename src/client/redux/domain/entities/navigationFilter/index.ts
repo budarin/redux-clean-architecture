@@ -13,10 +13,9 @@ export const filters = {
     [nextKey]: 'Следующие',
     [recycleBinKey]: 'Корзина',
 };
+export type FiltersKey = keyof typeof filters;
 
 export const flippedFilters = flipObject(filters) as Record<string, string>;
-
-export type FiltersKey = keyof typeof filters;
 
 export function setNavigationFilter(key: Id | string, filter: string) {
     return {
@@ -24,11 +23,12 @@ export function setNavigationFilter(key: Id | string, filter: string) {
         payload: { key, filter },
     };
 }
-
 export type NavigationFilterAction = ReturnType<typeof setNavigationFilter>;
 
+const initialState = { key: inboxKey, filter: filters[inboxKey] };
+
 export default function navigationFilterReducer(
-    state: NavigationFilterState = { key: inboxKey, filter: filters[inboxKey] },
+    state: NavigationFilterState = initialState,
     action: NavigationFilterAction,
 ) {
     switch (action.type) {

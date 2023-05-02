@@ -13,7 +13,7 @@ function AppContainer() {
     const dispatch = useStore(getDispatch);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const timer = setInterval(() => {
             const rnd = Math.random();
             const b = rnd < 0.5;
 
@@ -25,8 +25,8 @@ function AppContainer() {
                     completed: b,
                 }),
             );
-        }, 5000);
-        () => clearTimeout(timer);
+        }, 3000);
+        () => clearInterval(timer);
     }, []);
 
     return <App navigationPanel={<NavigationPanelContainer />} todos={<TodoListContainer />} />;

@@ -19,12 +19,12 @@ function NavigationPanelContainer(): JSX.Element {
     return (
         <NavigationPanel>
             <h4>Фильтры</h4>
-            {topFilters.map((navItem) => (
-                <NavigationPanelItemContainer key={navItem} id={navItem} navigationType={navigationTypes.filter} />
+            {topFilters.map((key) => (
+                <NavigationPanelItemContainer key={key} id={key} navigationType={navigationTypes.filter} />
             ))}
             <h4>Категории дел</h4>
-            {categoryIds.map((navItem) => (
-                <NavigationPanelItemContainer key={navItem} id={navItem} navigationType={navigationTypes.category} />
+            {categoryIds.map((key) => (
+                <NavigationPanelItemContainer key={key} id={key} navigationType={navigationTypes.category} />
             ))}
             <h4>Утилиты</h4>
             <NavigationPanelItemContainer
