@@ -20,7 +20,7 @@ const NavigationIPanelIem = ({ id, title, checked, count, handleChange }: Naviga
                     checked={checked}
                     onChange={handleChange}
                 />
-                {title} {count}
+                <span>{title}</span> <span>{count}</span>
             </label>
         </div>
     );
