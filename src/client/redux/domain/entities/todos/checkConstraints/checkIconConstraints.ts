@@ -1,5 +1,5 @@
-import { validateEntity } from '../../../utils/validation_utils/validateEntity.ts';
-import { getIcon, iconValidationRules } from '../../icons/validation.ts';
+import { checkEntityValidation } from '../../../utils/validation_utils/validateEntity.ts';
+import { getIconFomUnknownObject, iconValidationRules } from '../../icons/validation.ts';
 
 import type { UpdateEntitiesAction } from '../../../common/actions.ts';
 
@@ -12,10 +12,10 @@ export function checkIconConstraints(
     const newIcons = [] as Icon[];
 
     icons!.forEach((icon, i) => {
-        const { valid, errors } = validateEntity<Icon>(icon, iconValidationRules, 'Icons');
+        const { valid, errors } = checkEntityValidation<Icon>(icon, iconValidationRules, 'Icons');
 
         if (valid) {
-            newIcons.push(getIcon(icon));
+            newIcons.push(getIconFomUnknownObject(icon));
             iconIds[icon.id] = true;
         } else {
             console.error('Icon', { icon, errors });

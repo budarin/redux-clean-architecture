@@ -60,11 +60,11 @@ export function validateDescription({ description }: UnknownObject): boolean {
 }
 
 // значение поля status_id должно присутствовать в списке statuses
-export const validateStatusIdIntegration = (status_id: number, statusIdsSores: Record<number, any>[]): boolean =>
+export const validateStatusIdRelation = (status_id: number, statusIdsSores: Record<number, any>[]): boolean =>
     !!statusIdsSores.find((idsStore) => Boolean(idsStore[status_id]));
 
 // значение поля category_id должно присутствовать в списке categories либо быть равным undefined
-export const validateCategoryIdIntegration = (category_id: number, categoryIdsSores: Record<number, any>[]): boolean =>
+export const validateCategoryIdRelation = (category_id: number, categoryIdsSores: Record<number, any>[]): boolean =>
     !!categoryIdsSores.find((idsStore) => Boolean(idsStore[category_id]));
 
 // coverters
@@ -91,7 +91,7 @@ export const todoValidationRules: ValidationRules<Todo> = {
 };
 
 // Todo getter
-export function getTodo(input: UnknownObject): Todo {
+export function getTodoFomUnknownObject(input: UnknownObject): Todo {
     return {
         id: input['id'],
         todo: input['todo'],

@@ -1,5 +1,5 @@
-import { validateEntity } from '../../../utils/validation_utils/validateEntity.ts';
-import { getStatus, statusValidationRules } from '../../statuses/validation.ts';
+import { checkEntityValidation } from '../../../utils/validation_utils/validateEntity.ts';
+import { getStatusFomUnknownObject, statusValidationRules } from '../../statuses/validation.ts';
 
 import type { UpdateEntitiesAction } from '../../../common/actions.ts';
 
@@ -12,10 +12,10 @@ export function checkStatusConstraints(
     const newStatuses = [] as Status[];
 
     statuses!.forEach((status, i) => {
-        const { valid, errors } = validateEntity<Status>(status, statusValidationRules, 'Statuses');
+        const { valid, errors } = checkEntityValidation<Status>(status, statusValidationRules, 'Statuses');
 
         if (valid) {
-            newStatuses.push(getStatus(status));
+            newStatuses.push(getStatusFomUnknownObject(status));
             statusIds[status.id] = true;
         } else {
             console.error('Status', { status, errors });

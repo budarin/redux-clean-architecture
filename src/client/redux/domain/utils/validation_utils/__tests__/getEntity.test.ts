@@ -2,7 +2,7 @@ import { toInt } from '../toInt.ts';
 import { toBoolean } from '../toBoolean.ts';
 import { toTimeStamp } from '../toTimeStamp.ts';
 import { toDefaultBoolean } from '../toDefaultBoolean.ts';
-import { TypeConverters, getEntity } from '../getEntity.ts';
+import { TypeConverters, applyEntityConverters } from '../getEntity.ts';
 
 describe('getEntity', () => {
     interface Entity {
@@ -26,7 +26,7 @@ describe('getEntity', () => {
     };
 
     test('конвертирует типы свойств в соответствии с переданными функциями-конвертерами', () => {
-        const result = getEntity(entity, converters);
+        const result = applyEntityConverters(entity, converters);
         expect(result).toEqual({
             id: 1,
             completed: false,
@@ -36,7 +36,7 @@ describe('getEntity', () => {
     });
 
     test('игнорирует отсутствующие свойства', () => {
-        const result = getEntity({ ...entity, extraProp: 123 }, converters);
+        const result = applyEntityConverters({ ...entity, extraProp: 123 }, converters);
         expect(result).toEqual({
             id: 1,
             completed: false,
@@ -47,7 +47,7 @@ describe('getEntity', () => {
     });
 
     test('игнорирует неопределенные свойства', () => {
-        const result = getEntity({ ...entity, undefinedProp: undefined }, converters);
+        const result = applyEntityConverters({ ...entity, undefinedProp: undefined }, converters);
         expect(result).toEqual({
             id: 1,
             completed: false,

@@ -26,7 +26,7 @@ export const iconValidationRules: ValidationRules<Todo> = {
 };
 
 // Category getter
-export function getIcon(input: UnknownObject): Icon {
+export function getIconFomUnknownObject(input: UnknownObject): Icon {
     return {
         id: input['id'],
         name: input['name'],

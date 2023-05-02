@@ -7,7 +7,7 @@ type TypeConverter = ToRimeStamp | ToInt | ToBoolean | ToDefaultBoolean;
 
 export type TypeConverters = Record<string, TypeConverter>;
 
-export function getEntity<T>(entity: T, convertes: TypeConverters): T {
+export function applyEntityConverters<T>(entity: T, convertes: TypeConverters): T {
     Object.keys(convertes).forEach((propName) => {
         const key = propName as keyof T;
         const value = entity[key];

@@ -1,6 +1,6 @@
 export type ValidationRules<T> = Record<string, [(x: any) => boolean, string]>;
 
-export function validateEntity<T>(
+export function checkEntityValidation<T>(
     entity: object,
     rules: ValidationRules<T>,
     errorPrefix: string,

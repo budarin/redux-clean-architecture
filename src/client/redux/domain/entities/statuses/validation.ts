@@ -34,7 +34,7 @@ export const statusValidationRules: ValidationRules<Todo> = {
 };
 
 // Category getter
-export function getStatus(input: UnknownObject): Status {
+export function getStatusFomUnknownObject(input: UnknownObject): Status {
     return {
         id: input['id'],
         status: input['status'],

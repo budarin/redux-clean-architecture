@@ -1,6 +1,10 @@
-import { categoryValidationRules, getCategory, validateIconIdIntegration } from '../../categories/validation.ts';
+import {
+    categoryValidationRules,
+    getCategoryFomUnknownObject,
+    validateIconIdRelation,
+} from '../../categories/validation.ts';
 
-import { validateEntity } from '../../../utils/validation_utils/validateEntity.ts';
+import { checkEntityValidation } from '../../../utils/validation_utils/validateEntity.ts';
 
 import type { UpdateEntitiesAction } from '../../../common/actions.ts';
 
@@ -19,11 +23,11 @@ export function checkCategoryConstraints(
     categories!.forEach((category, i) => {
         let linksAreCorrect = true;
 
-        const { valid, errors } = validateEntity<Category>(category, categoryValidationRules, 'Categories');
+        const { valid, errors } = checkEntityValidation<Category>(category, categoryValidationRules, 'Categories');
         const { icon_id } = category;
 
         // проверить существуют ли icon_id в Icons
-        if (icon_id && validateIconIdIntegration(icon_id, [store.icons.byId, iconIds]) === false) {
+        if (icon_id && validateIconIdRelation(icon_id, [store.icons.byId, iconIds]) === false) {
             linksAreCorrect = false;
             errors['icon_id'] = ICON_ID_ERROR_MESSAGE;
             console.log(ICON_ID_ERROR_MESSAGE);
@@ -31,7 +35,7 @@ export function checkCategoryConstraints(
         }
 
         if (valid && linksAreCorrect) {
-            newCategories.push(getCategory(category));
+            newCategories.push(getCategoryFomUnknownObject(category));
             categoryIds[category.id] = true;
         } else {
             console.error('Category', { category, errors });

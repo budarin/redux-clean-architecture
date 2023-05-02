@@ -1,13 +1,13 @@
 import {
-    getTodo,
+    getTodoFomUnknownObject,
     todoConverters,
     todoValidationRules,
-    validateStatusIdIntegration,
-    validateCategoryIdIntegration,
+    validateStatusIdRelation,
+    validateCategoryIdRelation,
 } from '../validators.ts';
 
-import { getEntity } from '../../../utils/validation_utils/getEntity.ts';
-import { validateEntity } from '../../../utils/validation_utils/validateEntity.ts';
+import { applyEntityConverters } from '../../../utils/validation_utils/getEntity.ts';
+import { checkEntityValidation } from '../../../utils/validation_utils/validateEntity.ts';
 
 import type { UpdateEntitiesAction } from '../../../common/actions.ts';
 
@@ -27,12 +27,13 @@ export function checkTodoConstraints(
     todos!.forEach((todo, i) => {
         let linksAreCorrect = true;
 
-        const newTodo = getEntity<Todo>(todo, todoConverters);
-        const { valid, errors } = validateEntity<Todo>(newTodo, todoValidationRules, 'Categories');
+        const newTodo = applyEntityConverters<Todo>(todo, todoConverters);
+
+        const { valid, errors } = checkEntityValidation<Todo>(newTodo, todoValidationRules, 'Categories');
         const { status_id, category_id } = newTodo;
 
         // проверить существуют ли status_id в Statuse
-        if (status_id && validateStatusIdIntegration(status_id, [store.statuses.byId, statusIds]) === false) {
+        if (status_id && validateStatusIdRelation(status_id, [store.statuses.byId, statusIds]) === false) {
             linksAreCorrect = false;
             errors['status_id'] = STATUS_ID_ERROR_MESSAGE;
             console.log(STATUS_ID_ERROR_MESSAGE);
@@ -40,7 +41,7 @@ export function checkTodoConstraints(
         }
 
         // проверить существуют ли category_id в Categories
-        if (category_id && validateCategoryIdIntegration(category_id, [store.categories.byId, categoryIds]) === false) {
+        if (category_id && validateCategoryIdRelation(category_id, [store.categories.byId, categoryIds]) === false) {
             linksAreCorrect = false;
             errors['category_id'] = CATEGORY_ID_ERROR_MESSAGE;
             console.log(CATEGORY_ID_ERROR_MESSAGE);
@@ -48,7 +49,7 @@ export function checkTodoConstraints(
         }
 
         if (valid && linksAreCorrect) {
-            newTodos.push(getTodo(newTodo));
+            newTodos.push(getTodoFomUnknownObject(newTodo));
         } else {
             console.error('Todo', { newTodo, errors });
             hasErrors = true;

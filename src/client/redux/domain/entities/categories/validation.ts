@@ -23,7 +23,7 @@ export function validateCategory({ category }: UnknownObject): boolean {
 }
 
 // значение поля icon_id должно быть в спике icons
-export const validateIconIdIntegration = (icon_id: CategoryIconId, iconIdsSores: Record<Id, any>[]): boolean =>
+export const validateIconIdRelation = (icon_id: CategoryIconId, iconIdsSores: Record<Id, any>[]): boolean =>
     !!iconIdsSores.find((idsStore) => Boolean(idsStore[icon_id]));
 
 // validation rules
@@ -37,7 +37,7 @@ export const categoryValidationRules: ValidationRules<Todo> = {
 };
 
 // Category getter
-export function getCategory(input: UnknownObject): Category {
+export function getCategoryFomUnknownObject(input: UnknownObject): Category {
     return {
         id: input['id'],
         category: input['category'],
