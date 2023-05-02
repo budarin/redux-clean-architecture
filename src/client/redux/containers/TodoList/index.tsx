@@ -4,7 +4,7 @@ import { useStore } from '../../store.ts';
 import { filters } from '../../domain/entities/navigationFilter/index.ts';
 
 // components
-import List from '../../../components/List/index.tsx';
+import TodoList from '../../../components/TodoList /index.tsx';
 import TodoListItemContainer from '../TodoListItem/index.tsx';
 
 const getTodoIds = (state: State) => state.todos.ids;
@@ -86,11 +86,11 @@ function TodoListContainer(): JSX.Element {
     console.log('render TodoListContainer');
 
     return (
-        <List category={filter}>
+        <TodoList category={filter}>
             {filteredIds.map((id) => (
                 <TodoListItemContainer key={id} id={id} />
             ))}
-        </List>
+        </TodoList>
     );
 }
 

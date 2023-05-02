@@ -5,7 +5,7 @@ type ListProps = {
     children: ReactNode;
 };
 
-function List({ category, children }: ListProps) {
+function NavList({ category, children }: ListProps) {
     return (
         <>
             <h3>{category}</h3>
@@ -14,4 +14,4 @@ function List({ category, children }: ListProps) {
     );
 }
 
-export default List;
+export default NavList;
