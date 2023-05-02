@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useStore } from '../../store.ts';
 import { getDispatch } from '../../domain/common/selectors.ts';
 import { updateTodo } from '../../domain/entities/todos/index.ts';
@@ -9,6 +12,8 @@ import App from '../../../components/App/index.tsx';
 import TodoListContainer from '../TodoList/index.tsx';
 import NavigationPanelContainer from '../NavigationPanel/index.tsx';
 import { deleteCategory } from '../../domain/entities/categories/index.ts';
+
+import './index.css';
 
 function AppContainer() {
     const dispatch = useStore(getDispatch);
@@ -32,7 +37,12 @@ function AppContainer() {
         dispatch(deleteCategory(1));
     }, []);
 
-    return <App navigationPanel={<NavigationPanelContainer />} todos={<TodoListContainer />} />;
+    return (
+        <>
+            <App navigationPanel={<NavigationPanelContainer />} todos={<TodoListContainer />} />
+            <ToastContainer hideProgressBar={true} />
+        </>
+    );
 }
 
 export default AppContainer;

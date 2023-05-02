@@ -4,7 +4,7 @@ import { createEmptyState } from '../../utils/createEmptyState.ts';
 import { capitalizeFirstLetter } from '../../../../../common/capitalizeFirstLetter.ts';
 
 import type { InternalUpdateEntitiesAction } from '../../common/actions.ts';
-import { setAppError } from '../appErrors/index.ts';
+import { toast } from 'react-toastify';
 
 // Actions
 export const DELETE_CATEGORY = 'DELETE_CATEGORY' as const;
@@ -18,7 +18,7 @@ export type DeleteCategoryAction = ReturnType<typeof deleteCategory>;
 
 export type CategoryAction = DeleteCategoryAction | InternalUpdateEntitiesAction;
 
-const errorMsg = 'Categories: нельзя удалить Категорию если на нее ссылается хотя бы один Todo';
+const errorMsg = 'Нельзя удалить Категорию если на нее ссылается хотя бы один Todo';
 
 // @ts-ignore
 // регистрируем middleware для проверки check constraints попытке удаления категории
@@ -27,8 +27,8 @@ onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
     const linkeddTodo = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === action.payload.id);
 
     if (linkeddTodo) {
+        toast.error(errorMsg, { autoClose: 2000 });
         console.error(errorMsg, state.categories.byId[action.payload.id]);
-        api.originalDispatch(setAppError(errorMsg));
         return;
     }
 
