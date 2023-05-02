@@ -9,9 +9,10 @@ import { checkStatusConstraints } from './checkStatusConstraints.ts';
 import { checkCategoryConstraints } from './checkCategoryConstraints.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
+import { UPDATE_TODO } from '../../entities/todos/index.ts';
 
 // @ts-ignore
-onAction('UPDATE', (get, set, api, action: UpdateEntitiesAction) => {
+onAction(UPDATE_TODO, (get, set, api, action: UpdateEntitiesAction) => {
     if (action.payload.entities && everyIsEmptyArrayOrUndefined(action.payload.entities) === false) {
         const iconIds = {} as IdsHash;
         const statusIds = {} as IdsHash;

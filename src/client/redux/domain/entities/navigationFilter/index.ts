@@ -12,10 +12,9 @@ export const filters = {
     [todayKey]: 'Сегодня',
     [nextKey]: 'Следующие',
     [recycleBinKey]: 'Корзина',
-} as const;
+};
 
 export const flippedFilters = flipObject(filters) as Record<string, string>;
-export const FilterValues = Object.values(filters) as string[];
 
 export type FiltersKey = keyof typeof filters;
 

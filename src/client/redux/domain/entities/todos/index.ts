@@ -9,7 +9,7 @@ import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 // Actions
 export const DELETE_TODO = 'DELETETODO' as const;
-export const UPDATE_TODO = 'UPDATE' as const;
+export const UPDATE_TODO = 'UPDATE_TODO' as const;
 
 // Action creators
 export const deleteTodo = (id: number) => ({

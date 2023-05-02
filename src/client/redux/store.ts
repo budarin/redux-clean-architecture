@@ -12,7 +12,7 @@ import { businessLogic } from './middlewares/businessLogic.ts';
 
 // reducers
 import icons from './domain/entities/icons/icons.ts';
-import todos from './domain/entities/todos/index.ts';
+import todos, { UPDATE_TODO } from './domain/entities/todos/index.ts';
 import statuses from './domain/entities/statuses/statuses.ts';
 import categories from './domain/entities/categories/index.ts';
 import navigationFilter from './domain/entities/navigationFilter/index.ts';
@@ -56,7 +56,7 @@ export const useStore = create<State>(store);
 
 // setup store with data from server
 useStore.getState().dispatch({
-    type: 'UPDATE',
+    type: UPDATE_TODO,
     payload: {
         entities: initialState,
     },
