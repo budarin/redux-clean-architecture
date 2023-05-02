@@ -23,7 +23,7 @@ const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelIte
     const isCategoryNavigation = navigationType === navigationTypes.category;
 
     const dispatch = useStore(getDispatch);
-    const filter = useStore(getNavigationFilter);
+    const { key, filter } = useStore(getNavigationFilter);
     const categoriy = useStore(useCallback((state) => state.categories.byId[id as number], [id]));
     const count = useStore((state) =>
         isCategoryNavigation
@@ -34,14 +34,16 @@ const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelIte
     const isChecked = title === filter;
 
     const handleChange = React.useCallback(
-        (e: { target: { value: string } }): void => {
+        (e: { target: { value: string; dataset: { id: string | Id } } }): void => {
             const updatedTodo = e.target.value;
-            dispatch(setNavigationFilter(updatedTodo));
+            const id = e.target.dataset.id;
+
+            dispatch(setNavigationFilter(isCategoryNavigation ? Number(id) : id, updatedTodo));
         },
         [dispatch],
     );
 
-    return <NavigationIPanelIem title={title} count={count} checked={isChecked} handleChange={handleChange} />;
+    return <NavigationIPanelIem id={id} title={title} count={count} checked={isChecked} handleChange={handleChange} />;
 };
 
 export default NavigationPanelItemContainer;

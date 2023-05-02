@@ -28,7 +28,10 @@ type IconState = {
     ids: Id[];
 };
 
-type NavigationFilterState = string;
+type NavigationFilterState = {
+    key: sting | Id;
+    filter: string;
+};
 
 type EntitiesState = {
     icons: IconState;

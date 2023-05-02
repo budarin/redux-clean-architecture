@@ -1,3 +1,5 @@
+import { flipObject } from '../../../../../common/utils/flipObject.ts';
+
 export const SET_NAVIGATION_FILTER = 'SET_NAVIGATION_FILTER' as const;
 
 export const inboxKey = 'inbox';
@@ -12,21 +14,27 @@ export const filters = {
     [recycleBinKey]: 'Корзина',
 } as const;
 
+export const flippedFilters = flipObject(filters) as Record<string, string>;
+export const FilterValues = Object.values(filters) as string[];
+
 export type FiltersKey = keyof typeof filters;
 
-export function setNavigationFilter(filter: string) {
+export function setNavigationFilter(key: Id | string, filter: string) {
     return {
         type: SET_NAVIGATION_FILTER,
-        payload: { filter },
+        payload: { key, filter },
     };
 }
 
 export type NavigationFilterAction = ReturnType<typeof setNavigationFilter>;
 
-export default function categories(state: NavigationFilterState = filters.inbox, action: NavigationFilterAction) {
+export default function categories(
+    state: NavigationFilterState = { key: inboxKey, filter: filters[inboxKey] },
+    action: NavigationFilterAction,
+) {
     switch (action.type) {
         case SET_NAVIGATION_FILTER: {
-            return action.payload.filter;
+            return action.payload;
         }
 
         default:
