@@ -43,17 +43,17 @@ export const initialState: EntitiesPayload = {
         {
             id: 1,
             icon_id: 3,
-            category: 'работа',
+            category: 'Работа',
         },
         {
             id: 2,
             icon_id: 2,
-            category: 'дом',
+            category: 'Дом',
         },
         {
             id: 3,
             icon_id: 4,
-            category: 'здоровье',
+            category: 'Здоровье',
         },
     ],
     todos: [

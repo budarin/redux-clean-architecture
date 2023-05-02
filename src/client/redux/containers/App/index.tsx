@@ -19,21 +19,21 @@ function AppContainer() {
     const dispatch = useStore(getDispatch);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            const rnd = Math.random();
-            const b = rnd < 0.5;
-            dispatch(
-                updateTodo({
-                    id: 1,
-                    todo: String(rnd),
-                    deleted: b,
-                    completed: b,
-                }),
-            );
-        }, 3000);
-        () => clearInterval(timer);
+        // const timer = setInterval(() => {
+        //     const rnd = Math.random();
+        //     const b = rnd < 0.5;
+        //     dispatch(
+        //         updateTodo({
+        //             id: 1,
+        //             todo: String(rnd),
+        //             deleted: b,
+        //             completed: b,
+        //         }),
+        //     );
+        // }, 3000);
+        // () => clearInterval(timer);
 
-        dispatch(deleteCategory(1));
+        dispatch(deleteCategory(1, 'Работа'));
     }, []);
 
     return (
