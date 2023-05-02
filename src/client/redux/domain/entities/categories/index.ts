@@ -27,8 +27,10 @@ onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
 
     if (linkeddTodo) {
         const errorMsg = `Нельзя удалить категорию "${action.payload.category}" так как есть задачи, входящие в эту категорию!`;
-        toast.error(errorMsg, { autoClose: 3000 });
+
+        toast.error(errorMsg);
         console.error(errorMsg, state.categories.byId[action.payload.id]);
+
         return;
     }
 
