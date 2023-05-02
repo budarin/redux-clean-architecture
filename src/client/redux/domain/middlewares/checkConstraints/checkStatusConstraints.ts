@@ -8,7 +8,7 @@ export function checkStatusConstraints(
     statuses: Status[] | undefined,
     statusIds: IdsHash,
 ): boolean {
-    let hasErrors = false;
+    let isValid = true;
     const newStatuses = [] as Status[];
 
     statuses!.forEach((status, i) => {
@@ -19,12 +19,12 @@ export function checkStatusConstraints(
             statusIds[status.id] = true;
         } else {
             console.error('Status', { status, errors });
-            hasErrors = true;
+            isValid = false;
             // generate Error
         }
     });
 
     action.payload.entities!.statuses = newStatuses;
 
-    return hasErrors;
+    return isValid;
 }

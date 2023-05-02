@@ -35,7 +35,7 @@ export const validateDueDate = ({ due_date }: UnknownObject) => isNotExists(due_
 export const validateCompleted = ({ completed }: UnknownObject): boolean => isBoolean(completed);
 
 //  Поле deleted должно быть логическим типом и по умолчанию должно быть установлено в false.
-export const validateDeleted = ({ x: deleted }: UnknownObject): boolean => isUndefined(deleted) || isBoolean(deleted);
+export const validateDeleted = ({ deleted }: UnknownObject): boolean => isUndefined(deleted) || isBoolean(deleted);
 
 // Длина поля todo должна быть не менее 5 символов и не более 150 символов.
 export function validateTodo({ todo }: UnknownObject): boolean {

@@ -27,7 +27,7 @@ onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
     const linkeddTodo = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === action.payload.id);
 
     if (linkeddTodo) {
-        toast.error(errorMsg, { autoClose: 2000 });
+        toast.error(errorMsg, { autoClose: 3000 });
         console.error(errorMsg, state.categories.byId[action.payload.id]);
         return;
     }

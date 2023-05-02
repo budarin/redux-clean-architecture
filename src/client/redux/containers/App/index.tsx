@@ -22,7 +22,6 @@ function AppContainer() {
         // const timer = setInterval(() => {
         //     const rnd = Math.random();
         //     const b = rnd < 0.5;
-
         //     dispatch(
         //         updateTodo({
         //             id: 1,

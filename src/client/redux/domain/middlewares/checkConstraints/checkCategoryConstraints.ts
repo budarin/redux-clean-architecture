@@ -17,7 +17,7 @@ export function checkCategoryConstraints(
     iconIds: IdsHash,
     categoryIds: IdsHash,
 ): boolean {
-    let hasErrors = false;
+    let isValid = true;
     const newCategories = [] as Category[];
 
     categories!.forEach((category, i) => {
@@ -31,7 +31,7 @@ export function checkCategoryConstraints(
             linksAreCorrect = false;
             errors['icon_id'] = ICON_ID_ERROR_MESSAGE;
             console.log(ICON_ID_ERROR_MESSAGE);
-            hasErrors = true;
+            isValid = false;
         }
 
         if (valid && linksAreCorrect) {
@@ -39,12 +39,12 @@ export function checkCategoryConstraints(
             categoryIds[category.id] = true;
         } else {
             console.error('Category', { category, errors });
-            hasErrors = true;
+            isValid = false;
             // generate Error
         }
     });
 
     action.payload.entities!.categories = newCategories;
 
-    return hasErrors;
+    return isValid;
 }

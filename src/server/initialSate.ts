@@ -125,7 +125,7 @@ export const initialState: EntitiesPayload = {
             description: undefined,
             due_date: undefined,
             completed: true,
-            deleted: true,
+            deleted: false,
         },
     ],
 };

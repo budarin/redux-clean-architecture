@@ -43,15 +43,17 @@ onAction(UPDATE_ENTITIES, (get, set, api, action: UpdateEntitiesAction) => {
             isValidTodo = checkTodoConstraints(action, store, todos, categoryIds, statusIds);
         }
 
-        toast.error(
-            <>
-                <p>Часть данных являются не консистентными и поэтому не будут отображены!</p>
-                <p>Не волнуйтесь - мы уже работаем над этой проблемой</p>
-                <p>Если данные отображаются не верно - попробуйте позже</p>
-            </>,
-            { autoClose: false },
-        );
-        if (!isValidIcon && isValidStatus && isValidCategory && isValidTodo) {
+        if (!(isValidIcon && isValidStatus && isValidCategory && isValidTodo)) {
+            toast.error(
+                <>
+                    <p>
+                        Некоторые данные не будут отображены из-за ошибок при их обработке. Однако, мы уже занимаемся
+                        решением этой проблемы, поэтому не стоит беспокоиться.
+                    </p>
+                    <p>Если вы заметите неправильное отображение данных, обновите страницу или попробуйте позже.</p>
+                </>,
+                { autoClose: false },
+            );
         }
 
         return api.originalDispatch({ ...action, type: INTERNAL_UPDATE_ENTITIES });

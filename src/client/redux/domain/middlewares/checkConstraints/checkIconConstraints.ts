@@ -8,7 +8,7 @@ export function checkIconConstraints(
     icons: Icon[] | undefined,
     iconIds: IdsHash,
 ): boolean {
-    let hasErrors = false;
+    let isValid = true;
     const newIcons = [] as Icon[];
 
     icons!.forEach((icon, i) => {
@@ -19,12 +19,12 @@ export function checkIconConstraints(
             iconIds[icon.id] = true;
         } else {
             console.error('Icon', { icon, errors });
-            hasErrors = true;
+            isValid = false;
             // generate Error
         }
     });
 
     action.payload.entities!.icons = newIcons;
 
-    return hasErrors;
+    return isValid;
 }
