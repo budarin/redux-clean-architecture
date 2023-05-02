@@ -10,10 +10,11 @@ import NavigationPanelItemContainer, { navigationTypes } from '../NavigationPane
 
 const topFilters = [inboxKey, todayKey, nextKey];
 
-const getCategories = (state: State) => Object.values(state.categories.byId).map((category) => category.id, shallow);
+const getCategories = (state: State) => state.categories.byId;
 
 function NavigationPanelContainer(): JSX.Element {
-    const categoryIds = useStore(getCategories);
+    const categoriess = useStore(getCategories);
+    const categoryIds = Object.values(categoriess).map((category) => category.id);
 
     return (
         <NavigationPanel>
