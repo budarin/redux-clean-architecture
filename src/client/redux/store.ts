@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { redux } from 'zustand/middleware';
 
+import { initialState } from '../../server/initialSate.ts';
+
 // регистрируем middleware который обрабатывает UPDATE_TO action
 // с целью проверки целостности обновляемых в store данных
 import './domain/middlewares/checkConstraintsOnUpdate/index.ts';
@@ -18,7 +20,6 @@ import todos, { UPDATE_TODO } from './domain/entities/todos/index.ts';
 import statuses from './domain/entities/statuses/statuses.ts';
 import categories from './domain/entities/categories/index.ts';
 import navigationFilter from './domain/entities/navigationFilter/index.ts';
-import { initialState } from '../../server/initialSate.ts';
 
 function rootReducer(
     state: EntitiesState | undefined,
