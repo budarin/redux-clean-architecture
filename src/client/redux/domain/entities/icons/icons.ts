@@ -1,15 +1,15 @@
-import { UPDATE_ENTITIES } from '../../common/actions.ts';
+import { INTERNAL_UPDATE_ENTITIES } from '../../common/actions.ts';
 import { createEmptyState } from '../../utils/createEmptyState.ts';
 
-import type { UpdateEntitiesAction } from '../../common/actions.ts';
+import type { InternalUpdateEntitiesAction } from '../../common/actions.ts';
 
-export type IconAction = UpdateEntitiesAction;
+export type IconAction = InternalUpdateEntitiesAction;
 
 const initialState = createEmptyState<IconState>();
 
 export default function iconsReducer(state = initialState, action: IconAction = {} as IconAction) {
     switch (action.type) {
-        case UPDATE_ENTITIES: {
+        case INTERNAL_UPDATE_ENTITIES: {
             if (!action.payload.entities?.icons || Object.keys(action.payload.entities.icons).length === 0) {
                 return state;
             }

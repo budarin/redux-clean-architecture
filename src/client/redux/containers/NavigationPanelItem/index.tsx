@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import {
     navigationFilterTypes,
@@ -22,7 +22,7 @@ type NavigationPanelItemContainerProps = {
     navigationType: NavigationFilterType;
 };
 
-const NavigationPanelItemContainer = memo(({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
+const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);
 
     // FIXME: упростить логику
@@ -60,6 +60,6 @@ const NavigationPanelItemContainer = memo(({ id, navigationType }: NavigationPan
     );
 
     return <NavigationIPanelIem title={title} todoCount={todoCount} checked={isChecked} handleChange={handleChange} />;
-});
+};
 
 export default NavigationPanelItemContainer;

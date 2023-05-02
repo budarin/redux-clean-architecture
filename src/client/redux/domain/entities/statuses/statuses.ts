@@ -1,15 +1,15 @@
-import { UPDATE_ENTITIES } from '../../common/actions.ts';
+import { INTERNAL_UPDATE_ENTITIES } from '../../common/actions.ts';
 import { createEmptyState } from '../../utils/createEmptyState.ts';
 
-import type { UpdateEntitiesAction } from '../../common/actions.ts';
+import type { InternalUpdateEntitiesAction } from '../../common/actions.ts';
 
-export type StatusAction = UpdateEntitiesAction;
+export type StatusAction = InternalUpdateEntitiesAction;
 
 const initialState = createEmptyState<StatusState>();
 
 export default function statusesReducer(state = initialState, action: StatusAction = {} as StatusAction) {
     switch (action.type) {
-        case UPDATE_ENTITIES: {
+        case INTERNAL_UPDATE_ENTITIES: {
             if (!action.payload.entities?.statuses || Object.keys(action.payload.entities.statuses).length === 0) {
                 return state;
             }

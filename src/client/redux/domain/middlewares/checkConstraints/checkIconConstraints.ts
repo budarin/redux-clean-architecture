@@ -1,7 +1,7 @@
-import { checkEntityValidation } from '../../../utils/validation_utils/validateEntity.ts';
-import { getIconFomUnknownObject, iconValidationRules } from '../../icons/validation.ts';
+import { checkEntityValidation } from '../../utils/validation_utils/validateEntity.ts';
+import { getIconFomUnknownObject, iconValidationRules } from '../../entities/icons/validation.ts';
 
-import type { UpdateEntitiesAction } from '../../../common/actions.ts';
+import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 export function checkIconConstraints(
     action: UpdateEntitiesAction,

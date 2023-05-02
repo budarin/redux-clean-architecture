@@ -1,7 +1,7 @@
-import { checkEntityValidation } from '../../../utils/validation_utils/validateEntity.ts';
-import { getStatusFomUnknownObject, statusValidationRules } from '../../statuses/validation.ts';
+import { checkEntityValidation } from '../../utils/validation_utils/validateEntity.ts';
+import { getStatusFomUnknownObject, statusValidationRules } from '../../entities/statuses/validation.ts';
 
-import type { UpdateEntitiesAction } from '../../../common/actions.ts';
+import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 export function checkStatusConstraints(
     action: UpdateEntitiesAction,

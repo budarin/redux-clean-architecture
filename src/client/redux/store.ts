@@ -4,7 +4,7 @@ import { redux } from 'zustand/middleware';
 import { initialState } from '../../server/initialSate.ts';
 
 // actions
-import { RESET_STATE } from './domain/common/actions.ts';
+import { RESET_STATE, updateEntities } from './domain/common/actions.ts';
 
 // middlewares
 import { logger } from './middlewares/logger.ts';
@@ -12,10 +12,13 @@ import { businessLogic } from './middlewares/businessLogic.ts';
 
 // reducers
 import icons from './domain/entities/icons/icons.ts';
-import todos, { UPDATE_TODO } from './domain/entities/todos/index.ts';
+import todos from './domain/entities/todos/index.ts';
 import statuses from './domain/entities/statuses/statuses.ts';
 import categories from './domain/entities/categories/index.ts';
 import navigationFilter from './domain/entities/navigationFilter/index.ts';
+import appErrors from './domain/entities/appErrors';
+
+import './domain/middlewares/checkConstraints/index.ts';
 
 function rootReducer(
     state: EntitiesState | undefined,
@@ -27,6 +30,7 @@ function rootReducer(
           categories: CategoriyState;
           todos: TodoState;
           navigationFilter: NavigationFilter;
+          appErrors: ApplicationErrors;
       }
     | undefined {
     if (typeof action !== 'object') {
@@ -43,6 +47,7 @@ function rootReducer(
         categories: categories(state?.categories, action),
         todos: todos(state?.todos, action),
         navigationFilter: navigationFilter(state?.navigationFilter, action),
+        appErrors: appErrors(state?.appErrors, action),
     };
 }
 
@@ -54,9 +59,4 @@ const store = process.env['NODE_ENV'] === 'production' ? coreStore : logger(core
 export const useStore = create<State>(store);
 
 // setup store with data from server
-useStore.getState().dispatch({
-    type: UPDATE_TODO,
-    payload: {
-        entities: initialState,
-    },
-});
+useStore.getState().dispatch(updateEntities(initialState));

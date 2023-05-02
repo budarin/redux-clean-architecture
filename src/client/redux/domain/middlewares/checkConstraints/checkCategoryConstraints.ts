@@ -2,11 +2,11 @@ import {
     categoryValidationRules,
     getCategoryFomUnknownObject,
     validateIconIdRelation,
-} from '../../categories/validation.ts';
+} from '../../entities/categories/validation.ts';
 
-import { checkEntityValidation } from '../../../utils/validation_utils/validateEntity.ts';
+import { checkEntityValidation } from '../../utils/validation_utils/validateEntity.ts';
 
-import type { UpdateEntitiesAction } from '../../../common/actions.ts';
+import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 const ICON_ID_ERROR_MESSAGE = 'Значение icon_id отсутствует в Icons';
 

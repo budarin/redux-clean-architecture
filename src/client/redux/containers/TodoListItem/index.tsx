@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import { useStore } from '../../store.ts';
 import { getDispatch } from '../../domain/common/selectors.ts';
@@ -14,7 +14,7 @@ const getTodoStatus = (status_id: TodoStatusId) =>
 
 type TodoListItemContainerProps = { id: Id };
 
-const TodoListItemContainer = memo(({ id }: TodoListItemContainerProps): JSX.Element => {
+const TodoListItemContainer = ({ id }: TodoListItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);
 
     const todo = useStore(getTodoById(id));
@@ -37,7 +37,7 @@ const TodoListItemContainer = memo(({ id }: TodoListItemContainerProps): JSX.Ele
     );
 
     return <TodoListItem todo={todo} status={status} handleChange={handleChange} />;
-});
+};
 
 TodoListItemContainer.displayName = 'TodoListItemContainer';
 
