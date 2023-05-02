@@ -1,6 +1,6 @@
 export function updateICategoryCounters(todo: Todo, state: TodoState) {
     // обновляем idsByCategoryId
-    if (todo.category_id) {
+    if (todo.category_id && !todo.deleted) {
         const byId = state.idsByCategoryId;
 
         // если есть такая категория

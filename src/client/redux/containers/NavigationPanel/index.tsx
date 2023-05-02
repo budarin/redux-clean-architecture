@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'zustand/shallow';
 
 import { useStore } from '../../store';
-import { filters, inboxKey, nextKey, recycleBinKey, todayKey } from '../../domain/entities/navigationFilter';
+import { inboxKey, nextKey, recycleBinKey, todayKey } from '../../domain/entities/navigationFilter';
 
 // components
 import NavigationPanel from '../../../components/NavigationPanel';

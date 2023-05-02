@@ -20,10 +20,17 @@ export const navigationTypes = {
 };
 
 const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
+    const isCategoryNavigation = navigationType === navigationTypes.category;
+
     const dispatch = useStore(getDispatch);
     const filter = useStore(getNavigationFilter);
     const categoriy = useStore(useCallback((state) => state.categories.byId[id as number], [id]));
-    const title = navigationType === navigationTypes.category ? categoriy.category : filters[id as FiltersKey];
+    const count = useStore((state) =>
+        isCategoryNavigation
+            ? state.todos.idsByCategoryId[id as number].length || 0
+            : state.todos.idsByFilterId[id].length,
+    );
+    const title = isCategoryNavigation ? categoriy.category : filters[id as FiltersKey];
     const isChecked = title === filter;
 
     const handleChange = React.useCallback(
@@ -34,7 +41,7 @@ const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelIte
         [dispatch],
     );
 
-    return <NavigationIPanelIem title={title} checked={isChecked} handleChange={handleChange} />;
+    return <NavigationIPanelIem title={title} count={count} checked={isChecked} handleChange={handleChange} />;
 };
 
 export default NavigationPanelItemContainer;

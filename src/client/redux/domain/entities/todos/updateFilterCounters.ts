@@ -20,7 +20,7 @@ export function updateFilterCounters(todo: Todo, state: TodoState) {
 
         if (idx > -1) {
             byId[inboxKey] = [...inbox];
-            byId[inboxKey].slice(idx, 1);
+            byId[inboxKey].splice(idx, 1);
         }
     }
 
@@ -37,7 +37,7 @@ export function updateFilterCounters(todo: Todo, state: TodoState) {
 
         if (idx > -1) {
             byId[todayKey] = [...today];
-            byId[todayKey].slice(idx, 1);
+            byId[todayKey].splice(idx, 1);
         }
     }
 
@@ -50,7 +50,7 @@ export function updateFilterCounters(todo: Todo, state: TodoState) {
 
         if (idx > -1) {
             byId[nextKey] = [...next];
-            byId[nextKey].slice(idx, 1);
+            byId[nextKey].splice(idx, 1);
         }
     }
 
@@ -63,7 +63,7 @@ export function updateFilterCounters(todo: Todo, state: TodoState) {
 
         if (idx > -1) {
             byId[recycleBinKey] = [...recycleBin];
-            byId[recycleBinKey].slice(idx, 1);
+            byId[recycleBinKey].splice(idx, 1);
         }
     }
 }

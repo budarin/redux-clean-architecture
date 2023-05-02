@@ -24,14 +24,12 @@ const TodoListItemContainer = ({ id }: TodoListItemContainerProps): JSX.Element 
                     id: 1,
                     todo: String(Math.random()),
                     completed: updatedTodo,
-                    deleted: Math.random() > 0.5,
+                    deleted: updatedTodo,
                 }),
             );
         },
         [dispatch, id],
     );
-
-    console.log('render TodoListItemContainer');
 
     return <TodoListItem todo={todo} status={status} handleChange={handleChange} />;
 };

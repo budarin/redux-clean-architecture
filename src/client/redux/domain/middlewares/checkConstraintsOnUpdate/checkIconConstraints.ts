@@ -1,7 +1,7 @@
-import { validateEntity } from '../utils/validation_utils/validateEntity.ts';
-import { getIcon, iconValidationRules } from '../entities/icons/validation.ts';
+import { validateEntity } from '../../utils/validation_utils/validateEntity.ts';
+import { getIcon, iconValidationRules } from '../../entities/icons/validation.ts';
 
-import type { UpdateEntitiesAction } from '../common/actions.ts';
+import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
 const ICON_ID_ERROR_MESSAGE = 'Значение icon_id отсутствует в Icons';
 

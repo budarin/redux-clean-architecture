@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { redux } from 'zustand/middleware';
 
-import './domain/check_constraints/index.ts';
+import './domain/middlewares/checkConstraintsOnUpdate/index.ts';
 
 // actions
 import { RESET_STATE } from './domain/common/actions.ts';
