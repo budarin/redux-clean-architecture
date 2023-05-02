@@ -1,5 +1,5 @@
-import { useStore } from './store.ts';
-import { getEntitiesInitialState } from './domain/utils/getEntitiesInitialState.ts';
+import { useStore } from '../store.ts';
+import { getEntitiesInitialState } from '../domain/utils/getEntitiesInitialState.ts';
 
 describe('useStore', () => {
     it('should initialize with an empty todo list', () => {
