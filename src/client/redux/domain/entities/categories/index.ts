@@ -36,7 +36,7 @@ onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
 
 const initialState = createEmptyState<CategoriyState>();
 
-export default function categories(state = initialState, action = {} as CategoryAction) {
+export default function categoriesReducer(state = initialState, action = {} as CategoryAction) {
     switch (action.type) {
         case UPDATE_ENTITIES: {
             if (!action.payload.entities?.categories || Object.keys(action.payload.entities.categories).length === 0) {

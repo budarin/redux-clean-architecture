@@ -27,7 +27,7 @@ export function setNavigationFilter(key: Id | string, filter: string) {
 
 export type NavigationFilterAction = ReturnType<typeof setNavigationFilter>;
 
-export default function categories(
+export default function navigationFilterReducer(
     state: NavigationFilterState = { key: inboxKey, filter: filters[inboxKey] },
     action: NavigationFilterAction,
 ) {

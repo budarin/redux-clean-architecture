@@ -7,7 +7,7 @@ export type IconAction = UpdateEntitiesAction;
 
 const initialState = createEmptyState<IconState>();
 
-export default function categories(state = initialState, action: IconAction = {} as IconAction) {
+export default function iconsReducer(state = initialState, action: IconAction = {} as IconAction) {
     switch (action.type) {
         case UPDATE_ENTITIES: {
             if (!action.payload.entities?.icons || Object.keys(action.payload.entities.icons).length === 0) {

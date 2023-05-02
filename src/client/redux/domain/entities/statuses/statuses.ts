@@ -7,7 +7,7 @@ export type StatusAction = UpdateEntitiesAction;
 
 const initialState = createEmptyState<StatusState>();
 
-export default function categories(state = initialState, action: StatusAction = {} as StatusAction) {
+export default function statusesReducer(state = initialState, action: StatusAction = {} as StatusAction) {
     switch (action.type) {
         case UPDATE_ENTITIES: {
             if (!action.payload.entities?.statuses || Object.keys(action.payload.entities.statuses).length === 0) {

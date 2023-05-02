@@ -40,7 +40,7 @@ export type TodoAction = DeleteTodoAction | UpdateTodoAction | UpdateEntitiesAct
 const initialState = createEmptyTodoState();
 
 // reducer
-export default function todos(state = initialState, action = {} as TodoAction) {
+export default function todosReducer(state = initialState, action = {} as TodoAction) {
     switch (action.type) {
         case UPDATE_ENTITIES: {
             if (!action.payload.entities?.todos || Object.keys(action.payload.entities.todos).length === 0) {
