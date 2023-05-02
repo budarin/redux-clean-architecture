@@ -3,14 +3,7 @@ import { getIcon, iconValidationRules } from '../../entities/icons/validation.ts
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
-const ICON_ID_ERROR_MESSAGE = 'Значение icon_id отсутствует в Icons';
-
-export function checkIconConstraints(
-    action: UpdateEntitiesAction,
-    store: State,
-    icons: Icon[] | undefined,
-    iconIds: IdsHash,
-): void {
+export function checkIconConstraints(action: UpdateEntitiesAction, icons: Icon[] | undefined, iconIds: IdsHash): void {
     const newIcons = [] as Icon[];
 
     icons!.forEach((icon, i) => {

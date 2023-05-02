@@ -83,7 +83,7 @@ export const initialState: EntitiesPayload = {
             category_id: 3,
             todo: 'Todo3',
             description: undefined,
-            due_date: new Date('05/05/2023').valueOf(),
+            due_date: new Date('05/08/2023').valueOf(),
             completed: true,
             deleted: false,
         },

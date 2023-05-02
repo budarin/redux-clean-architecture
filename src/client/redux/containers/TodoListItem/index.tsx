@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from 'react';
-import { useStore } from '../../store.ts';
 
+import { useStore } from '../../store.ts';
 import { getDispatch } from '../../domain/common/selectors.ts';
 import { updateTodo } from '../../domain/entities/todos/index.ts';
 

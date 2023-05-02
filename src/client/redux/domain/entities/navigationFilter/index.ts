@@ -25,7 +25,10 @@ export function setNavigationFilter(key: Id | string, filter: string) {
 }
 export type NavigationFilterAction = ReturnType<typeof setNavigationFilter>;
 
-const initialState = { key: inboxKey, filter: filters[inboxKey] };
+const initialState = {
+    key: inboxKey,
+    filter: filters[inboxKey],
+};
 
 export default function navigationFilterReducer(
     state: NavigationFilterState = initialState,

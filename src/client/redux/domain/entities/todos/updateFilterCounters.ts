@@ -1,8 +1,8 @@
-import { inboxKey, nextKey, recycleBinKey, todayKey } from '../navigationFilter/index.ts';
-import { isInboxItem } from './isInboxItem.ts';
 import { isNextItem } from './isNextItem.ts';
-import { isRecycleBinItem } from './isRecycleBinItem.ts';
+import { isInboxItem } from './isInboxItem.ts';
 import { isTodayItem } from './isTodayItem.ts';
+import { isRecycleBinItem } from './isRecycleBinItem.ts';
+import { inboxKey, nextKey, recycleBinKey, todayKey } from '../navigationFilter/index.ts';
 
 export function updateFilterCounters(todo: Todo, state: TodoState) {
     const byId = state.idsByFilterId;

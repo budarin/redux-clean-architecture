@@ -1,3 +1,3 @@
-export function isRecycleBinItem(todo: Todo) {
+export function isRecycleBinItem(todo: Todo): boolean {
     return todo.deleted;
 }

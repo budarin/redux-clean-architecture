@@ -1,4 +1,5 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
+import { UPDATE_TODO } from '../../entities/todos/index.ts';
 import { onAction } from '../../../middlewares/businessLogic.ts';
 import { everyIsEmptyArrayOrUndefined } from '../../utils/validation_utils/everyIsEmptyArrayOrUndefined.ts';
 
@@ -9,7 +10,6 @@ import { checkStatusConstraints } from './checkStatusConstraints.ts';
 import { checkCategoryConstraints } from './checkCategoryConstraints.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
-import { UPDATE_TODO } from '../../entities/todos/index.ts';
 
 // @ts-ignore
 onAction(UPDATE_TODO, (get, set, api, action: UpdateEntitiesAction) => {
@@ -21,11 +21,11 @@ onAction(UPDATE_TODO, (get, set, api, action: UpdateEntitiesAction) => {
         const { todos, categories, statuses, icons } = action.payload.entities;
 
         if (icons && icons.length > 0) {
-            checkIconConstraints(action, store, icons, iconIds);
+            checkIconConstraints(action, icons, iconIds);
         }
 
         if (statuses && statuses.length > 0) {
-            checkStatusConstraints(action, store, statuses, statusIds);
+            checkStatusConstraints(action, statuses, statusIds);
         }
 
         if (categories && categories.length > 0) {

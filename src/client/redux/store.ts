@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { redux } from 'zustand/middleware';
 
+// регистрируем middleware который обрабатывает UPDATE_TO action
+// с целью проверки целостности обновляемых в store данных
 import './domain/middlewares/checkConstraintsOnUpdate/index.ts';
 
 // actions

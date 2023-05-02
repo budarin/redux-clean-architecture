@@ -1,7 +1,6 @@
 import { UPDATE_ENTITIES } from '../../common/actions.ts';
-import { createEmptyState } from '../../utils/createEmptyState.ts';
-
 import { updateFilterCounters } from './updateFilterCounters.ts';
+import { createEmptyState } from '../../utils/createEmptyState.ts';
 import { updateICategoryCounters } from './updateICategoryCounters.ts';
 import { createEmptyTodoState } from '../../utils/createEmptyTodoState.ts';
 

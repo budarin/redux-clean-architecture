@@ -1,13 +1,13 @@
 import { createEmptyState } from './createEmptyState.ts';
 
-// store initial state
-
-export function getEntitiesInitialState(): {
+type EntitiesInitialState = {
     icons: IconState;
     statuses: StatusState;
     categories: CategoriyState;
     todos: TodoState;
-} {
+};
+
+export function getEntitiesInitialState(): EntitiesInitialState {
     return {
         icons: createEmptyState<IconState>(),
         statuses: createEmptyState<StatusState>(),

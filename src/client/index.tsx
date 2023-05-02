@@ -3,13 +3,15 @@ import { createRoot } from 'react-dom/client';
 
 import AppContainer from './redux/containers/App/index.tsx';
 
-let rootElement = document.getElementById('root');
+function createRootElement() {
+    const root = document.createElement('div');
+    root.id = 'root';
+    document.body.appendChild(root);
 
-if (!rootElement) {
-    rootElement = document.createElement('div');
-    rootElement.id = 'root';
-    document.body.appendChild(rootElement);
+    return root;
 }
+
+let rootElement = document.getElementById('root') || createRootElement();
 
 createRoot(rootElement).render(
     // <StrictMode>

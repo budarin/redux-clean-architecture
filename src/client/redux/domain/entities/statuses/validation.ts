@@ -1,5 +1,5 @@
-import { inRange } from '../../utils/validation_utils/inRange.ts';
 import { isInt } from '../../utils/validation_utils/isInt.ts';
+import { inRange } from '../../utils/validation_utils/inRange.ts';
 import { isString } from '../../utils/validation_utils/isString.ts';
 
 import type { ValidationRules } from '../../utils/validation_utils/validateEntity.ts';

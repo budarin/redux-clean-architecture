@@ -5,8 +5,9 @@ import {
     validateCategoryIdIntegration,
     validateStatusIdIntegration,
 } from '../../entities/todos/validators.ts';
-import { validateEntity } from '../../utils/validation_utils/validateEntity.ts';
+
 import { getEntity } from '../../utils/validation_utils/getEntity.ts';
+import { validateEntity } from '../../utils/validation_utils/validateEntity.ts';
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 

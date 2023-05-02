@@ -3,11 +3,8 @@ import { getStatus, statusValidationRules } from '../../entities/statuses/valida
 
 import type { UpdateEntitiesAction } from '../../common/actions.ts';
 
-const ICON_ID_ERROR_MESSAGE = 'Значение icon_id отсутствует в Icons';
-
 export function checkStatusConstraints(
     action: UpdateEntitiesAction,
-    store: State,
     statuses: Status[] | undefined,
     statusIds: IdsHash,
 ): void {
