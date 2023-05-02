@@ -36,7 +36,6 @@ type EntitiesState = {
     categories: CategoriyState;
     todos: TodoState;
     navigationFilter: NavigationFilter;
-    appErrors: ApplicationErrors;
 };
 
 type Action = {

@@ -16,9 +16,8 @@ import todos from './domain/entities/todos/index.ts';
 import statuses from './domain/entities/statuses/statuses.ts';
 import categories from './domain/entities/categories/index.ts';
 import navigationFilter from './domain/entities/navigationFilter/index.ts';
-import appErrors from './domain/entities/appErrors';
 
-import './domain/middlewares/checkConstraints/index.ts';
+import './domain/middlewares/checkConstraints/index.tsx';
 
 function rootReducer(
     state: EntitiesState | undefined,
@@ -30,7 +29,6 @@ function rootReducer(
           categories: CategoriyState;
           todos: TodoState;
           navigationFilter: NavigationFilter;
-          appErrors: ApplicationErrors;
       }
     | undefined {
     if (typeof action !== 'object') {
@@ -47,7 +45,6 @@ function rootReducer(
         categories: categories(state?.categories, action),
         todos: todos(state?.todos, action),
         navigationFilter: navigationFilter(state?.navigationFilter, action),
-        appErrors: appErrors(state?.appErrors, action),
     };
 }
 

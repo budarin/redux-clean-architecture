@@ -54,9 +54,6 @@ type NavigationFilter = {
     type: NavigationFilterType;
 };
 
-type AppErrorMessage = string;
-type ApplicationErrors = AppErrorMessage[];
-
 type OneOfEntities = Icon | Status | Category | Todo;
 
 type EntitiesPayload = {
