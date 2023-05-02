@@ -40,7 +40,7 @@ export const categoryValidationRules: ValidationRules<Todo> = {
 export function getCategory(input: UnknownObject): Category {
     return {
         id: input['id'],
-        icon_id: input['icon_id'],
         category: input['category'],
+        icon_id: input['icon_id'],
     } as Category;
 }

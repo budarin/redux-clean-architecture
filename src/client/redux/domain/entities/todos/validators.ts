@@ -94,12 +94,12 @@ export const todoValidationRules: ValidationRules<Todo> = {
 export function getTodo(input: UnknownObject): Todo {
     return {
         id: input['id'],
+        todo: input['todo'],
         status_id: input['status_id'],
         category_id: input['category_id'],
-        todo: input['todo'],
         description: input['description'],
         due_date: input['due_date'],
-        deleted: input['deleted'],
-        completed: input['completed'],
+        deleted: input['deleted'] ?? false,
+        completed: input['completed'] ?? false,
     } as Todo;
 }

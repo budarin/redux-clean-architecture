@@ -51,23 +51,35 @@ onAction(UPDATE_TODO, (get, set, api, action: UpdateEntitiesAction) => {
         const iconIds = {} as IdsHash;
         const statusIds = {} as IdsHash;
         const categoryIds = {} as IdsHash;
+
+        let isValidIcon = true;
+        let isValidStatus = true;
+        let isValidCategory = true;
+        let isValidTodo = true;
+
         const store = api.getState() as State;
         const { todos, categories, statuses, icons } = action.payload.entities;
 
         if (icons && icons.length > 0) {
-            checkIconConstraints(action, icons, iconIds);
+            isValidIcon = checkIconConstraints(action, icons, iconIds);
         }
 
         if (statuses && statuses.length > 0) {
-            checkStatusConstraints(action, statuses, statusIds);
+            isValidStatus = checkStatusConstraints(action, statuses, statusIds);
         }
 
         if (categories && categories.length > 0) {
-            checkCategoryConstraints(action, store, categories, iconIds, categoryIds);
+            isValidCategory = checkCategoryConstraints(action, store, categories, iconIds, categoryIds);
         }
 
         if (todos && todos.length > 0) {
-            checkTodoConstraints(action, store, todos, categoryIds, statusIds);
+            isValidTodo = checkTodoConstraints(action, store, todos, categoryIds, statusIds);
+        }
+
+        if (!isValidIcon && isValidStatus && isValidCategory && isValidTodo) {
+            // отправить сообщение о том что не все данные консистентны
+            // FIXME:
+            // return api.вispatch({ type: APP_ERROR });
         }
 
         return api.originalDispatch({ ...action, type: UPDATE_ENTITIES });

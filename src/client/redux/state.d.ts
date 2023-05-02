@@ -1,11 +1,10 @@
-type TodoIdsByCategoryId = Record<number, Id[]>;
+type TodoIdsByCategoryId = Record<Id, Id[]>;
 type TodoIdsByCategoryIdKey = keyof TodoIdsByCategoryId;
 
-type TodoIdsByFilterId = Record<string, Id[]>;
+type TodoIdsByFilterId = Record<NavigationFilterKey, Id[]>;
 type TodoIdsByFilterIdKey = keyof TodoIdsByFilterId;
 
 type TodoById = Record<Id, Todo>;
-
 type TodoState = {
     byId: TodoById;
     ids: Id[];
@@ -13,18 +12,21 @@ type TodoState = {
     idsByFilterId: TodoIdsByFilterId;
 };
 
+type CategoriyById = Record<Id, Categoriy>;
 type CategoriyState = {
-    byId: Record<Id, Category>;
+    byId: CategoriyById;
     ids: Id[];
 };
 
+type StatusById = Record<Id, Status>;
 type StatusState = {
-    byId: Record<Id, Status>;
+    byId: StatusById;
     ids: Id[];
 };
 
+type SIconById = Record<Id, Icon>;
 type IconState = {
-    byId: Record<Id, Icon>;
+    byId: SIconById;
     ids: Id[];
 };
 
@@ -38,13 +40,7 @@ type EntitiesState = {
 
 type Action = {
     type: string;
-    payload?: any;
+    payload?: UnknownObject;
 };
 
 type State = EntitiesState & { dispatch: (Action: Action) => void };
-
-// keys types
-type TodosStatesKey = keyof EntitiesState['todos']['byId'];
-type CategoriesStatesKey = keyof EntitiesState['todos']['byId'];
-type StatusesStatesKey = keyof EntitiesState['todos']['byId'];
-type IconsStatesKey = keyof EntitiesState['todos']['byId'];

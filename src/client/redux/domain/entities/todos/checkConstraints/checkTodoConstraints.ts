@@ -20,7 +20,8 @@ export function checkTodoConstraints(
     todos: Todo[] | undefined,
     categoryIds: IdsHash,
     statusIds: IdsHash,
-): void {
+): boolean {
+    let hasErrors = false;
     const newTodos = [] as Todo[];
 
     todos!.forEach((todo, i) => {
@@ -35,6 +36,7 @@ export function checkTodoConstraints(
             linksAreCorrect = false;
             errors['status_id'] = STATUS_ID_ERROR_MESSAGE;
             console.log(STATUS_ID_ERROR_MESSAGE);
+            hasErrors = true;
         }
 
         // проверить существуют ли category_id в Categories
@@ -42,15 +44,19 @@ export function checkTodoConstraints(
             linksAreCorrect = false;
             errors['category_id'] = CATEGORY_ID_ERROR_MESSAGE;
             console.log(CATEGORY_ID_ERROR_MESSAGE);
+            hasErrors = true;
         }
 
         if (valid && linksAreCorrect) {
             newTodos.push(getTodo(newTodo));
         } else {
             console.error('Todo', { newTodo, errors });
+            hasErrors = true;
             // generate Error
         }
     });
 
     action.payload.entities!.todos = newTodos;
+
+    return hasErrors;
 }
