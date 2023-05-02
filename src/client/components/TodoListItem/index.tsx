@@ -9,10 +9,8 @@ type TodoListItemProps = {
 const TodoListItem = ({ todo, status: statuses, handleChange }: TodoListItemProps) => {
     return (
         <li>
-            <form name={`todo${todo.id}`}>
-                <input name="completed" type="checkbox" checked={todo.completed} onChange={handleChange}></input>
-                <span style={{ color: statuses.color }}>{todo.todo}</span>
-            </form>
+            <input name="completed" type="checkbox" checked={todo.completed} onChange={handleChange}></input>
+            <span style={{ color: statuses.color }}>{todo.todo}</span>
         </li>
     );
 };
