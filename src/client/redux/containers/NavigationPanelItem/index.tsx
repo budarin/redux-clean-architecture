@@ -22,6 +22,7 @@ export const navigationTypes = {
 const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
     const isCategoryNavigation = navigationType === navigationTypes.category;
 
+    // FIXME: упростить логику
     const dispatch = useStore(getDispatch);
     const { key, filter } = useStore(getNavigationFilter);
     const categoriy = useStore(useCallback((state) => state.categories.byId[id as number], [id]));
