@@ -20,15 +20,3 @@
     cursor: pointer;
     margin-right: 1ch;
 }
-
-@media only screen and (min-width: 600px) {
-    .navPanel {
-        font-size: 0.9rem;
-    }
-}
-
-@media only screen and (min-width: 800px) {
-    .navPanel-item label {
-        font-size: 1rem;
-    }
-}
