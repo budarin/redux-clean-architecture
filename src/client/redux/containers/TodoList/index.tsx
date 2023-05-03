@@ -21,7 +21,7 @@ function TodoListContainer() {
                         ? state.todos.idsByCategoryId[key as Id]
                         : state.todos.idsByFilterId[key];
                 },
-                [isCategoryNavigation],
+                [key, isCategoryNavigation],
             ),
         ) || [];
 
