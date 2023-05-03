@@ -5,11 +5,6 @@
     border-right: 1px solid #e3e3e3;
 }
 
-.navPanel h4 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 @media only screen and (min-width: 480px) {
     .navPanel {
         width: 200px;

@@ -14,6 +14,8 @@ import {
 import NavigationPanel from '../../../components/NavigationPanel';
 import NavigationPanelItemContainer from '../NavigationPanelItem';
 
+import './index.css';
+
 const topFilters = [inboxKey, todayKey, nextKey];
 
 // selectors
@@ -30,7 +32,7 @@ function NavigationPanelContainer(): JSX.Element {
                 <NavigationPanelItemContainer key={key} id={key} navigationType={navigationFilterTypes.filter} />
             ))}
 
-            <h4>Категории дел</h4>
+            <h4>Категории</h4>
             {categoryIds.map((key) => (
                 <NavigationPanelItemContainer key={key} id={key} navigationType={navigationFilterTypes.category} />
             ))}

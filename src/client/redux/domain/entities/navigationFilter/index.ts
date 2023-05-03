@@ -11,7 +11,7 @@ export const nextKey = 'next';
 export const recycleBinKey = 'recycleBin';
 
 export const navigationFilters = {
-    [inboxKey]: 'Не назначенные',
+    [inboxKey]: 'Черновики',
     [todayKey]: 'Сегодня',
     [nextKey]: 'Следующие',
     [recycleBinKey]: 'Корзина',
