@@ -29,7 +29,6 @@
         "html-webpack-plugin": "^5.5.1",
         "jest": "^29.5.0",
         "jest-environment-jsdom": "^29.5.0",
-        "mini-css-extract-plugin": "^2.7.5",
         "style-loader": "^3.3.2",
         "typescript": "^5.0.4",
         "webpack": "^5.81.0",
@@ -40,6 +39,6 @@
         "start-client": "webpack-dev-server -c ./configs/webpack.config.js",
         "test": "jest",
         "tsc": "tsc",
-        "upgrade": "yarn upgrade-interactive --latest;"
+        "upgrade deps": "yarn upgrade-interactive --latest;"
     }
 }
