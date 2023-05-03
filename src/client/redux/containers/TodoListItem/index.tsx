@@ -39,6 +39,4 @@ const TodoListItemContainer = ({ id }: TodoListItemContainerProps): JSX.Element 
     return <TodoListItem todo={todo} status={status} handleChange={handleChange} />;
 };
 
-TodoListItemContainer.displayName = 'TodoListItemContainer';
-
 export default TodoListItemContainer;
