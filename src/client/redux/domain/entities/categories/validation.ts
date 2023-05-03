@@ -4,8 +4,8 @@ import { isString } from '../../utils/validation_utils/isString.ts';
 
 import type { ValidationRules } from '../../utils/validation_utils/validateEntity.ts';
 
-const MIN_CATEGOTY_LENGTH = 3;
-const MAX_CATEGOTY_LENGTH = 20;
+export const MIN_CATEGOTY_LENGTH = 3;
+export const MAX_CATEGOTY_LENGTH = 15;
 
 //  Идентификатор (id) должен быть целочисленного типа.
 export const validateId = ({ id }: UnknownObject): boolean => isInt(id);
@@ -13,7 +13,7 @@ export const validateId = ({ id }: UnknownObject): boolean => isInt(id);
 // Поле icon_id должно быть целочисленного типа и должно ссылаться на существующую иконку в списке Icons.
 export const validateIconId = ({ icon_id }: UnknownObject): boolean => isInt(icon_id);
 
-// Обязательно должно присутствовать поле category, и его длина должна быть более 3-х символов и не должна превышать 20 символов.
+// Обязательно должно присутствовать поле category, и его длина должна быть более 3-х символов и не должна превышать 15 символов.
 export function validateCategory({ category }: UnknownObject): boolean {
     if (isString(category)) {
         return inRange(category.length, MIN_CATEGOTY_LENGTH, MAX_CATEGOTY_LENGTH);

@@ -10,11 +10,11 @@ import { toDefaultBoolean } from '../../utils/validation_utils/toDefaultBoolean.
 import type { TypeConverters } from '../../utils/validation_utils/getEntity.ts';
 import type { ValidationRules } from '../../utils/validation_utils/validateEntity.ts';
 
-const MIN_TODO_LENGTH = 5;
-const MAX_TODO_LENGTH = 150;
+export const MIN_TODO_LENGTH = 5;
+export const MAX_TODO_LENGTH = 150;
 
-const MIN_DESCRIPTION_LENGTH = 10;
-const MAX_DESCRIPTION_LENGTH = 1000;
+export const MIN_DESCRIPTION_LENGTH = 10;
+export const MAX_DESCRIPTION_LENGTH = 1000;
 
 // Идентификатор (id) должен быть целочисленного типа.
 export const validateId = ({ id }: UnknownObject): boolean => isInt(id);
