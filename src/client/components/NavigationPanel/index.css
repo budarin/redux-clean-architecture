@@ -1,0 +1,11 @@
+.navPanel {
+    max-width: 360px;
+    border-top: 1px solid #e3e3e3;
+    border-left: 1px solid #e3e3e3;
+    border-right: 1px solid #e3e3e3;
+}
+
+.navPanel h4 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

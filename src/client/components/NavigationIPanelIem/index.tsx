@@ -1,6 +1,8 @@
 import React from 'react';
+import { cn } from '@bem-react/classname';
 
 import './index.css';
+import Badge from '../Badge/index.tsx';
 
 type NavigationIPanelIemProps = {
     title: string;
@@ -9,9 +11,13 @@ type NavigationIPanelIemProps = {
     handleChange: (e: any) => void;
 };
 
+const navItem = cn('navPanel', 'item');
+
 const NavigationIPanelIem = ({ title, checked, todoCount, handleChange }: NavigationIPanelIemProps) => {
+    const itemClass = navItem({ selected: checked });
+
     return (
-        <div>
+        <div className={itemClass}>
             <label>
                 <input
                     type="radio"
@@ -19,10 +25,11 @@ const NavigationIPanelIem = ({ title, checked, todoCount, handleChange }: Naviga
                     value={title}
                     checked={checked}
                     onChange={handleChange}
-                    className="navPanelItem-radio"
+                    className="navPanel-item-radio"
                 />
-                <span className="navPanelItem-title">{title}</span> <span>{todoCount}</span>
+                {title}
             </label>
+            <Badge num={todoCount} />
         </div>
     );
 };

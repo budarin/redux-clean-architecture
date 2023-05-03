@@ -13,8 +13,6 @@ import App from '../../../components/App/index.tsx';
 import TodoListContainer from '../TodoList/index.tsx';
 import NavigationPanelContainer from '../NavigationPanel/index.tsx';
 
-import './index.css';
-
 function AppContainer() {
     const dispatch = useStore(getDispatch);
 

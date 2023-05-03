@@ -1,12 +1,17 @@
-.navPanelItem-radio {
-    display: none;
+.navPanel-item {
+    line-height: 2;
+    border-bottom: 1px solid #e8e8e8;
 }
 
-.navPanelItem-radio:checked + .navPanelItem-title {
-    font-weight: bold;
-    color: blue;
+.navPanel-item_selected {
+    background-color: #ad7;
 }
 
-.navPanelItem-title {
+.navPanel-item-radio {
+    visibility: hidden;
+}
+
+.navPanel-item label {
     cursor: pointer;
+    margin-right: 1ch;
 }

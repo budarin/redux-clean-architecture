@@ -41,7 +41,6 @@ function NavigationPanelContainer(): JSX.Element {
                 id={recycleBinKey}
                 navigationType={navigationFilterTypes.filter}
             />
-            <hr />
         </NavigationPanel>
     );
 }
