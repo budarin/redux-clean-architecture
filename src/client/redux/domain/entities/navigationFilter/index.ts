@@ -11,9 +11,9 @@ export const nextKey = 'next';
 export const recycleBinKey = 'recycleBin';
 
 export const navigationFilters = {
-    [inboxKey]: 'Черновики',
     [todayKey]: 'Сегодня',
-    [nextKey]: 'Следующие',
+    [nextKey]: 'Завтра и после',
+    [inboxKey]: 'Черновики',
     [recycleBinKey]: 'Корзина',
 };
 export type NavigationFiltersKey = keyof typeof navigationFilters;
@@ -35,8 +35,8 @@ export function setNavigationFilter(
 export type NavigationFilterAction = ReturnType<typeof setNavigationFilter>;
 
 const initialState = {
-    key: inboxKey,
-    title: navigationFilters[inboxKey],
+    key: todayKey,
+    title: navigationFilters[todayKey],
     type: navigationFilterTypes.filter,
 };
 

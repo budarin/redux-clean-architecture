@@ -16,7 +16,7 @@ import NavigationPanelItemContainer from '../NavigationPanelItem';
 
 import './index.css';
 
-const topFilters = [inboxKey, todayKey, nextKey];
+const topFilters = [todayKey, nextKey, inboxKey];
 
 // selectors
 const getCategories = (state: State) => state.categories.byId;

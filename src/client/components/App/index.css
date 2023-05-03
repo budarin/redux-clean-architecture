@@ -13,12 +13,12 @@ html,
 .app {
     height: 100%;
     overflow: auto;
-    padding: 0 8px;
+    padding: 0 4px;
     block-size: 100%;
 }
 
 @media only screen and (min-width: 640px) {
     .app {
-        padding: 0 16px;
+        padding: 0 8px;
     }
 }
