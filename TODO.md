@@ -19,6 +19,8 @@ CREATE TABLE mytable (
 
 -   редьюсеры для internal вынести в middlewares или написать универсальные функции чтобы уменьшить код
 
+-   вынести Badge из NavigationIPanelIem и добавить BadgeContainer и вставлять его в NavigationIPanelIemContainer
+
 <!--  -->
 
 Unit tests:
