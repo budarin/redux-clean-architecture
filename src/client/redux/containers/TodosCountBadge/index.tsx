@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { useStore } from '../../store.ts';
 import { navigationFilterTypes } from '../../domain/entities/navigationFilter/index.ts';
@@ -10,15 +10,9 @@ type TodosCountBadgeProps = {
     navigationType: NavigationFilterType;
 };
 
-const getTodoCount = (id: NavigationFilterKey, isCategory: boolean) =>
-    useCallback(
-        (state: State) => {
-            return isCategory
-                ? state.todos.idsByCategoryId[id as Id]?.length || 0
-                : state.todos.idsByFilterId[id].length;
-        },
-        [id, isCategory],
-    );
+const getTodoCount = (id: NavigationFilterKey, isCategory: boolean) => (state: State) => {
+    return isCategory ? state.todos.idsByCategoryId[id as Id]?.length || 0 : state.todos.idsByFilterId[id].length;
+};
 
 function TodosCountBadge({ id, navigationType }: TodosCountBadgeProps): JSX.Element {
     const isCategory = navigationFilterTypes.category === navigationType;

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { useStore } from '../../store.ts';
 import { navigationFilterTypes } from '../../domain/entities/navigationFilter/index.ts';
@@ -14,16 +14,9 @@ function TodoListContainer() {
     const isCategoryNavigation = navigationFilterTypes.category === type;
 
     const todoIds =
-        useStore(
-            useCallback(
-                (state) => {
-                    return isCategoryNavigation
-                        ? state.todos.idsByCategoryId[key as Id]
-                        : state.todos.idsByFilterId[key];
-                },
-                [key, isCategoryNavigation],
-            ),
-        ) || [];
+        useStore((state) => {
+            return isCategoryNavigation ? state.todos.idsByCategoryId[key as Id] : state.todos.idsByFilterId[key];
+        }) || [];
 
     return (
         <>

@@ -21,7 +21,7 @@ type NavigationPanelItemContainerProps = {
 
 //selectors
 const getNavigationFilter = (state: State) => state.navigationFilter;
-const getCategory = (id: Id) => useCallback((state: State) => state.categories.byId[id as Id], [id]);
+const getCategory = (id: Id) => (state: State) => state.categories.byId[id as Id];
 
 const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);
