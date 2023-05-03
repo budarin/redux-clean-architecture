@@ -11,7 +11,7 @@ type NavigationIPanelIemProps = {
     handleChange: (e: any) => void;
 };
 
-const navItem = cn('navPanel', 'item');
+const navItem = cn('navPanel-item');
 
 const NavigationIPanelIem = ({ title, checked, todoCount, handleChange }: NavigationIPanelIemProps) => {
     const itemClass = navItem({ selected: checked });
@@ -25,7 +25,7 @@ const NavigationIPanelIem = ({ title, checked, todoCount, handleChange }: Naviga
                     value={title}
                     checked={checked}
                     onChange={handleChange}
-                    className="navPanel-item-radio"
+                    className="navPanel-item__radio"
                 />
                 {title}
             </label>

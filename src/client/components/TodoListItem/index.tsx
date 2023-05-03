@@ -16,7 +16,7 @@ const TodoListItem = ({ todo, status, handleChange }: TodoListItemProps) => {
                 type="checkbox"
                 checked={todo.completed}
                 onChange={handleChange}
-                className="todoListItem-checkbox"
+                className="todoListItem__checkbox"
             ></input>{' '}
             <span style={{ color: status.color }}>{todo.todo}</span>
         </li>

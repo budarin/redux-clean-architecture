@@ -1,5 +1,5 @@
 .navPanel {
-    max-width: 360px;
+    width: 100%;
     border-top: 1px solid #e3e3e3;
     border-left: 1px solid #e3e3e3;
     border-right: 1px solid #e3e3e3;
@@ -8,4 +8,22 @@
 .navPanel h4 {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 480px) {
+    .navPanel {
+        width: 200px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .navPanel {
+        width: 220px;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .navPanel {
+        width: 250px;
+    }
 }
