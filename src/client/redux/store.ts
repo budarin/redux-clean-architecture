@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { redux } from 'zustand/middleware';
 
-import { initialState } from '../../server/initialSate.ts';
+import { serverInitialState } from '../../server/initialSate.ts';
 
 // actions
 import { RESET_STATE, updateEntities } from './domain/common/actions.ts';
@@ -56,4 +56,4 @@ const store = process.env['NODE_ENV'] === 'production' ? coreStore : logger(core
 export const useStore = create<State>(store);
 
 // setup store with data from server
-useStore.getState().dispatch(updateEntities(initialState));
+useStore.getState().dispatch(updateEntities(serverInitialState));

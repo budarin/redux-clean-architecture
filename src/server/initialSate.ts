@@ -1,4 +1,4 @@
-export const initialState: EntitiesPayload = {
+export const serverInitialState: EntitiesPayload = {
     icons: [
         {
             id: 1,
