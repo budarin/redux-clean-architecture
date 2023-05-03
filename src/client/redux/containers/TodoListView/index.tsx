@@ -3,9 +3,10 @@ import React from 'react';
 import { useStore } from '../../store.ts';
 
 // components
-import TodoList from '../../../components/TodoList /index.tsx';
 import TodoListContainer from '../TodoList/index.tsx';
+import TodoList from '../../../components/TodoList/index.tsx';
 
+// selectors
 const getNavigationFilter = (state: State) => state.navigationFilter;
 
 function TodoListViewContainer(): JSX.Element {

@@ -11,8 +11,8 @@ import { useStore } from '../../store';
 import { getDispatch } from '../../domain/common/selectors';
 
 // components
-import NavigationIPanelIem from '../../../components/NavigationIPanelIem';
 import TodosCountBadge from '../TodosCountBadge/index.tsx';
+import NavigationIPanelIem from '../../../components/NavigationIPanelIem';
 
 type NavigationPanelItemContainerProps = {
     id: NavigationFilterKey;

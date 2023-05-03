@@ -6,6 +6,7 @@ import { navigationFilterTypes } from '../../domain/entities/navigationFilter/in
 // components
 import TodoListItemContainer from '../TodoListItem/index.tsx';
 
+// selectors
 const getNavigationFilter = (state: State) => state.navigationFilter;
 
 function TodoListContainer() {
