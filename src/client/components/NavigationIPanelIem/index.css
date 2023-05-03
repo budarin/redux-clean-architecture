@@ -1,0 +1,12 @@
+.navPanelItem-radio {
+    display: none;
+}
+
+.navPanelItem-radio:checked + .navPanelItem-title {
+    font-weight: bold;
+    color: blue;
+}
+
+.navPanelItem-title {
+    cursor: pointer;
+}

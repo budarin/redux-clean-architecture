@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './index.css';
+
 type NavigationIPanelIemProps = {
     title: string;
     todoCount: number;
@@ -11,8 +13,15 @@ const NavigationIPanelIem = ({ title, checked, todoCount, handleChange }: Naviga
     return (
         <div>
             <label>
-                <input type="radio" name="navlist" value={title} checked={checked} onChange={handleChange} />
-                <span>{title}</span> <span>{todoCount}</span>
+                <input
+                    type="radio"
+                    name="navlist"
+                    value={title}
+                    checked={checked}
+                    onChange={handleChange}
+                    className="navPanelItem-radio"
+                />
+                <span className="navPanelItem-title">{title}</span> <span>{todoCount}</span>
             </label>
         </div>
     );

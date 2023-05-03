@@ -23,12 +23,12 @@ export type CategoryAction = DeleteCategoryAction | InternalUpdateEntitiesAction
 // регистрируем middleware для проверки check constraints попытке удаления категории
 onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
     const state = api.getState();
-    const linkeddTodo = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === action.payload.id);
+    const hasLinkeddTodo = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === action.payload.id);
 
-    if (linkeddTodo) {
+    if (hasLinkeddTodo) {
         const errorMsg = `Нельзя удалить категорию "${action.payload.category}" так как есть задачи, входящие в эту категорию!`;
 
-        toast.error(errorMsg);
+        toast.error(errorMsg, { autoClose: 3000 });
         console.error(errorMsg, state.categories.byId[action.payload.id]);
 
         return;
