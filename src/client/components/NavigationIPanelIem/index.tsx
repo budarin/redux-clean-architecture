@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { cn } from '@bem-react/classname';
 
 import './index.css';
-import Badge from '../Badge/index.tsx';
 
 type NavigationIPanelIemProps = {
     title: string;
-    todoCount: number;
     checked: boolean;
     handleChange: (e: any) => void;
+    children: ReactNode;
 };
 
 const navItem = cn('navPanel-item');
 
-const NavigationIPanelIem = ({ title, checked, todoCount, handleChange }: NavigationIPanelIemProps) => {
+const NavigationIPanelIem = ({ title, checked, handleChange, children }: NavigationIPanelIemProps) => {
     const itemClass = navItem({ selected: checked });
 
     return (
@@ -29,7 +28,7 @@ const NavigationIPanelIem = ({ title, checked, todoCount, handleChange }: Naviga
                 />
                 {title}
             </label>
-            <Badge num={todoCount} />
+            {children}
         </div>
     );
 };

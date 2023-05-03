@@ -12,15 +12,16 @@ import { getDispatch } from '../../domain/common/selectors';
 
 // components
 import NavigationIPanelIem from '../../../components/NavigationIPanelIem';
-
-//selectors
-const getNavigationFilter = (state: State) => state.navigationFilter;
-const getCategory = (id: Id) => useCallback((state: State) => state.categories.byId[id as Id], [id]);
+import TodosCountBadge from '../TodosCountBadge/index.tsx';
 
 type NavigationPanelItemContainerProps = {
     id: NavigationFilterKey;
     navigationType: NavigationFilterType;
 };
+
+//selectors
+const getNavigationFilter = (state: State) => state.navigationFilter;
+const getCategory = (id: Id) => useCallback((state: State) => state.categories.byId[id as Id], [id]);
 
 const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);
@@ -29,38 +30,26 @@ const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelIte
 
     const navigationFilter = useStore(getNavigationFilter);
     const categoriy = useStore(getCategory(id as Id));
-    const isCategoryNavigation = navigationFilterTypes.category === navigationType;
 
-    const todoCount = useStore(
-        useCallback(
-            (state) => {
-                return isCategoryNavigation
-                    ? state.todos.idsByCategoryId[id as Id]?.length || 0
-                    : state.todos.idsByFilterId[id].length;
-            },
-            [id],
-        ),
-    );
+    const isCategory = navigationFilterTypes.category === navigationType;
 
-    const title = isCategoryNavigation ? categoriy.category : navigationFilters[id as NavigationFiltersKey];
+    const title = isCategory ? categoriy.category : navigationFilters[id as NavigationFiltersKey];
     const isChecked = navigationFilter.title === title;
 
     const handleChange = React.useCallback(
         (e: { target: { value: string } }): void => {
             const title = e.target.value;
 
-            dispatch(
-                setNavigationFilter(
-                    isCategoryNavigation ? Number(id) : id,
-                    title,
-                    navigationType as NavigationFilterType,
-                ),
-            );
+            dispatch(setNavigationFilter(isCategory ? Number(id) : id, title, navigationType as NavigationFilterType));
         },
         [dispatch],
     );
 
-    return <NavigationIPanelIem title={title} todoCount={todoCount} checked={isChecked} handleChange={handleChange} />;
+    return (
+        <NavigationIPanelIem title={title} checked={isChecked} handleChange={handleChange}>
+            <TodosCountBadge id={id} navigationType={navigationType} />
+        </NavigationIPanelIem>
+    );
 };
 
 export default NavigationPanelItemContainer;

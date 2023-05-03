@@ -2,8 +2,8 @@ import React from 'react';
 
 import './index.css';
 
-function Badge({ num }: { num: string | number }) {
-    return <span className="badge">{num}</span>;
+function Badge({ count }: { count: string | number }) {
+    return <span className="badge">{count}</span>;
 }
 
 export default Badge;
