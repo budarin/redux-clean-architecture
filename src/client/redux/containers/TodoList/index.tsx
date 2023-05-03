@@ -1,29 +1,35 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useStore } from '../../store.ts';
 import { navigationFilterTypes } from '../../domain/entities/navigationFilter/index.ts';
 
 // components
-import TodoList from '../../../components/TodoList /index.tsx';
 import TodoListItemContainer from '../TodoListItem/index.tsx';
 
 const getNavigationFilter = (state: State) => state.navigationFilter;
 
-function TodoListContainer(): JSX.Element {
-    const { key, title, type } = useStore(getNavigationFilter);
+function TodoListContainer() {
+    const { key, type } = useStore(getNavigationFilter);
     const isCategoryNavigation = navigationFilterTypes.category === type;
 
     const todoIds =
-        useStore((state) => {
-            return isCategoryNavigation ? state.todos.idsByCategoryId[key as Id] : state.todos.idsByFilterId[key];
-        }) || [];
+        useStore(
+            useCallback(
+                (state) => {
+                    return isCategoryNavigation
+                        ? state.todos.idsByCategoryId[key as Id]
+                        : state.todos.idsByFilterId[key];
+                },
+                [isCategoryNavigation],
+            ),
+        ) || [];
 
     return (
-        <TodoList category={title}>
+        <>
             {todoIds.map((id) => (
                 <TodoListItemContainer key={id} id={id} />
             ))}
-        </TodoList>
+        </>
     );
 }
 
