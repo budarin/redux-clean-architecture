@@ -19,11 +19,10 @@ import './index.css';
 const topFilters = [todayKey, nextKey, inboxKey];
 
 // selectors
-const getCategories = (state: State) => state.categories.byId;
+const getCategoryIds = (state: State) => state.categories.ids;
 
 function NavigationPanelContainer(): JSX.Element {
-    const categories = useStore(getCategories);
-    const categoryIds = Object.values(categories).map((category) => category.id);
+    const categoryIds = useStore(getCategoryIds);
 
     return (
         <NavigationPanel>

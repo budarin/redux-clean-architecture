@@ -55,6 +55,11 @@ export const initialState: EntitiesPayload = {
             icon_id: 4,
             category: 'Здоровье',
         },
+        {
+            id: 4,
+            icon_id: 4,
+            category: 'Фуфло',
+        },
     ],
     todos: [
         {

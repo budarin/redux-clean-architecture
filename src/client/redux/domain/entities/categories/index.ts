@@ -2,39 +2,59 @@ import { toast } from 'react-toastify';
 
 import { onAction } from '../../../middlewares/businessLogic.ts';
 import { createEmptyState } from '../../utils/createEmptyState.ts';
-import { INTERNAL_UPDATE_ENTITIES } from '../../common/actions.ts';
+import {
+    DELETE_ENTITY,
+    DeleteEntityAction,
+    INTERNAL_UPDATE_ENTITIES,
+    deleteEntity,
+    updateEntities,
+} from '../../common/actions.ts';
 import { capitalizeFirstLetter } from '../../../../../common/capitalizeFirstLetter.ts';
 
 import type { InternalUpdateEntitiesAction } from '../../common/actions.ts';
+import { entityNames } from '../index.ts';
+import { delay } from '../../../../../common/promises/delay.ts';
 
 // Actions
 export const DELETE_CATEGORY = 'DELETE_CATEGORY' as const;
 
 // Action creators
-export const deleteCategory = (id: Id, category: CategoryName) => ({
+export const deleteCategory = (id: Id) => ({
     type: DELETE_CATEGORY,
-    payload: { id, category },
+    payload: { id },
 });
 export type DeleteCategoryAction = ReturnType<typeof deleteCategory>;
 
-export type CategoryAction = DeleteCategoryAction | InternalUpdateEntitiesAction;
+export type CategoryAction = DeleteEntityAction | InternalUpdateEntitiesAction;
 
-// @ts-ignore
 // регистрируем middleware для проверки check constraints попытке удаления категории
-onAction(DELETE_CATEGORY, (get, set, api, action: DeleteCategoryAction) => {
+onAction(DELETE_CATEGORY, async (get, set, api, action: DeleteCategoryAction) => {
+    const { id } = action.payload;
     const state = api.getState();
-    const hasLinkeddTodo = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === action.payload.id);
+    const category = state.categories.byId[id];
+
+    const hasLinkeddTodo = Object.values<Todo>(state.todos.byId).find((todo) => todo.category_id === id);
 
     if (hasLinkeddTodo) {
-        const errorMsg = `Нельзя удалить категорию "${action.payload.category}" так как есть задачи, входящие в эту категорию!`;
+        const errorMsg = `Нельзя удалить категорию "${category.category}" так как есть задачи, входящие в эту категорию!`;
 
         toast.error(errorMsg, { autoClose: 3000 });
-        console.error(errorMsg, state.categories.byId[action.payload.id]);
+        console.error(errorMsg, category);
 
         return;
     }
 
-    return api.dispatch(action);
+    // сохраняем предыдущее состояние todo
+    const prevCategory = { ...api.getState().categories.byId[id] };
+
+    api.dispatch(deleteEntity(id, entityNames.category));
+
+    // имитируем запрос на сервер
+    await delay(3000);
+
+    // имитируем обработку ошибки на сервере
+    delay(1000).then(() => api.dispatch(updateEntities({ categories: [prevCategory] })));
+    toast.error(`Не удалось удалить категорию "${prevCategory.category}". Категория будет восстановлена`);
 });
 
 const initialState = createEmptyState<CategoriyState>();
@@ -49,11 +69,7 @@ export default function categoriesReducer(state = initialState, action = {} as C
             let isAddedEntities = false;
 
             action.payload.entities.categories.forEach((category) => {
-                state.byId[category.id] = {
-                    id: category.id,
-                    icon_id: category.icon_id,
-                    category: capitalizeFirstLetter(category.category),
-                };
+                state.byId[category.id] = { ...category };
 
                 if (!isAddedEntities && state.ids.indexOf(category.id) === -1) {
                     isAddedEntities = true;
@@ -68,8 +84,16 @@ export default function categoriesReducer(state = initialState, action = {} as C
             return state;
         }
 
-        case DELETE_CATEGORY: {
-            if (state.ids.length === 0) {
+        case DELETE_ENTITY: {
+            const { id, entityName } = action.payload;
+
+            if (entityName !== entityNames.category) {
+                return state;
+            }
+
+            const idx = state.ids[id];
+
+            if (idx === -1) {
                 return state;
             }
 

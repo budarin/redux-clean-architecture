@@ -18,3 +18,13 @@ export function updateEntities(entities?: EntitiesPayload) {
 }
 
 export type UpdateEntitiesAction = ReturnType<typeof updateEntities>;
+
+export const DELETE_ENTITY = 'DELETE_ENTITY' as const;
+export function deleteEntity(id: Id, entityName: string) {
+    return {
+        type: DELETE_ENTITY,
+        payload: { id, entityName },
+    };
+}
+
+export type DeleteEntityAction = ReturnType<typeof deleteEntity>;

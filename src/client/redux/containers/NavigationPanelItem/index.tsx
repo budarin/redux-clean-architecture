@@ -33,10 +33,11 @@ const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelIte
 
     const todoCount = useStore(
         useCallback(
-            (state) =>
-                isCategoryNavigation
+            (state) => {
+                return isCategoryNavigation
                     ? state.todos.idsByCategoryId[id as Id]?.length || 0
-                    : state.todos.idsByFilterId[id].length,
+                    : state.todos.idsByFilterId[id].length;
+            },
             [id],
         ),
     );

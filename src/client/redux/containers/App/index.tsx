@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useStore } from '../../store.ts';
 import { getDispatch } from '../../domain/common/selectors.ts';
-import { updateTodo } from '../../domain/entities/todos/index.ts';
+import { deleteTodo, updateTodo } from '../../domain/entities/todos/index.ts';
 import { deleteCategory } from '../../domain/entities/categories/index.ts';
 
 // components
@@ -17,21 +17,25 @@ function AppContainer() {
     const dispatch = useStore(getDispatch);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            const rnd = Math.random();
-            const b = rnd < 0.5;
-            dispatch(
-                updateTodo({
-                    id: 1,
-                    todo: String(rnd),
-                    deleted: b,
-                    completed: b,
-                }),
-            );
-        }, 5000);
-        () => clearInterval(timer);
+        // const timer = setTimeout(() => {
+        //     const rnd = Math.random();
+        //     const b = rnd < 0.5;
 
-        dispatch(deleteCategory(1, 'Работа'));
+        //     dispatch(
+        //         updateTodo({
+        //             id: 1,
+        //             todo: String(rnd),
+        //             deleted: b,
+        //             completed: b,
+        //         }),
+        //     );
+
+        //     dispatch(deleteTodo(5));
+        // }, 5000);
+
+        // () => clearTimeout(timer);
+
+        dispatch(deleteCategory(4));
     }, []);
 
     return (
