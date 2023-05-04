@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { useStore } from '../../store.ts';
 import { getDispatch } from '../../domain/common/selectors.ts';
-import { deleteTodo, updateTodo } from '../../domain/entities/todos/index.ts';
 import { deleteCategory } from '../../domain/entities/categories/index.ts';
+import { deleteTodo, updateTodo } from '../../domain/entities/todos/index.ts';
 
 // components
 import App from '../../../components/App/index.tsx';
-import NavigationPanelContainer from '../NavigationPanel/index.tsx';
 import TodoListViewContainer from '../TodoListView/index.tsx';
+import NavigationPanelContainer from '../NavigationPanel/index.tsx';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function AppContainer() {
     const dispatch = useStore(getDispatch);

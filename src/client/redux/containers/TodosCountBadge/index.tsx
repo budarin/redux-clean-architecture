@@ -10,6 +10,7 @@ type TodosCountBadgeProps = {
     navigationType: NavigationFilterType;
 };
 
+// selectors
 const getTodoCount = (id: NavigationFilterKey, isCategory: boolean) => (state: State) => {
     return isCategory ? state.todos.idsByCategoryId[id as Id]?.length || 0 : state.todos.idsByFilterId[id].length;
 };
