@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { redux } from 'zustand/middleware';
+import { unstable_batchedUpdates } from 'react-dom';
 
 import { serverInitialState } from '../../server/serverInitialState.ts';
 
@@ -56,4 +57,6 @@ const store = process.env['NODE_ENV'] === 'production' ? coreStore : logger(core
 export const useStore = create<State>(store);
 
 // setup store with data from server
-useStore.getState().dispatch(updateEntities(serverInitialState));
+unstable_batchedUpdates(() => {
+    useStore.getState().dispatch(updateEntities(serverInitialState));
+});

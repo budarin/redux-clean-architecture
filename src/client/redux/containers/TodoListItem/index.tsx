@@ -10,8 +10,9 @@ import TodoListItem from '../../../components/TodoListItem/index.tsx';
 type TodoListItemContainerProps = { id: Id };
 
 // selectors
-const getTodoById = (id: Id) => (state: State) => state.todos.byId[id as Id];
-const getTodoStatus = (status_id: TodoStatusId) => (state: State) => state.statuses.byId[status_id as Id];
+const getTodoById = (id: Id) => useCallback((state: State) => state.todos.byId[id as Id], [id]);
+const getTodoStatus = (status_id: TodoStatusId) =>
+    useCallback((state: State) => state.statuses.byId[status_id as Id], [status_id]);
 
 const TodoListItemContainer = ({ id }: TodoListItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { shallow } from 'zustand/shallow';
 
 import { useStore } from '../../store';
@@ -17,27 +17,31 @@ type NavigationPanelItemContainerProps = {
 };
 
 //selectors
-const selector = (id: NavigationFilterKey, navigationType: NavigationFilterType) => (state: State) => {
-    let checked = false;
-    let title = '';
+const selector = (id: NavigationFilterKey, navigationType: NavigationFilterType) =>
+    useCallback(
+        (state: State) => {
+            let checked = false;
+            let title = '';
 
-    const filter = state.navigationFilter;
-    const isCategory = navigationFilterTypes.category === navigationType;
+            const filter = state.navigationFilter;
+            const isCategory = navigationFilterTypes.category === navigationType;
 
-    if (isCategory) {
-        title = state.categories.byId[id as Id].category;
-        checked = title === filter.title;
-    } else {
-        title = navigationFilters[id as NavigationFiltersKey];
-        checked = id === filter.key;
-    }
+            if (isCategory) {
+                title = state.categories.byId[id as Id].category;
+                checked = title === filter.title;
+            } else {
+                title = navigationFilters[id as NavigationFiltersKey];
+                checked = id === filter.key;
+            }
 
-    return {
-        isCategory,
-        title,
-        checked,
-    };
-};
+            return {
+                isCategory,
+                title,
+                checked,
+            };
+        },
+        [id, navigationType],
+    );
 
 const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelItemContainerProps): JSX.Element => {
     const dispatch = useStore(getDispatch);

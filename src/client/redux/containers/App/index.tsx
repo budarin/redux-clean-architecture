@@ -21,7 +21,6 @@ function AppContainer() {
         // const timer = setTimeout(() => {
         //     const rnd = Math.random();
         //     const b = rnd < 0.5;
-
         //     dispatch(
         //         updateTodo({
         //             id: 1,
@@ -30,13 +29,10 @@ function AppContainer() {
         //             completed: b,
         //         }),
         //     );
-
         //     dispatch(deleteTodo(5));
         // }, 5000);
-
         // () => clearTimeout(timer);
-
-        dispatch(deleteCategory(4));
+        // dispatch(deleteCategory(4));
     }, []);
 
     return (
