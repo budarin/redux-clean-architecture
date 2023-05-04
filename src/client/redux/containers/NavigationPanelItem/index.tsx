@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import {
     navigationFilterTypes,
@@ -33,6 +33,7 @@ const NavigationPanelItemContainer = ({ id, navigationType }: NavigationPanelIte
 
     const isCategory = navigationFilterTypes.category === navigationType;
 
+    // вынести в селетор !
     const title = isCategory ? categoriy.category : navigationFilters[id as NavigationFiltersKey];
     const isChecked = navigationFilter.title === title;
 

@@ -76,7 +76,7 @@ export const serverInitialState: EntitiesPayload = {
             id: 2,
             status_id: 2,
             category_id: 2,
-            todo: 'Todo2',
+            todo: 'Hover your mouse over a project or item and click the icon on the right side of the item for more options',
             description: undefined,
             due_date: new Date('01/05/2023').valueOf(),
             completed: false,

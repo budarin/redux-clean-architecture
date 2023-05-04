@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { redux } from 'zustand/middleware';
 
-import { serverInitialState } from '../../server/initialSate.ts';
+import { serverInitialState } from '../../server/serverInitialState.ts';
 
 // actions
 import { RESET_STATE, updateEntities } from './domain/common/actions.ts';
